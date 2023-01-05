@@ -4,6 +4,7 @@ import 'package:aves/theme/icons.dart';
 import 'package:aves/widgets/common/action_controls/quick_choosers/common/quick_chooser.dart';
 import 'package:flutter/material.dart';
 
+/// 按下修片评分按钮后，打开修改评分选择框。
 class RateQuickChooser extends StatefulWidget {
   final bool blurred;
   final ValueNotifier<int?> valueNotifier;

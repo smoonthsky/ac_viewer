@@ -28,6 +28,7 @@ import 'package:aves/widgets/filter_grids/common/action_delegates/chip.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class CollectionSearchDelegate extends AvesSearchDelegate {
   final CollectionSource source;
@@ -78,16 +79,23 @@ class CollectionSearchDelegate extends AvesSearchDelegate {
           valueListenable: _expandedSectionNotifier,
           builder: (context, expandedSection, child) {
             final queryFilter = _buildQueryFilter(false);
-            return Selector<Settings, Set<CollectionFilter>>(
-              selector: (context, s) => s.hiddenFilters,
-              builder: (context, hiddenFilters, child) {
-                bool notHidden(CollectionFilter filter) => !hiddenFilters.contains(filter);
+            return Selector<Settings, Tuple3<Set<CollectionFilter>,Set<CollectionFilter>,bool>>(
+              selector: (context, s) => Tuple3(s.hiddenFilters,s.presentVisibleFilters, s.presentationVerify),
+              shouldRebuild: (t1, t2) {
+                // `Selector` by default uses `DeepCollectionEquality`, which does not go deep in collections within `TupleN`
+                const eq = DeepCollectionEquality();
+                return !(eq.equals(t1.item1, t2.item1) && eq.equals(t1.item2, t2.item2) && eq.equals(t1.item3, t2.item3) ) ;
+              },
+              builder: (context, s, child) {
+                bool notHidden(CollectionFilter filter) => !s.item1.contains(filter);
 
-                final visibleTypeFilters = typeFilters.where(notHidden).toList();
-                if (hiddenFilters.contains(MimeFilter.video)) {
+                var visibleTypeFilters = typeFilters.where(notHidden).toList();
+                if (s.item3){
+                  visibleTypeFilters= visibleTypeFilters.where((a) => s.item2.contains(a)).toList();
+                }
+                if (s.item1.contains(MimeFilter.video)) {
                   [MimeFilter.image, TypeFilter.sphericalVideo].forEach(visibleTypeFilters.remove);
                 }
-
                 final history = settings.searchHistory.where(notHidden).toList();
 
                 return ListView(
@@ -132,6 +140,9 @@ class CollectionSearchDelegate extends AvesSearchDelegate {
     required List<CollectionFilter> filters,
     HeroType Function(CollectionFilter filter)? heroTypeBuilder,
   }) {
+    if(settings.presentationVerify){
+      filters= filters.where((a) => settings.presentFilters.contains(a)).toList();
+    }
     void onTap(filter) => _select(context, filter is QueryFilter ? QueryFilter(filter.query) : filter);
     const onLongPress = AvesFilterChip.showDefaultLongPressMenu;
     return title != null

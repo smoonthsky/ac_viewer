@@ -6,6 +6,12 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+// The MosaicSectionedListLayout is a custom layout for displaying a sectioned list of items in a mosaic pattern. The layout is defined by its sections, which are lists of items, and a set of properties that control the layout of the items, such as the spacing between items and the horizontal padding. It extends the SectionedListLayout<T> class and overrides the getTileRect() and getItemAt() methods to implement the mosaic layout.
+//
+// The getTileRect() method is used to determine the position and size of a specific item in the layout. Given an item, the method first finds the section that contains the item and the index of the item within that section. Then it finds the row that contains the item by iterating through the rows of the section. After that, it calculates the position and size of the item based on the widths of the items in that row and the height of the row.
+//
+// The getItemAt() method is used to determine the item at a specific position in the layout. Given an offset, the method first finds the section at that position and then finds the row within the section. It then iterates through the items in the row, subtracting their widths from the horizontal offset, until it finds the item at the position. If no item is found, the method returns null.
+
 class MosaicSectionedListLayout<T> extends SectionedListLayout<T> {
   const MosaicSectionedListLayout({
     required super.sections,

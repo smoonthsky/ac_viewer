@@ -1,11 +1,11 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
 import android.app.WallpaperManager
 import android.app.WallpaperManager.FLAG_LOCK
 import android.app.WallpaperManager.FLAG_SYSTEM
 import android.content.ContextWrapper
 import android.os.Build
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safe
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safe
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler

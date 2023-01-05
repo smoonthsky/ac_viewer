@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.streams
+package anonymity.ac.viewer.channel.streams
 
 import android.content.Context
 import android.database.ContentObserver
@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.MediaStore
 import android.util.Log
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.EventSink
 

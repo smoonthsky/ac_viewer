@@ -24,7 +24,7 @@
 		"product_id":"99536292102197525",
 		"project_id":"99536292102197525",
 		"app_id":"106014023",
-		"package_name":"deckers.thibault.aves"
+		"package_name":"anonymity.ac.viewer"
 	},
 	"oauth_client":{
 		"client_id":"106014023",
@@ -32,17 +32,17 @@
 	},
 	"app_info":{
 		"app_id":"106014023",
-		"package_name":"deckers.thibault.aves"
+		"package_name":"anonymity.ac.viewer"
 	},
 	"configuration_version":"3.0",
 	"appInfos":[
 		{
-			"package_name":"deckers.thibault.aves",
+			"package_name":"anonymity.ac.viewer",
 			"client":{
 				"app_id":"106014023"
 			},
 			"app_info":{
-				"package_name":"deckers.thibault.aves",
+				"package_name":"anonymity.ac.viewer",
 				"app_id":"106014023"
 			},
 			"oauth_client":{
@@ -51,12 +51,12 @@
 			}
 		},
 		{
-			"package_name":"deckers.thibault.aves.debug",
+			"package_name":"anonymity.ac.viewer.debug",
 			"client":{
 				"app_id":"106014297"
 			},
 			"app_info":{
-				"package_name":"deckers.thibault.aves.debug",
+				"package_name":"anonymity.ac.viewer.debug",
 				"app_id":"106014297"
 			},
 			"oauth_client":{
@@ -65,12 +65,12 @@
 			}
 		},
 		{
-			"package_name":"deckers.thibault.aves.profile",
+			"package_name":"anonymity.ac.viewer.profile",
 			"client":{
 				"app_id":"106031461"
 			},
 			"app_info":{
-				"package_name":"deckers.thibault.aves.profile",
+				"package_name":"anonymity.ac.viewer.profile",
 				"app_id":"106031461"
 			},
 			"oauth_client":{

@@ -8,6 +8,8 @@ import 'package:aves/widgets/common/grid/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// 用于在浏览模式下，各缩略图上附加显示的小图标，可以在设置中关闭
+
 class VideoIcon extends StatelessWidget {
   final AvesEntry entry;
 
@@ -71,6 +73,19 @@ class PanoramaIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return const OverlayIcon(
       icon: AIcons.panorama,
+      iconScale: scale,
+    );
+  }
+}
+class PresentIcon extends StatelessWidget {
+  const PresentIcon({super.key});
+
+  static const scale = .9;
+
+  @override
+  Widget build(BuildContext context) {
+    return const OverlayIcon(
+      icon: AIcons.presentationActive,
       iconScale: scale,
     );
   }
@@ -297,7 +312,15 @@ class OverlayIcon extends StatelessWidget {
   }
 }
 
+/// The IconUtils class defines a getAlbumIcon() method that returns an icon widget based on the type of album represented by the given albumPath.
+///
+/// if the album is a camera album, the method returns an Icon widget with AIcons.cameraAlbum as the icon data.
+///
+/// If the album is a screenshot album, the method returns an Icon widget with AIcons.screenshotAlbum as the icon data.
+///
+/// If the album is a regular album, the method returns null.
 class IconUtils {
+  /// This method returns special icons for camera, screenshots, video captures, screen recordings, download, and app albums, otherwise it returns null and regular icons will be used.
   static Widget? getAlbumIcon({
     required BuildContext context,
     required String albumPath,

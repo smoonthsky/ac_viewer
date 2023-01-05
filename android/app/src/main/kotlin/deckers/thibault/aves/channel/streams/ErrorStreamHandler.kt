@@ -1,6 +1,6 @@
-package deckers.thibault.aves.channel.streams
+package anonymity.ac.viewer.channel.streams
 
-import deckers.thibault.aves.utils.FlutterUtils
+import anonymity.ac.viewer.utils.FlutterUtils
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.EventSink
 

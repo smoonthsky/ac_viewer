@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.streams
+package anonymity.ac.viewer.channel.streams
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -9,8 +9,8 @@ import android.os.Handler
 import android.os.Looper
 import android.provider.Settings
 import android.util.Log
-import deckers.thibault.aves.model.FieldMap
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.model.FieldMap
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.EventSink
 

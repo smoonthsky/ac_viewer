@@ -10,6 +10,7 @@ import 'package:aves/model/favourites.dart';
 import 'package:aves/model/filters/filters.dart';
 import 'package:aves/model/metadata/date_modifier.dart';
 import 'package:aves/model/naming_pattern.dart';
+import 'package:aves/model/present.dart';
 import 'package:aves/model/query.dart';
 import 'package:aves/model/selection.dart';
 import 'package:aves/model/settings/enums/enums.dart';
@@ -44,8 +45,12 @@ import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
+import '../../model/settings/home_screen_widget/filter_exchanger.dart';
 import '../common/action_mixins/entry_storage.dart';
 
+/// provides a way to determine whether a given action should be visible or can be applied based on various parameters such as the current app mode, whether the user is currently selecting items, the number of items and the number of selected items, and whether the current collection is the trash collection.
+///
+/// And implement some of these action.
 class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, EntryEditorMixin, EntryStorageMixin {
   bool isVisible(
     EntrySetAction action, {
@@ -60,6 +65,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
     switch (action) {
       // general
       case EntrySetAction.configureView:
+      case EntrySetAction.toggleLockPresentation:
         return true;
       case EntrySetAction.select:
         return appMode.canSelectMedia && !isSelecting;
@@ -86,10 +92,12 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
       // selecting
       case EntrySetAction.share:
       case EntrySetAction.toggleFavourite:
-        return isMain && isSelecting && !isTrash;
+      case EntrySetAction.togglePresent:
+        return isMain && isSelecting && !isTrash && !settings.presentationLock;
       case EntrySetAction.delete:
-        return canWrite && isMain && isSelecting;
+        return canWrite && isMain && isSelecting && !settings.presentationLock;
       case EntrySetAction.copy:
+        return canWrite && isMain && isSelecting && !isTrash;
       case EntrySetAction.move:
       case EntrySetAction.rename:
       case EntrySetAction.rotateCCW:
@@ -101,9 +109,13 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
       case EntrySetAction.editRating:
       case EntrySetAction.editTags:
       case EntrySetAction.removeMetadata:
-        return canWrite && isMain && isSelecting && !isTrash;
+        return canWrite && isMain && isSelecting && !isTrash  && !settings.presentationLock;
       case EntrySetAction.restore:
         return canWrite && isMain && isSelecting && isTrash;
+      case EntrySetAction.presentTag:
+      case EntrySetAction.togglePresentationVerify:
+      case EntrySetAction.toggleWidgetFiltersBak:
+      return isMain && !isTrash  && !(isSelecting || settings.presentationLock);
     }
   }
 
@@ -118,6 +130,8 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
 
     switch (action) {
       case EntrySetAction.configureView:
+      case EntrySetAction.toggleLockPresentation:
+      case EntrySetAction.toggleWidgetFiltersBak:
         return true;
       case EntrySetAction.select:
         return hasItems;
@@ -138,6 +152,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
         return (!isSelecting && hasItems) || (isSelecting && hasSelection);
       // selecting
       case EntrySetAction.share:
+        return hasSelection;
       case EntrySetAction.delete:
       case EntrySetAction.restore:
       case EntrySetAction.copy:
@@ -153,11 +168,16 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
       case EntrySetAction.editRating:
       case EntrySetAction.editTags:
       case EntrySetAction.removeMetadata:
-        return hasSelection;
+      case EntrySetAction.togglePresent:
+        return hasSelection ;
+      case EntrySetAction.presentTag:
+      case EntrySetAction.togglePresentationVerify:
+        return !isSelecting;
     }
   }
 
   void onActionSelected(BuildContext context, EntrySetAction action) {
+    debugPrint('EntrySetAction  switch action start  ');
     switch (action) {
       // general
       case EntrySetAction.configureView:
@@ -187,6 +207,23 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
         break;
       case EntrySetAction.rescan:
         _rescan(context);
+        break;
+    //present
+      case EntrySetAction.presentTag:
+      //Todo AC: so how cant get in this case
+        presentFunc.goPresentTag(context);
+        break;
+      case EntrySetAction.togglePresentationVerify:
+        presentFunc.togglePresentationVerify(context);
+        break;
+      case EntrySetAction.togglePresent:
+        _togglePresent(context);
+        break;
+      case EntrySetAction.toggleLockPresentation:
+        presentFunc.togglePresentLock(context);
+        break;
+      case EntrySetAction.toggleWidgetFiltersBak:
+        widgetFiltersExchanger.toggleWidgetFiltersBakExchange(context);
         break;
       // selecting
       case EntrySetAction.share:
@@ -360,6 +397,20 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
 
     _leaveSelectionMode(context);
   }
+
+  // present
+  Future<void> _togglePresent(BuildContext context) async {
+    final entries = _getTargetItems(context);
+    if (entries.every((entry) => entry.isPresent)) {
+      await presentEntries.removeEntries(entries);
+    } else {
+      await presentEntries.add(entries);
+    }
+
+    _leaveSelectionMode(context);
+  }
+
+
 
   Future<void> _edit(
     BuildContext context,
@@ -666,6 +717,7 @@ class EntrySetActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAware
       ),
     );
   }
+
 
   void _goToSearch(BuildContext context) {
     final collection = context.read<CollectionLens>();

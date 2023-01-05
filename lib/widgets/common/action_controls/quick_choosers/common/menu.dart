@@ -10,6 +10,10 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 
+// It takes an input of a list of options and a value notifier to keep track of the selected value.
+// It also has some other properties such as autoReverse and blurred to control the visual appearance.
+// When the user long presses on the button, it shows a list of options with the ability to select one of them.
+
 class MenuQuickChooser<T> extends StatefulWidget {
   final ValueNotifier<T?> valueNotifier;
   final List<T> options;

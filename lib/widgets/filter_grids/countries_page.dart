@@ -23,12 +23,12 @@ class CountryListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final source = context.read<CollectionSource>();
-    return Selector<Settings, Tuple3<ChipSortFactor, bool, Set<CollectionFilter>>>(
-      selector: (context, s) => Tuple3(s.countrySortFactor, s.countrySortReverse, s.pinnedFilters),
+    return Selector<Settings, Tuple5<ChipSortFactor, bool, Set<CollectionFilter>,bool,Set<CollectionFilter>>>(
+      selector: (context, s) => Tuple5(s.countrySortFactor, s.countrySortReverse, s.pinnedFilters,s.presentationVerify,s.presentVisibleFilters),
       shouldRebuild: (t1, t2) {
         // `Selector` by default uses `DeepCollectionEquality`, which does not go deep in collections within `TupleN`
         const eq = DeepCollectionEquality();
-        return !(eq.equals(t1.item1, t2.item1) && eq.equals(t1.item2, t2.item2) && eq.equals(t1.item3, t2.item3));
+        return !(eq.equals(t1.item1, t2.item1) && eq.equals(t1.item2, t2.item2) && eq.equals(t1.item3, t2.item3) && eq.equals(t1.item4, t2.item4)&& eq.equals(t1.item5, t2.item5));
       },
       builder: (context, s, child) {
         return StreamBuilder(

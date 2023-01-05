@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata.metadataextractor
+package anonymity.ac.viewer.metadata.metadataextractor
 
 import android.util.Log
 import com.drew.imaging.png.*
@@ -14,7 +14,7 @@ import com.drew.metadata.icc.IccReader
 import com.drew.metadata.png.PngChromaticitiesDirectory
 import com.drew.metadata.png.PngDirectory
 import com.drew.metadata.xmp.XmpReader
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.utils.LogUtils
 import java.io.ByteArrayInputStream
 import java.io.IOException
 import java.io.InputStream

@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata
+package anonymity.ac.viewer.metadata
 
 import android.annotation.SuppressLint
 import android.media.MediaFormat

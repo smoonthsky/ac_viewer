@@ -2,6 +2,11 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 // adapted from Flutter `_OutputBuffer` in `/foundation/consolidate_response.dart`
+/// a utility class that allows to collect a stream of binary data as it comes in, and then converts it into a single, contiguous Uint8List (an array of bytes) when closed.
+///
+/// This is done by keeping track of each chunk of bytes that is added, and then copying all of those chunks into a single, large byte array when close is called.
+///
+/// The resulting byte array can then be used for further processing or reading the data.
 class OutputBuffer extends ByteConversionSinkBase {
   List<List<int>>? _chunks = <List<int>>[];
   int _contentLength = 0;

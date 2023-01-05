@@ -18,27 +18,38 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../common/action_mixins/feedback.dart';
+
+// TODO AC:add present and add time setting
 class HomeWidgetSettingsPage extends StatefulWidget {
   static const routeName = '/settings/home_widget';
 
   final int widgetId;
 
-  const HomeWidgetSettingsPage({
+  final bool useUpdateReplace;
+
+  const HomeWidgetSettingsPage( {
     super.key,
     required this.widgetId,
+    this.useUpdateReplace = false,
   });
 
   @override
   State<HomeWidgetSettingsPage> createState() => _HomeWidgetSettingsPageState();
 }
 
-class _HomeWidgetSettingsPageState extends State<HomeWidgetSettingsPage> {
+class _HomeWidgetSettingsPageState extends State<HomeWidgetSettingsPage> with FeedbackMixin{
   late WidgetShape _shape;
   late Color? _outline;
   late WidgetOpenPage _openPage;
   late WidgetDisplayedItem _displayedItem;
   late Set<CollectionFilter> _collectionFilters;
-
+  /* AC Viewer 20230129 :  [home screen widget set wallpaper] start */
+  late Set<CollectionFilter> _collectionBakFilters;
+  late WidgetWallpaperLocation _wallpaperLocation;
+  late int _widgetUpdateInterval;
+  late int _widgetBakUpdateInterval;
+  /* AC Viewer 20230129 :  [home screen widget set wallpaper] end */
   int get widgetId => widget.widgetId;
 
   static const gradient = HomeWidgetPainter.backgroundGradient;
@@ -62,6 +73,12 @@ class _HomeWidgetSettingsPageState extends State<HomeWidgetSettingsPage> {
     _openPage = settings.getWidgetOpenPage(widgetId);
     _displayedItem = settings.getWidgetDisplayedItem(widgetId);
     _collectionFilters = settings.getWidgetCollectionFilters(widgetId);
+
+    _collectionBakFilters = settings.getWidgetCollectionBakFilters(widgetId);
+    _wallpaperLocation =settings.getWidgetWallpaperLocation(widgetId);
+    _widgetUpdateInterval=settings.getWidgetUpdateInterval(widgetId);
+    _widgetBakUpdateInterval=settings.getWidgetBakUpdateInterval(widgetId);
+
   }
 
   @override
@@ -99,9 +116,31 @@ class _HomeWidgetSettingsPageState extends State<HomeWidgetSettingsPage> {
                     onSelection: (v) => setState(() => _displayedItem = v),
                     tileTitle: l10n.settingsWidgetDisplayedItem,
                   ),
+                  SettingsSelectionListTile<WidgetWallpaperLocation>(
+                    values: WidgetWallpaperLocation.values,
+                    getName: (context, v) => v.getName(context),
+                    selector: (context, s) => _wallpaperLocation,
+                    onSelection: (v) => setState(() => _wallpaperLocation = v),
+                    tileTitle: l10n.settingsWidgetWallpaperLocation,
+                  ),
                   SettingsCollectionTile(
                     filters: _collectionFilters,
                     onSelection: (v) => setState(() => _collectionFilters = v),
+                  ),
+                  SettingsCollectionTile(
+                    filters: _collectionBakFilters,
+                    textTitle:l10n.settingsCollectionBakTile,
+                    onSelection: (v) => setState(() => _collectionBakFilters = v),
+                  ),
+                  SettingsDurationListTile(
+                    selector: (context, s) => _widgetUpdateInterval,
+                    onChanged: (v) => setState(() => _widgetUpdateInterval = v),
+                    title: l10n.settingsWidgetUpdateIntervalTile,
+                  ),
+                  SettingsDurationListTile(
+                    selector: (context, s) => _widgetBakUpdateInterval,
+                    onChanged: (v) => setState(() => _widgetBakUpdateInterval = v),
+                    title: l10n.settingsWidgetBakUpdateIntervalTile,
                   ),
                 ],
               ),
@@ -113,7 +152,14 @@ class _HomeWidgetSettingsPageState extends State<HomeWidgetSettingsPage> {
                 label: l10n.saveTooltip,
                 onPressed: () {
                   _saveSettings();
-                  WidgetService.configure();
+                  if(widget.useUpdateReplace){
+                    debugPrint('HomeWidgetSettingsPage useUpdateReplace: ${widget.useUpdateReplace} ' );
+                    WidgetService.update(widgetId);
+                    showFeedback(context, '${context.l10n.homeScreenWidgetSettingTile} ${MaterialLocalizations.of(context).okButtonLabel}');
+                  }else {
+                    debugPrint('HomeWidgetSettingsPage not useUpdateReplace: ${widget.useUpdateReplace} ' );
+                    WidgetService.configure();
+                  }
                 },
               ),
             ),
@@ -162,6 +208,13 @@ class _HomeWidgetSettingsPageState extends State<HomeWidgetSettingsPage> {
     settings.setWidgetOpenPage(widgetId, _openPage);
     settings.setWidgetDisplayedItem(widgetId, _displayedItem);
     settings.setWidgetCollectionFilters(widgetId, _collectionFilters);
+
+    /* AC Viewer 20230129 : wallpaperLocation start */
+    settings.setWidgetCollectionBakFilters(widgetId, _collectionBakFilters);
+    settings.setWidgetWallpaperLocation(widgetId,_wallpaperLocation);
+    settings.setWidgetUpdateInterval(widgetId, _widgetUpdateInterval);
+    settings.setWidgetBakUpdateInterval(widgetId, _widgetBakUpdateInterval);
+    /* AC Viewer 20230129 : wallpaperLocation end */
 
     if (invalidateUri) {
       settings.setWidgetUri(widgetId, null);

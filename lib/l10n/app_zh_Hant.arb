@@ -1,7 +1,7 @@
 {
-  "appName": "Aves",
+  "appName": "收圖瀏覽",
   "@appName": {},
-  "welcomeMessage": "歡迎使用 Aves",
+  "welcomeMessage": "歡迎使用 收圖瀏覽",
   "@welcomeMessage": {},
   "welcomeOptional": "可選擇的",
   "@welcomeOptional": {},
@@ -271,6 +271,7 @@
   "@widgetDisplayedItemRandom": {},
   "widgetDisplayedItemMostRecent": "最新",
   "@widgetDisplayedItemMostRecent": {},
+
   "widgetOpenPageHome": "打開主畫面",
   "@widgetOpenPageHome": {},
   "widgetOpenPageCollection": "打開收藏品",
@@ -425,6 +426,7 @@
   "@menuActionSlideshow": {},
   "menuActionStats": "統計資料",
   "@menuActionStats": {},
+
   "viewDialogSortSectionTitle": "排序",
   "@viewDialogSortSectionTitle": {},
   "viewDialogGroupSectionTitle": "群組",
@@ -665,6 +667,7 @@
   "@settingsHomeTile": {},
   "settingsHomeDialogTitle": "主畫面",
   "@settingsHomeDialogTitle": {},
+
   "settingsShowBottomNavigationBar": "顯示底部操作條",
   "@settingsShowBottomNavigationBar": {},
   "settingsKeepScreenOnDialogTitle": "保持螢幕開啟",
@@ -695,6 +698,7 @@
   "@settingsThumbnailOverlayTile": {},
   "settingsThumbnailOverlayPageTitle": "疊加層",
   "@settingsThumbnailOverlayPageTitle": {},
+
   "settingsThumbnailShowFavouriteIcon": "顯示我的最愛圖示",
   "@settingsThumbnailShowFavouriteIcon": {},
   "settingsThumbnailShowTagIcon": "顯示標籤圖示",
@@ -879,6 +883,7 @@
   "@settingsWidgetDisplayedItem": {},
   "settingsCollectionTile": "收藏品",
   "@settingsCollectionTile": {},
+
   "statsTopCountriesSectionTitle": "熱門國家",
   "@statsTopCountriesSectionTitle": {},
   "statsTopPlacesSectionTitle": "熱門地點",
@@ -933,6 +938,12 @@
   "@timeMinutes": {
     "placeholders": {
       "minutes": {}
+    }
+  },
+  "timeHours": "{hours, plural, =1{1 小时} other{{hours} 小时}}",
+  "@timeHours": {
+    "placeholders": {
+      "hours": {}
     }
   },
   "applyButtonLabel": "套用",
@@ -1317,7 +1328,7 @@
   "@tagEditorPageAddTagTooltip": {},
   "tagEditorSectionRecent": "最近",
   "@tagEditorSectionRecent": {},
-  "tagEditorSectionPlaceholders": "占位符",
+  "tagEditorSectionPlaceholders": "地点位置",
   "@tagEditorSectionPlaceholders": {},
   "tagPlaceholderCountry": "國家",
   "@tagPlaceholderCountry": {},
@@ -1346,5 +1357,99 @@
   "collectionDeselectSectionTooltip": "取消選擇部份",
   "@collectionDeselectSectionTooltip": {},
   "settingsAllowInstalledAppAccess": "允許存取應用程式清單",
-  "@settingsAllowInstalledAppAccess": {}
+  "@settingsAllowInstalledAppAccess": {},
+
+
+ "settingsShowAllCollectionWhenNoneFilter": "無篩選條件時顯示所有媒體收藏",
+ "@settingsShowAllCollectionWhenNoneFilter": {},
+
+ "collectionFilterEmptyNotShow": "媒體收藏無篩選條件",
+ "@collectionFilterEmptyNotShow": {},
+
+ "addToPresentation": "加入演示",
+ "@addToPresentation": {},
+ "removeFromPresentation": "從演示中刪除",
+ "@removeFromPresentation": {},
+
+ "filterPresentLabel": "演示",
+ "@filterPresentLabel": {},
+ "menuActionPresentTagSettings": "演示標籤設定",
+ "@menuActionPresentTagSettings": {},
+
+ "settingsThumbnailShowPresentIcon": "顯示演示圖示",
+ "@settingsThumbnailShowPresentIcon": {},
+
+ "settingsPresentSectionTitle": "演示",
+ "@settingsPresentSectionTitle": {},
+ "settingsCreatePresentTagModeTile": "創建新演示模式",
+ "@settingsCreatePresentTagModeTile": {},
+ "clearVisibleAndAutoDate": "清除，添加新時間標籤",
+ "@clearVisibleAndAutoDate": {},
+ "addToCurrentVisible": "加入當前顯示（如果没有则添加到默认）",
+ "@addToCurrentVisible": {},
+
+ "settingsPresentTagTile": "演示標籤設定",
+ "@settingsPresentTagTile": {},
+ "settingsPresentTagVisible": "選擇",
+ "@settingsPresentTagVisible": {},
+ "settingsPresentTagManage": "管理",
+ "@settingsPresentTagManage": {},
+ "presentTagEditorPageNewTagFieldLabel": "新的演示標籤",
+ "@presentTagEditorPageNewTagFieldLabel": {},
+ "presentTagEditorPageRenameTagFieldLabel": "重命名演示標籤",
+ "@presentTagEditorPageRenameTagFieldLabel": {},
+ "presentTagEditorPageTitle": "編輯演示標籤",
+ "@presentTagEditorPageTitle": {},
+ "presentTagEditorPageNewTagFieldLabel": "新的演示標籤",
+ "@presentTagEditorPageNewTagFieldLabel": {},
+
+ "presentTagEditorPageAddTagTooltip": "添加演示標籤",
+ "@presentTagEditorPageAddTagTooltip": {},
+ "presentTagAlreadyExistsHelper": "標籤已存在",
+ "@presentTagAlreadyExistsHelper": {},
+ "verifyPresentation": "驗證演示",
+ "@verifyPresentation": {},
+ "verifyPresentationCancel": "取消驗證演示",
+ "@verifyPresentationCancel": {},
+ "toggleWidgetFiltersBak": "切換 Widget備份",
+ "@toggleWidgetFiltersBak": {},
+ "lockPresentation": "鎖定演示",
+ "@lockPresentation": {},
+ "unlockPresentation": "解鎖演示",
+ "@unlockPresentation": {},
+ "unlockPresentationDialogTitle": "解鎖演示（預設：1234）",
+ "@unlockPresentationDialogTitle": {},
+ "unlockPresentationPasswordTile": "密碼",
+ "@unlockPresentationPasswordTile": {},
+ "unlockPresentationPasswordChangeDialogTitle": "變更解鎖演示密碼",
+ "@unlockPresentationPasswordChangeDialogTitle": {},
+ "unlockPresentationOldPassword": "舊的（預設：1234）",
+ "@unlockPresentationOldPassword": {},
+ "unlockPresentationNewPassword": "新密碼",
+ "@unlockPresentationNewPassword": {},
+ "unlockPresentationConfirmPassword": "確認新密碼",
+ "@unlockPresentationConfirmPassword": {},
+
+ "settingsWidgetWallpaperLocation": "設定桌布位置",
+ "@settingsWidgetWallpaperLocation": {},
+ "widgetWallpaperLocationNone": "不設定",
+ "@widgetWallpaperLocationNone": {},
+ "widgetWallpaperLocationHomeScreen": "僅在主畫面",
+ "@widgetWallpaperLocationHomeScreen": {},
+ "widgetWallpaperLocationLockScreen": "僅在鎖定畫面",
+ "@widgetWallpaperLocationLockScreen": {},
+ "widgetWallpaperLocationBothScreen": "主畫面和鎖定畫面",
+ "@widgetWallpaperLocationBothScreen": {},
+ "settingsWidgetUpdateIntervalTile": "更換桌布間隔",
+ "@settingsWidgetUpdateIntervalTile": {},
+ "settingsCollectionBakTile": "備用媒體收藏",
+ "@settingsCollectionBakTile": {},
+ "settingsWidgetBakUpdateIntervalTile": "備用更換桌布間隔",
+ "@settingsWidgetBakUpdateIntervalTile": {},
+ "homeScreenWidgetSettingTile": "桌面微件設定",
+ "@homeScreenWidgetSettingTile": {},
+ "homeScreenWidgetIdTile": "桌面微件ID",
+ "@homeScreenWidgetIdTile": {},
+ "homeScreenWidgetEmptyNotShow": "未創建桌面微件",
+ "@homeScreenWidgetEmptyNotShow": {}
 }

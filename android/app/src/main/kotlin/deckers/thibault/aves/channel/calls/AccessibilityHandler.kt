@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,8 +8,8 @@ import android.os.Build
 import android.provider.Settings
 import android.util.Log
 import android.view.accessibility.AccessibilityManager
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safe
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safe
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler

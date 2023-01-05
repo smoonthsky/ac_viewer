@@ -96,6 +96,7 @@ class AvesApp extends StatefulWidget {
     );
   }
 
+  ///work for quit full screen  .
   static Future<void> showSystemUI() async {
     if (device.supportEdgeToEdgeUIMode) {
       await SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
@@ -103,7 +104,7 @@ class AvesApp extends StatefulWidget {
       await SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
     }
   }
-
+  ///work for full screen change.
   static Future<void> hideSystemUI() async {
     await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   }
@@ -414,7 +415,9 @@ class _AvesAppState extends State<AvesApp> with WidgetsBindingObserver {
             navigationMode: NavigationMode.directional,
           );
     }
+    //检查是否可以渲染地图
     await mobileServices.init();
+
     await settings.init(monitorPlatformSettings: true);
     settings.isRotationLocked = await windowService.isRotationLocked();
     settings.areAnimationsRemoved = await AccessibilityService.areAnimationsRemoved();

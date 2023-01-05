@@ -9,6 +9,7 @@ import 'package:aves/model/device.dart';
 import 'package:aves/model/filters/favourite.dart';
 import 'package:aves/model/filters/filters.dart';
 import 'package:aves/model/filters/mime.dart';
+import 'package:aves/model/present.dart';
 import 'package:aves/model/settings/defaults.dart';
 import 'package:aves/model/settings/enums/enums.dart';
 import 'package:aves/model/settings/enums/map_style.dart';
@@ -28,10 +29,16 @@ import 'package:latlong2/latlong.dart';
 
 final Settings settings = Settings._private();
 
+///  extends the ChangeNotifier class, to notify your widgets when settings changes.
 class Settings extends ChangeNotifier {
+  /// The EventChannel is used to receive events from the native side of the application, specifically the _platformSettingsChangeChannel EventChannel.
   final EventChannel _platformSettingsChangeChannel = const OptionalEventChannel('deckers.thibault/aves/settings_change');
+
+  /// the stream is managed by the _updateStreamController variable, this stream is exposed to the outside as the updateStream getter.
+  /// the
   final StreamController<SettingsChangedEvent> _updateStreamController = StreamController.broadcast();
 
+  /// A StreamController that fires `SettingsChangedEvent`s, created using StreamController.broadcast(), that can have multiple listeners.
   Stream<SettingsChangedEvent> get updateStream => _updateStreamController.stream;
 
   Settings._private();
@@ -91,6 +98,7 @@ class Settings extends ChangeNotifier {
   static const collectionSortReverseKey = 'collection_sort_reverse';
   static const collectionBrowsingQuickActionsKey = 'collection_browsing_quick_actions';
   static const collectionSelectionQuickActionsKey = 'collection_selection_quick_actions';
+  static const showThumbnailPresentKey = 'show_thumbnail_Present';
   static const showThumbnailFavouriteKey = 'show_thumbnail_favourite';
   static const showThumbnailTagKey = 'show_thumbnail_tag';
   static const showThumbnailLocationKey = 'show_thumbnail_location';
@@ -98,6 +106,8 @@ class Settings extends ChangeNotifier {
   static const showThumbnailRatingKey = 'show_thumbnail_rating';
   static const showThumbnailRawKey = 'show_thumbnail_raw';
   static const showThumbnailVideoDurationKey = 'show_thumbnail_video_duration';
+  //AC Viewer:
+  static const showAllCollectionWhenNoneFilterKey = 'show_all_collecion_when_none_filter_';
 
   // filter grids
   static const albumGroupFactorKey = 'album_group_factor';
@@ -194,6 +204,23 @@ class Settings extends ChangeNotifier {
   static const widgetOpenPagePrefixKey = '${_widgetKeyPrefix}open_page_';
   static const widgetDisplayedItemPrefixKey = '${_widgetKeyPrefix}displayed_item_';
   static const widgetUriPrefixKey = '${_widgetKeyPrefix}uri_';
+  /* AC Viewer  :  [home screen widget set wallpaper] start */
+  static const widgetWallpaperLocationPrefixKey = '${_widgetKeyPrefix}wallpaper_location_';
+  static const widgetCollectionBakFiltersPrefixKey = '${_widgetKeyPrefix}collection_bak_filters_';
+  static const widgetUpdateIntervalPrefixKey = '${_widgetKeyPrefix}update_interval_';
+  static const widgetBakUpdateIntervalPrefixKey = '${_widgetKeyPrefix}bak_update_interval_';
+  /* AC Viewer  :  [home screen widget set wallpaper] end */
+
+  /* AC Viewer  :  [present mode ] start */
+  static const currentPresentTagsPrefix = 'current_present_tags_';
+  static const presentationVerifyPrefix = 'presentation_verify_';
+  static const presentationLockPrefix = 'presentation_lock_';
+  static const presentationLockPasswordPrefix = 'presentation_lock_password_';
+  static const createPresentationModePrefix = 'create_presentation_mode_';
+  static const presentFiltersPrefix = 'present_filters_';
+  static const presentVisibleFiltersPrefix = 'present_visible_filters_';
+  /* AC Viewer  :  [present mode ] end */
+
 
   // platform settings
   // cf Android `Settings.System.ACCELEROMETER_ROTATION`
@@ -207,6 +234,7 @@ class Settings extends ChangeNotifier {
   Future<void> init({required bool monitorPlatformSettings}) async {
     await settingsStore.init();
     _appliedLocale = null;
+    // 监视手机旋转和
     if (monitorPlatformSettings) {
       _platformSettingsChangeChannel.receiveBroadcastStream().listen((event) => _onPlatformSettingsChanged(event as Map?));
     }
@@ -224,10 +252,12 @@ class Settings extends ChangeNotifier {
 
   bool isInternalKey(String key) => _internalKeys.contains(key) || key.startsWith(_widgetKeyPrefix);
 
+  /// This method sets some default settings for the application depending on the environment and the device the app is running on.
   Future<void> setContextualDefaults(AppFlavor flavor) async {
     // performance
     final performanceClass = await deviceService.getPerformanceClass();
     enableBlurEffect = performanceClass >= 29;
+
 
     // availability
     if (flavor.hasMapStyleDefault) {
@@ -269,7 +299,7 @@ class Settings extends ChangeNotifier {
       enableBin = false;
       showPinchGestureAlternatives = true;
     }
-  }
+  } //setContextualDefaults
 
   // app
 
@@ -358,6 +388,7 @@ class Settings extends ChangeNotifier {
 
   set entryRenamingPattern(String newValue) => setAndNotify(entryRenamingPatternKey, newValue);
 
+  ///已排序好的界面内可显示的最前的Entrys
   List<int>? get topEntryIds => getStringList(topEntryIdsKey)?.map(int.tryParse).whereNotNull().toList();
 
   set topEntryIds(List<int>? newValue) => setAndNotify(topEntryIdsKey, newValue?.map((id) => id.toString()).whereNotNull().toList());
@@ -527,6 +558,7 @@ class Settings extends ChangeNotifier {
 
   set tagSortReverse(bool newValue) => setAndNotify(tagSortReverseKey, newValue);
 
+  ///Pinned albums will always be shown at the top of the album group.
   Set<CollectionFilter> get pinnedFilters => (getStringList(pinnedFiltersKey) ?? []).map(CollectionFilter.fromJson).whereNotNull().toSet();
 
   set pinnedFilters(Set<CollectionFilter> newValue) => setAndNotify(pinnedFiltersKey, newValue.map((filter) => filter.toJson()).toList());
@@ -804,9 +836,68 @@ class Settings extends ChangeNotifier {
 
   void setWidgetCollectionFilters(int widgetId, Set<CollectionFilter> newValue) => setAndNotify('$widgetCollectionFiltersPrefixKey$widgetId', newValue.map((filter) => filter.toJson()).toList());
 
+
   WidgetOpenPage getWidgetOpenPage(int widgetId) => getEnumOrDefault('$widgetOpenPagePrefixKey$widgetId', SettingsDefaults.widgetOpenPage, WidgetOpenPage.values);
 
   void setWidgetOpenPage(int widgetId, WidgetOpenPage newValue) => setAndNotify('$widgetOpenPagePrefixKey$widgetId', newValue.toString());
+
+  /* AC Viewer  :  [home screen widget set wallpaper] start */
+  WidgetWallpaperLocation getWidgetWallpaperLocation(int widgetId) => getEnumOrDefault('$widgetWallpaperLocationPrefixKey$widgetId', SettingsDefaults.widgetWallpaperLocation, WidgetWallpaperLocation.values);
+
+  void setWidgetWallpaperLocation(int widgetId, WidgetWallpaperLocation newValue) => setAndNotify('$widgetWallpaperLocationPrefixKey$widgetId', newValue.toString());
+
+  Set<CollectionFilter> getWidgetCollectionBakFilters(int widgetId) => (getStringList('$widgetCollectionBakFiltersPrefixKey$widgetId') ?? []).map(CollectionFilter.fromJson).whereNotNull().toSet();
+
+  void setWidgetCollectionBakFilters(int widgetId, Set<CollectionFilter> newValue) => setAndNotify('$widgetCollectionBakFiltersPrefixKey$widgetId', newValue.map((filter) => filter.toJson()).toList());
+
+  int getWidgetUpdateInterval(int widgetId) => getInt('$widgetUpdateIntervalPrefixKey$widgetId') ?? SettingsDefaults.widgetUpdateInterval;
+
+  void setWidgetUpdateInterval(int widgetId, int newValue) => setAndNotify('$widgetUpdateIntervalPrefixKey$widgetId', newValue);
+
+  int getWidgetBakUpdateInterval(int widgetId) => getInt('$widgetBakUpdateIntervalPrefixKey$widgetId') ?? SettingsDefaults.widgetUpdateInterval;
+
+  void setWidgetBakUpdateInterval(int widgetId, int newValue) => setAndNotify('$widgetBakUpdateIntervalPrefixKey$widgetId', newValue);
+
+  /* AC Viewer  :  [home screen widget set wallpaper] end */
+
+  /* AC Viewer  :  [present] start */
+  Set<PresentTagRow> getCurrentPresentTagRows() => (getStringList('$currentPresentTagsPrefix') ?? []).map(PresentTagRow.fromJson).whereNotNull().toSet();
+
+  void setCurrentPresentTagRows(Set<PresentTagRow> newValue) => setAndNotify('$currentPresentTagsPrefix', newValue.map((row) => row.toJson()).toList());
+
+  bool get presentationVerify => getBool(presentationVerifyPrefix) ?? SettingsDefaults.presentationVerify;
+
+  set presentationVerify(bool newValue) => setAndNotify(presentationVerifyPrefix, newValue);
+
+  bool get presentationLock => getBool(presentationLockPrefix) ?? SettingsDefaults.presentationLock;
+
+  set presentationLock(bool newValue) => setAndNotify(presentationLockPrefix, newValue);
+
+  String get presentationLockPassword => getString(presentationLockPasswordPrefix) ?? SettingsDefaults.presentLockPassword;
+
+  set presentationLockPassword(String newValue) => setAndNotify(presentationLockPasswordPrefix, newValue);
+
+  CreatePresentationMode get createPresentationMode => getEnumOrDefault(createPresentationModePrefix, SettingsDefaults.createPresentationMode, CreatePresentationMode.values);
+
+  set createPresentationMode(CreatePresentationMode newValue) => setAndNotify(createPresentationModePrefix, newValue.toString());
+
+  bool get showThumbnailPresent => getBool(showThumbnailPresentKey) ?? SettingsDefaults.showThumbnailPresent;
+
+  set showThumbnailPresent(bool newValue) => setAndNotify(showThumbnailPresentKey, newValue);
+
+  Set<CollectionFilter> get presentFilters => (getStringList(presentFiltersPrefix) ?? []).map(CollectionFilter.fromJson).whereNotNull().toSet();
+
+  set presentFilters(Set<CollectionFilter> newValue) => setAndNotify(presentFiltersPrefix, newValue.map((filter) => filter.toJson()).toList());
+
+  Set<CollectionFilter> get presentVisibleFilters => (getStringList(presentVisibleFiltersPrefix) ?? []).map(CollectionFilter.fromJson).whereNotNull().toSet();
+
+  set presentVisibleFilters(Set<CollectionFilter> newValue) => setAndNotify(presentVisibleFiltersPrefix, newValue.map((filter) => filter.toJson()).toList());
+
+  bool get showAllCollectionWhenNoneFilter => getBool(showAllCollectionWhenNoneFilterKey) ?? SettingsDefaults.showAllCollectionWhenNoneFilter;
+
+  set showAllCollectionWhenNoneFilter(bool newValue) => setAndNotify(showAllCollectionWhenNoneFilterKey, newValue);
+
+  /* AC Viewer  :  [present] end */
 
   WidgetDisplayedItem getWidgetDisplayedItem(int widgetId) => getEnumOrDefault('$widgetDisplayedItemPrefixKey$widgetId', SettingsDefaults.widgetDisplayedItem, WidgetDisplayedItem.values);
 
@@ -881,6 +972,12 @@ class Settings extends ChangeNotifier {
     return settingsStore.getStringList(key)?.map((s) => values.firstWhereOrNull((v) => v.toString() == s)).whereNotNull().toList() ?? defaultValue;
   }
 
+
+  /// If newValue is null it removes the key from the settingsStore.
+  ///
+  /// If newValue is not null, retrieves the current value for the key and sets the new value using the corresponding method of the settingsStore.
+  ///
+  /// Then, if the old value and the new value are different, it notifies any listeners by calling the notifyListeners() method.
   void setAndNotify(String key, dynamic newValue) {
     var oldValue = settingsStore.get(key);
     if (newValue == null) {
@@ -939,6 +1036,7 @@ class Settings extends ChangeNotifier {
         settingsStore.getKeys().whereNot(isInternalKey).map((k) => MapEntry(k, settingsStore.get(k))),
       );
 
+  // TODO AC: when add settings , need to maintain import and export
   Future<void> import(dynamic jsonMap) async {
     if (jsonMap is Map<String, dynamic>) {
       // clear to restore defaults
@@ -1093,8 +1191,17 @@ class Settings extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Set<String> getKeys() {
+    return settingsStore.getKeys();
+  }
 }
 
+/// @immutable, meaning that the data stored in it should not change after being created.
+///
+/// has three final properties,String key, dynamic oldValue, and dynamic newValue.
+///
+/// used to store information about the change that occurred and transmit that information through the updateStream to any interested party.
 @immutable
 class SettingsChangedEvent {
   final String key;

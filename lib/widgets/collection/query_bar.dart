@@ -6,6 +6,7 @@ import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 class EntryQueryBar extends StatefulWidget {
   final ValueNotifier<String> queryNotifier;
   final FocusNode focusNode;

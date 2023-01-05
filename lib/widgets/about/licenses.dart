@@ -10,6 +10,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// 展示各种开源许可协议
 class Licenses extends StatefulWidget {
   const Licenses({super.key});
 

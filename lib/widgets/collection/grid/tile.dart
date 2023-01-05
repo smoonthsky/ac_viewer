@@ -13,6 +13,26 @@ import 'package:aves/widgets/viewer/entry_viewer_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// The InteractiveTile class is a stateless widget that wraps a Tile widget and makes it interactive.
+//
+// It listens to tap events on the Tile and handles them accordingly based on the current app mode.
+//
+// When tapped, it opens the EntryViewerPage if the app mode is set to AppMode.main and the Selection is not selecting.
+//
+// If the app mode is set to AppMode.pickSingleMediaExternal, it submits the picked items to the IntentService.
+//
+// If the app mode is set to AppMode.pickMultipleMediaExternal, it toggles the selection of the current AvesEntry in the Selection.
+//
+// If the app mode is set to AppMode.pickMediaInternal, it pops the current context and returns the AvesEntry as the result.
+//
+// Tile class, on the other hand, is a stateless widget that displays an AvesEntry in a specific layout.
+//
+// It has properties such as entry, thumbnailExtent, tileLayout, selectable, highlightable, isScrollingNotifier, and heroTagger.
+//
+// It generates a thumbnail of the AvesEntry based on the TileLayout and the thumbnailExtent provided, and it also has the ability to be selected and highlighted when selectable and highlightable are set to true.
+//
+// It takes an isScrollingNotifier that is used to determine whether the list view is scrolling or not. And also it takes a heroTagger function that is used to create a unique tag for the hero animation between different views of the entry in the same collection.
+
 class InteractiveTile extends StatelessWidget {
   final CollectionLens collection;
   final AvesEntry entry;

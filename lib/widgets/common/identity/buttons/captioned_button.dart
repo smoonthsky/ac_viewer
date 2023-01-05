@@ -2,6 +2,12 @@ import 'package:aves/widgets/common/identity/buttons/overlay_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+// The CaptionedButton and CaptionedButtonText widgets are used to create a button with an icon and a caption text, usually shown below the icon.
+// The CaptionedButton class takes in an icon, a caption, and a callback function for when the button is pressed.
+// The CaptionedButtonText class takes in a text and an enabled flag, and it is used to display the caption text below the icon.
+// The CaptionedButton also takes an optional scale animation, which can be used to animate the button when it's pressed.
+// The CaptionedButton class also provides a few utility methods to get the size of the button based on the text and whether or not the caption is shown.
+
 class CaptionedButton extends StatelessWidget {
   final Animation<double> scale;
   final Widget captionText;

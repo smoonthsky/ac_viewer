@@ -3,6 +3,7 @@ import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+/// 显示所有开源许可协议
 class PolicyPage extends StatefulWidget {
   static const routeName = '/about/policy';
 

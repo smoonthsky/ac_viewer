@@ -9,6 +9,7 @@ import 'package:aves/widgets/common/identity/buttons/captioned_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// used in app bar
 class FavouriteToggler extends StatefulWidget {
   final Set<AvesEntry> entries;
   final bool isMenuItem;
@@ -92,11 +93,23 @@ class _FavouriteTogglerState extends State<FavouriteToggler> {
     );
   }
 
+  /// Work for multiple selections. If none of the entries are favorited, change the action to 'Remove All' to unfavorite them."
   void _onChanged() {
     isFavouriteNotifier.value = entries.isNotEmpty && entries.every((entry) => entry.isFavourite);
   }
 }
 
+/// This is a Flutter class that represents a toggle button caption for marking an image as a favorite or removing it from favorites.
+///
+// The FavouriteTogglerCaption widget takes in a set of AvesEntry objects, which are images, and a boolean value enabled as its constructor arguments. The enabled property determines whether the button is active or not.
+//
+// The FavouriteTogglerCaption class has an associated state object called _FavouriteTogglerCaptionState which holds the state of the widget. This state object is created using the createState method.
+//
+// The _FavouriteTogglerCaptionState class maintains a ValueNotifier called isFavouriteNotifier which holds a boolean value indicating whether the image(s) are marked as favorite or not.
+//
+// The _FavouriteTogglerCaptionState listens to the favourites object for changes and updates the isFavouriteNotifier value accordingly.
+//
+// The build method of _FavouriteTogglerCaptionState returns a CaptionedButtonText widget which displays the text "Add to favorites" or "Remove from favorites" depending on the value of isFavouriteNotifier. The enabled property of the CaptionedButtonText widget is set to the value of the enabled property passed to the FavouriteTogglerCaption widget.
 class FavouriteTogglerCaption extends StatefulWidget {
   final Set<AvesEntry> entries;
   final bool enabled;

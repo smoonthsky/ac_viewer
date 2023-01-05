@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata.metadataextractor
+package anonymity.ac.viewer.metadata.metadataextractor
 
 import android.util.Log
 import com.drew.imaging.FileType
@@ -24,10 +24,10 @@ import com.drew.metadata.file.FileTypeDirectory
 import com.drew.metadata.iptc.IptcReader
 import com.drew.metadata.png.PngDirectory
 import com.drew.metadata.xmp.XmpReader
-import deckers.thibault.aves.metadata.ExifGeoTiffTags
-import deckers.thibault.aves.metadata.GeoTiffKeys
-import deckers.thibault.aves.metadata.Metadata
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.metadata.ExifGeoTiffTags
+import anonymity.ac.viewer.metadata.GeoTiffKeys
+import anonymity.ac.viewer.metadata.Metadata
+import anonymity.ac.viewer.utils.LogUtils
 import java.io.BufferedInputStream
 import java.io.IOException
 import java.io.InputStream

@@ -1,4 +1,4 @@
-package deckers.thibault.aves.utils
+package anonymity.ac.viewer.utils
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -18,12 +18,12 @@ import android.text.TextUtils
 import android.util.Log
 import androidx.annotation.RequiresApi
 import com.commonsware.cwac.document.DocumentFileCompat
-import deckers.thibault.aves.model.provider.ImageProvider
-import deckers.thibault.aves.utils.FileUtils.transferFrom
-import deckers.thibault.aves.utils.MimeTypes.isImage
-import deckers.thibault.aves.utils.MimeTypes.isVideo
-import deckers.thibault.aves.utils.PermissionManager.getGrantedDirForPath
-import deckers.thibault.aves.utils.UriUtils.tryParseId
+import anonymity.ac.viewer.model.provider.ImageProvider
+import anonymity.ac.viewer.utils.FileUtils.transferFrom
+import anonymity.ac.viewer.utils.MimeTypes.isImage
+import anonymity.ac.viewer.utils.MimeTypes.isVideo
+import anonymity.ac.viewer.utils.PermissionManager.getGrantedDirForPath
+import anonymity.ac.viewer.utils.UriUtils.tryParseId
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream

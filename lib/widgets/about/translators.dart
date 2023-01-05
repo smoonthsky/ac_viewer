@@ -6,6 +6,7 @@ import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+/// 显示翻译人员
 class AboutTranslators extends StatelessWidget {
   const AboutTranslators({super.key});
 

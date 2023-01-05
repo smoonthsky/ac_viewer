@@ -7,6 +7,7 @@ import 'package:aves/widgets/settings/common/tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// TODO AC: 显示展示present
 class ThumbnailOverlayPage extends StatelessWidget {
   static const routeName = '/settings/thumbnail_overlay';
 
@@ -24,6 +25,19 @@ class ThumbnailOverlayPage extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
+            SettingsSwitchListTile(
+              selector: (context, s) => s.showThumbnailPresent,
+              onChanged: (v) => settings.showThumbnailPresent = v,
+              title: context.l10n.settingsThumbnailShowPresentIcon,
+              trailing: Padding(
+                padding: EdgeInsets.symmetric(horizontal: iconSize * (1 - FavouriteIcon.scale) / 2),
+                child: Icon(
+                  AIcons.presentationActive,
+                  size: iconSize * FavouriteIcon.scale,
+                  color: iconColor,
+                ),
+              ),
+            ),
             SettingsSwitchListTile(
               selector: (context, s) => s.showThumbnailFavourite,
               onChanged: (v) => settings.showThumbnailFavourite = v,

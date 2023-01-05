@@ -1,4 +1,6 @@
+
 import 'package:aves/model/filters/filters.dart';
+import 'package:aves/model/settings/settings.dart';
 import 'package:aves/model/source/collection_source.dart';
 import 'package:aves/model/source/enums/enums.dart';
 import 'package:aves/utils/time_utils.dart';
@@ -34,6 +36,7 @@ class FilterNavigationPage<T extends CollectionFilter, CSAD extends ChipSetActio
     required this.emptyBuilder,
   });
 
+
   @override
   State<FilterNavigationPage<T, CSAD>> createState() => _FilterNavigationPageState<T, CSAD>();
 
@@ -62,6 +65,11 @@ class FilterNavigationPage<T extends CollectionFilter, CSAD extends ChipSetActio
     CollectionSource source,
     Set<T> filters,
   ) {
+    // AC Viewer : add for present filters start
+    if(settings.presentationVerify){
+      filters = filters.intersection(settings.presentVisibleFilters);
+    }
+    // AC Viewer : add for present filters end
     List<FilterGridItem<T>> toGridItem(CollectionSource source, Set<T> filters) {
       return filters
           .map((filter) => FilterGridItem(

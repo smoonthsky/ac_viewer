@@ -25,6 +25,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+/// Define a set of classes that represent filters that can be applied to a collection of entries, such as albums, tags, or dates.
+/// These filters can be used to specify which entries should be included or excluded from the collection based on certain criteria.
+/// The CollectionFilter class is the base class for all the different types of filters, and it provides methods for serializing and deserializing filters to and from JSON strings, as well as methods for comparing filters to each other based on their type.
+/// The categoryOrder list defines the order in which the different filter types should be displayed in the UI.
 @immutable
 abstract class CollectionFilter extends Equatable implements Comparable<CollectionFilter> {
   static const List<String> categoryOrder = [
@@ -33,11 +37,14 @@ abstract class CollectionFilter extends Equatable implements Comparable<Collecti
     MimeFilter.type,
     AlbumFilter.type,
     TypeFilter.type,
+
     RecentlyAddedFilter.type,
     DateFilter.type,
     LocationFilter.type,
     CoordinateFilter.type,
     FavouriteFilter.type,
+    //PresentFilter.type,
+
     RatingFilter.type,
     TagFilter.type,
     AspectRatioFilter.type,
@@ -62,6 +69,7 @@ abstract class CollectionFilter extends Equatable implements Comparable<Collecti
         return DateFilter.fromMap(jsonMap);
       case FavouriteFilter.type:
         return FavouriteFilter.fromMap(jsonMap);
+
       case LocationFilter.type:
         return LocationFilter.fromMap(jsonMap);
       case MimeFilter.type:
@@ -107,10 +115,16 @@ abstract class CollectionFilter extends Equatable implements Comparable<Collecti
 
   String toJson() => jsonEncode(toMap());
 
+  ///positiveTest returns an EntryFilter, which is a function that takes an Entry object as input and returns a boolean indicating whether the entry satisfies the filter criteria.
   EntryFilter get positiveTest;
 
   EntryFilter get test => reversed ? (v) => !positiveTest(v) : positiveTest;
 
+  /// creates a copy of the current filter and toggles the value of the reversed field.
+  ///
+  /// if _fromMap returns null, the overall expression returns null.
+  ///
+  /// The method returns the newly created filter object.
   CollectionFilter reverse() => _fromMap(toMap()..['reversed'] = !reversed)!;
 
   bool get exclusiveProp;
@@ -151,6 +165,13 @@ abstract class CollectionFilter extends Equatable implements Comparable<Collecti
   }
 }
 
+/// Adds support for displaying a cover for the filter, which can be a custom image or a generated color.
+/// This is typically used for filters that represent collections of media, such as albums or tags.
+/// For example, CoveredCollectionFilter to allow users to set a custom cover image or color for each album .
+/// The color method of CoveredCollectionFilter returns a Future that resolves to a Color representing the color of the filter.
+/// If a custom color has been set for the filter, it is returned. I
+/// f no custom color has been set, the color of the filter is determined by the covers.effectiveAlbumType of the album path of the filter.
+/// If no color can be determined, the superclass's color method is called.
 @immutable
 abstract class CoveredCollectionFilter extends CollectionFilter {
   const CoveredCollectionFilter({required super.reversed});
@@ -165,6 +186,10 @@ abstract class CoveredCollectionFilter extends CollectionFilter {
   }
 }
 
+/// FilterGridItem represents an item in a grid of collection filters.
+/// Each item is associated with a CollectionFilter, which is a class that defines a condition to filter entries in a collection.
+///Used in a widget that displays a grid of filters that can be applied to a collection of entries, such as photos or videos.
+///The user can select or deselect filters to narrow down the entries displayed in the collection.
 @immutable
 class FilterGridItem<T extends CollectionFilter> with EquatableMixin {
   final T filter;
@@ -176,4 +201,6 @@ class FilterGridItem<T extends CollectionFilter> with EquatableMixin {
   const FilterGridItem(this.filter, this.entry);
 }
 
+///Takes an AvesEntry object as input and returns a boolean value indicating whether the entry satisfies the filter's criteria.
+///It is typically used to filter a list of entries based on certain properties or attributes of the entries.
 typedef EntryFilter = bool Function(AvesEntry);

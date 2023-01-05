@@ -140,11 +140,15 @@ class SettingsDurationListTile extends StatelessWidget {
     return Selector<Settings, int>(
       selector: selector,
       builder: (context, current, child) {
-        final currentMinutes = current ~/ secondsInMinute;
+        final currentdays = current ~/ secondsInDay;
+        final currentHours =(current % secondsInDay) ~/  secondsInHours;
+        final currentMinutes = (current % secondsInHours) ~/ secondsInMinute;
         final currentSeconds = current % secondsInMinute;
 
         final l10n = context.l10n;
         final subtitle = [
+          if (currentdays > 0) l10n.timeDays(currentdays),
+          if (currentHours > 0) l10n.timeHours(currentHours),
           if (currentMinutes > 0) l10n.timeMinutes(currentMinutes),
           if (currentSeconds > 0) l10n.timeSeconds(currentSeconds),
         ].join(' ');

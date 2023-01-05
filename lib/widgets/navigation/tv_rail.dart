@@ -10,7 +10,6 @@ import 'package:aves/model/source/collection_source.dart';
 import 'package:aves/widgets/about/about_page.dart';
 import 'package:aves/widgets/collection/collection_page.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
-import 'package:aves/widgets/common/identity/aves_logo.dart';
 import 'package:aves/widgets/debug/app_debug_page.dart';
 import 'package:aves/widgets/filter_grids/albums_page.dart';
 import 'package:aves/widgets/navigation/drawer/app_drawer.dart';
@@ -72,7 +71,7 @@ class _TvRailState extends State<TvRail> {
   Widget build(BuildContext context) {
     final header = Row(
       children: [
-        const AvesLogo(size: 48),
+        //const AvesLogo(size: 48),
         const SizedBox(width: 16),
         Text(
           context.l10n.appName,

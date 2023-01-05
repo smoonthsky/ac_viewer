@@ -7,6 +7,14 @@ import 'package:aves/widgets/common/fx/blurred.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// AvesAppBar is a custom implementation of a SliverAppBar that is used in the Aves app.
+// It takes in several parameters such as the contentHeight, leading, title, actions and bottom.
+// It also has support for transition animations when switching between pages using the Hero widget.
+// The leading and title are wrapped in a Hero widget so that they can transition smoothly between pages.
+// It also uses a custom Material widget as the parent which allows to have a background color and a child.
+// It also uses a Column widget to arrange the elements in the AppBar, the first row is for the leading, title and actions and the second row is for the bottom (if provided).
+// Additionally, it uses the SafeArea widget to ensure that the content is not obscured by the device's notch or other system UI elements.
+
 class AvesAppBar extends StatelessWidget {
   final double contentHeight;
   final Widget? leading;

@@ -14,6 +14,7 @@ import 'package:aves/widgets/filter_grids/common/list_details.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// 被filter_grid_page调用
 class InteractiveFilterTile<T extends CollectionFilter> extends StatefulWidget {
   final FilterGridItem<T> gridItem;
   final double chipExtent, thumbnailExtent;

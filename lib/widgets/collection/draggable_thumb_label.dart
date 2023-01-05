@@ -10,6 +10,21 @@ import 'package:aves/widgets/common/grid/sections/list_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// CollectionDraggableThumbLabel is a widget that is used to display a label that appears when the user drags a thumbnail on the screen.
+//
+// It is built on top of DraggableThumbLabel, which takes an offsetY property to set the position of the label and a lineBuilder callback that returns the lines of text to be displayed in the label.
+//
+// The lineBuilder callback takes a context and an AvesEntry as arguments and it is used to determine which lines of text to be displayed in the label based on the collection.sortFactor and collection.sectionFactor.
+//
+// The widget also uses helper methods like _hasMultipleSections, _showAlbumName, and _getAlbumName to determine when to show the album name and whether the album name should be displayed or not.
+
+/// This will be shown when dragging the scroll thumb on the right side of the screen.
+///
+/// In the DraggableScrollbar widget, the draggable part is called the "scroll thumb."
+///
+/// The scroll thumb is the small, rectangular element that can be dragged up and down to scroll through the content in the scroll view.
+///
+/// When the user holds and moves the scroll thumb, it allows them to quickly scroll through the content of the scroll view.
 class CollectionDraggableThumbLabel extends StatelessWidget {
   final CollectionLens collection;
   final double offsetY;

@@ -86,6 +86,7 @@ class AIcons {
   static const IconData flip = Icons.flip_outlined;
   static const IconData favourite = Icons.favorite_border;
   static const IconData favouriteActive = Icons.favorite;
+  /// see: https://pictogrammers.github.io/@mdi/font/5.4.55/ , Ctrl + F , mdi-filter-off-outline ,mdi-filter-outline
   static const IconData filter = MdiIcons.filterOutline;
   static const IconData filterOff = MdiIcons.filterOffOutline;
   static const IconData geoBounds = Icons.public_outlined;
@@ -136,6 +137,17 @@ class AIcons {
   static const IconData expand = Icons.expand_more_outlined;
   static const IconData previous = Icons.chevron_left_outlined;
   static const IconData next = Icons.chevron_right_outlined;
+
+  /// AC Viewer action https://fonts.google.com/icons?selected=Material+Icons
+  static const IconData presentationActive = Icons.people_alt; //groups_outlined;
+  static const IconData presentationInactive = Icons.person_outline;
+  static const IconData lockPresentation = Icons.lock_open_outlined;
+  static const IconData unlockPresentation = Icons.lock;
+  static const IconData presentTagsSetting = Icons.manage_accounts_outlined;
+  static const IconData verifyPresentation = Icons.toll_outlined;
+  static const IconData cancelPresentation = Icons.hide_source;
+
+  static const IconData exchangeWidgetBakFilters = Icons.safety_divider;//health_and_safety //diversity_1
 
   // albums
   static const IconData album = Icons.photo_album_outlined;

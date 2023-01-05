@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
+
 @immutable
 class OverlayMetadata extends Equatable {
   final double? aperture, focalLength;

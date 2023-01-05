@@ -6,6 +6,11 @@ import 'package:aves/utils/android_file_utils.dart';
 import 'package:flutter/services.dart';
 import 'package:streams_channel/streams_channel.dart';
 
+/// an abstract class that defines a set of methods for interacting with the storage system of the device.
+///
+/// The methods in this class allow the app to get information about storage volumes, free space, and directories that the app has access to.
+///
+/// It also allows the app to request access to directories, delete empty directories, and create files.
 abstract class StorageService {
   Future<Set<StorageVolume>> getStorageVolumes();
 

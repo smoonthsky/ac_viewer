@@ -5,10 +5,10 @@ import 'package:aves/utils/constants.dart';
 import 'package:aves/widgets/about/policy_page.dart';
 import 'package:aves/widgets/common/basic/link_chip.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
-import 'package:aves/widgets/common/identity/aves_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+///TODO： 显示App名字与版本,github地址，许可协议隐私政策等，widget,
 class AppReference extends StatefulWidget {
   const AppReference({super.key});
 
@@ -52,9 +52,9 @@ class _AppReferenceState extends State<AppReference> {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            AvesLogo(
-              size: style.fontSize! * MediaQuery.textScaleFactorOf(context) * 1.3,
-            ),
+            // AvesLogo(
+            //   size: style.fontSize! * MediaQuery.textScaleFactorOf(context) * 1.3,
+            // ),
             const SizedBox(width: 8),
             Text(
               '${context.l10n.appName} ${snapshot.data?.version}',
@@ -73,14 +73,14 @@ class _AppReferenceState extends State<AppReference> {
       spacing: 16,
       crossAxisAlignment: WrapCrossAlignment.center,
       children: [
-        const LinkChip(
-          leading: Icon(
-            AIcons.github,
-            size: 24,
-          ),
-          text: 'GitHub',
-          urlString: Constants.avesGithub,
-        ),
+        // const LinkChip(
+        //   leading: Icon(
+        //     AIcons.github,
+        //     size: 24,
+        //   ),
+        //   text: 'GitHub',
+        //   urlString: Constants.avesGithub,
+        // ),
         LinkChip(
           leading: const Icon(
             AIcons.legal,

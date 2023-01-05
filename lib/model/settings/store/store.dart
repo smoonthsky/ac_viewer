@@ -1,3 +1,6 @@
+/// provides an interface for storing and retrieving application settings.
+///
+/// The class has several methods that allow you to initialize, reload, clear, or remove settings, as well as get or set various types of values such as booleans, integers, doubles, strings, and lists of strings.
 abstract class SettingsStore {
   bool get initialized;
 

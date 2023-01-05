@@ -5,6 +5,16 @@ import 'package:aves_map/aves_map.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 
+/// Defines an interface for a class that checks the availability of various features and services for the application.
+/// The class has three methods:
+///
+/// onResume(): This method is called when the application resumes from the background.
+///
+/// isConnected: This method returns a Future that completes with a bool indicating whether the device is currently connected to the internet or not.
+///
+/// canLocatePlaces: This method returns a Future that completes with a bool indicating whether the device can locate places by using the geocoder or not.
+///
+/// mapStyles: This method returns a list of EntryMapStyle.
 abstract class AvesAvailability {
   void onResume();
 
@@ -44,6 +54,7 @@ class LiveAvesAvailability implements AvesAvailability {
   @override
   Future<bool> get canLocatePlaces async => device.hasGeocoder && await isConnected;
 
+  /// uses mobileServices.mapStyles to get the available map styles for the app, and it also includes styles that don't need mobile services to be present.
   @override
   List<EntryMapStyle> get mapStyles => [
         ...mobileServices.mapStyles,

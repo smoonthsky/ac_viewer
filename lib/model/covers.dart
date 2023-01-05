@@ -12,8 +12,24 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 import 'package:tuple/tuple.dart';
 
+///The Covers class is a container for metadata about collections of media, specifically their custom cover images and colors.
+///It has a number of StreamControllers that allow other parts of the app to be notified when the metadata for a particular collection changes.
+///It also provides methods for adding, updating, and removing this metadata, as well as for querying the metadata for a particular collection.
+///The Covers class is a singleton, with only one instance that is accessed through the covers global variable.
+///In db: 'CREATE TABLE $coverTable('
+///        'filter TEXT PRIMARY KEY'
+///        ', contentId INTEGER'
+///        ')'
+///    ALTER TABLE $coverTable ADD COLUMN packageName TEXT;
+///    ALTER TABLE $coverTable ADD COLUMN color INTEGER;
 final Covers covers = Covers._private();
 
+
+///The Covers class provides methods for interacting with these CoverRow objects and for listening to changes in them.
+///The init method is used to load all CoverRow objects from the database into memory.
+/// The of method retrieves the cover image metadata for a given collection filter, and the set method updates or deletes a CoverRow object.
+/// The entryChangeStream, packageChangeStream, and colorChangeStream provide a way to listen for changes to the entryId, packageName, and color properties of CoverRow objects, respectively.
+/// The moveEntry, removeIds, and removePackages methods are used to remove CoverRow objects when the corresponding entries or packages are deleted.
 class Covers {
   final StreamController<Set<CollectionFilter>?> _entryChangeStreamController = StreamController.broadcast();
   final StreamController<Set<CollectionFilter>?> _packageChangeStreamController = StreamController.broadcast();
@@ -187,6 +203,9 @@ class Covers {
   }
 }
 
+///CoverRow is a class that represents a row in the database table that stores cover images and contextual properties (color, package name) for certain collection filters.
+/// For example, if a user assigns a cover image to an album in the app, a CoverRow object is created with the AlbumFilter filter and the cover image metadata (entry ID and package name).
+/// This object is then added to the _rows set and stored in the database. The set method can also be used to update or delete a CoverRow object.
 @immutable
 class CoverRow extends Equatable {
   final CollectionFilter filter;

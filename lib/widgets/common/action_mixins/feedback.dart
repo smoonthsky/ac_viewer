@@ -19,9 +19,11 @@ import 'package:overlay_support/overlay_support.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
+/// Provides methods for showing feedback to the user in the form of a snack bar or an overlay notification.
 mixin FeedbackMixin {
   void dismissFeedback(BuildContext context) => ScaffoldMessenger.of(context).hideCurrentSnackBar();
 
+  /// Displays a message to the user and optionally an action they can take.
   void showFeedback(BuildContext context, String message, [SnackBarAction? action]) {
     ScaffoldMessengerState? scaffoldMessenger;
     try {
@@ -153,6 +155,12 @@ mixin FeedbackMixin {
   }
 }
 
+
+/// Displays a circular progress indicator while a stream of items is processed.
+/// It also displays a percentage of the total items that have been processed.
+/// Has a cancel button that allows the user to cancel the processing of the stream.
+/// The ReportOverlay uses a StreamBuilder to listen to the stream of items and adds each processed item to a set.
+/// When the stream is completed or an error occurs, the ReportOverlay hides itself by reversing an animation controller.
 class ReportOverlay<T> extends StatefulWidget {
   final Stream<T> opStream;
   final int? itemCount;
@@ -289,6 +297,10 @@ class _ReportOverlayState<T> extends State<ReportOverlay<T>> with SingleTickerPr
   }
 }
 
+/// Displays a message to the user and an optional timer indicating the remaining time before the message is dismissed.
+/// The timer is displayed as a circular progress indicator, and its progress is animated in a linear fashion from the beginning to the end of the duration.
+/// The timer and message are displayed as a single row, with the message occupying the majority of the available space and the timer displayed in a small circular indicator to the right of the message.
+/// The message text style and timer progress color can be customized by the caller. The timer can be dismissed manually by the user by clicking on a dismiss button.
 class _FeedbackMessage extends StatefulWidget {
   final String message;
   final DateTime? start, stop;
@@ -392,6 +404,13 @@ class _FeedbackMessageState extends State<_FeedbackMessage> with SingleTickerPro
   }
 }
 
+
+/// Used to provide visual feedback to the user when they perform an action.
+/// It does this by animating the child widget that it wraps.
+/// When the child widget changes, the animation is reset and starts again.
+/// The animation includes an opacity transition and a scaling effect. The animation runs for a fixed duration defined in the Durations class.
+/// The ActionFeedback widget is often used in combination with other widgets that provide an action, such as a button.
+/// When the user performs the action, the child widget is displayed and the animation is triggered. This can help to confirm to the user that their action was successful and provide a more engaging and interactive user experience.
 class ActionFeedback extends StatefulWidget {
   final Widget? child;
 

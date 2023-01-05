@@ -3,6 +3,9 @@ import 'package:flutter/foundation.dart';
 const hoursInDay = 24;
 const minutesInHour = 60;
 const secondsInMinute = 60;
+const secondsInHours = 3600;
+const secondsInDay = 86400;
+const hoursInTwoDays = 48 ;
 
 extension ExtraDateTime on DateTime {
   bool isAtSameYearAs(DateTime? other) => year == other?.year;

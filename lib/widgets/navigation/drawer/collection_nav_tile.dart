@@ -55,7 +55,7 @@ class CollectionNavTile extends StatelessWidget {
       ),
     );
   }
-
+// TODO AC: fix clash much items
   void _goToCollection(BuildContext context) {
     Navigator.pop(context);
     Navigator.pushAndRemoveUntil(

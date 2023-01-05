@@ -1,6 +1,6 @@
 {
-  "appName": "Aves",
-  "welcomeMessage": "Welcome to Aves",
+  "appName": "AC Viewer",
+  "welcomeMessage": "Welcome to AC Viewer",
   "welcomeOptional": "Optional",
   "welcomeTermsToggle": "I agree to the terms and conditions",
   "itemCount": "{count, plural, =1{1 item} other{{count} items}}",
@@ -26,6 +26,12 @@
   "@timeMinutes": {
     "placeholders": {
       "minutes": {}
+    }
+  },
+  "timeHours": "{hours, plural, =1{1 hour} other{{hours} hours}}",
+  "@timeHours": {
+    "placeholders": {
+      "hours": {}
     }
   },
   "timeDays": "{days, plural, =1{1 day} other{{days} days}}",
@@ -139,8 +145,10 @@
   "filterFavouriteLabel": "Favorite",
   "filterNoDateLabel": "Undated",
   "filterNoAddressLabel": "No address",
+  "filterLocatedLabel": "Located",
   "filterNoLocationLabel": "Unlocated",
   "filterNoRatingLabel": "Unrated",
+  "filterTaggedLabel": "Tagged",
   "filterNoTagLabel": "Untagged",
   "filterNoTitleLabel": "Untitled",
   "filterOnThisDayLabel": "On this day",
@@ -909,5 +917,51 @@
   "filePickerDoNotShowHiddenFiles": "Don’t show hidden files",
   "filePickerOpenFrom": "Open from",
   "filePickerNoItems": "No items",
-  "filePickerUseThisFolder": "Use this folder"
+  "filePickerUseThisFolder": "Use this folder",
+
+  "settingsShowAllCollectionWhenNoneFilter": "Show all media collection when there's no filter",
+  "collectionFilterEmptyNotShow": "Media collection has no filter",
+
+  "addToPresentation": "Add to presentation",
+  "removeFromPresentation": "Remove from presentation",
+  "filterPresentLabel": "Presentation",
+  "menuActionPresentTagSettings": "Presentation tag",
+  "settingsThumbnailShowPresentIcon": "Show presentation icon",
+
+  "settingsPresentSectionTitle": "Presentation",
+  "settingsCreatePresentTagModeTile": "Create presentation tag mode",
+  "clearVisibleAndAutoDate": "Clear visibility, marked with new date",
+  "addToCurrentVisible": "Add to current visible (no visible forces add to default)",
+  "settingsPresentTagTile": "Presentation tag settings",
+  "settingsPresentTagVisible": "Selected",
+  "settingsPresentTagManage": "Manage",
+  "presentTagEditorPageNewTagFieldLabel": "New presentation tag",
+  "presentTagEditorPageRenameTagFieldLabel": "Rename presentation tag",
+  "presentTagEditorPageTitle": "Edit presentation tag",
+  "presentTagEditorPageAddTagTooltip": "Add presentation tag",
+  "presentTagAlreadyExistsHelper": "Presentation tag already exists",
+  "verifyPresentation": "Verify presentation",
+  "verifyPresentationCancel": "Cancel presentation",
+  "toggleWidgetFiltersBak": "Toggle widget backup",
+
+  "lockPresentation":"Lock presentation",
+  "unlockPresentation":"Unlock presentation",
+  "unlockPresentationDialogTitle":"Unlock presentation (default: 1234)",
+  "unlockPresentationPasswordTile":"Password ",
+  "unlockPresentationPasswordChangeDialogTitle":"Change unlock presentation password",
+  "unlockPresentationOldPassword":"Old password (default: 1234)",
+  "unlockPresentationNewPassword":"New password",
+  "unlockPresentationConfirmPassword":"Confirm new password",
+
+  "settingsWidgetWallpaperLocation": "Set wallpaper to",
+  "widgetWallpaperLocationNone": "Not set",
+  "widgetWallpaperLocationHomeScreen": "Only home screen",
+  "widgetWallpaperLocationLockScreen": "Only lock screen",
+  "widgetWallpaperLocationBothScreen": "Home and lock screen",
+  "settingsWidgetUpdateIntervalTile": "Wallpaper switch interval",
+  "settingsCollectionBakTile": "Backup media collection",
+  "settingsWidgetBakUpdateIntervalTile": "Wallpaper switch bak interval",
+  "homeScreenWidgetSettingTile": "Desktop Widget Setting",
+  "homeScreenWidgetIdTile": "Widget ID",
+  "homeScreenWidgetEmptyNotShow": "Desktop widget not created"
 }

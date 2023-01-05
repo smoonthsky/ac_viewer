@@ -5,6 +5,12 @@ import 'package:flutter/scheduler.dart';
 
 import 'aves_dialog.dart';
 
+//The showSelectionDialog function is used to show a dialog that allows the user to make a selection from a list of options.
+// The AvesSelectionDialog is a widget that builds the UI for the dialog.
+// The _AvesSelectionDialogState holds the selected value and updates the UI accordingly.
+// The SelectionRadioListTile is a widget that represents each option in the list as a radio button.
+// The onSelection callback is called when the user confirms the selection by clicking the confirmation button.
+
 Future<void> showSelectionDialog<T>({
   required BuildContext context,
   required WidgetBuilder builder,

@@ -1,4 +1,4 @@
-package deckers.thibault.aves.utils
+package anonymity.ac.viewer.utils
 
 import android.content.Context
 import android.content.Intent

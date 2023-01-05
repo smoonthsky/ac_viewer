@@ -1,4 +1,4 @@
-package deckers.thibault.aves.decoder
+package anonymity.ac.viewer.decoder
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -18,8 +18,8 @@ import com.bumptech.glide.module.LibraryGlideModule
 import com.bumptech.glide.signature.ObjectKey
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
-import deckers.thibault.aves.metadata.SvgHelper.normalizeSize
-import deckers.thibault.aves.utils.StorageUtils
+import anonymity.ac.viewer.metadata.SvgHelper.normalizeSize
+import anonymity.ac.viewer.utils.StorageUtils
 import kotlin.math.ceil
 
 @GlideModule

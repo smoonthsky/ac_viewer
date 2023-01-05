@@ -1,12 +1,12 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
 import android.content.Context
 import android.net.Uri
 import com.bumptech.glide.Glide
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safe
-import deckers.thibault.aves.model.FieldMap
-import deckers.thibault.aves.model.provider.ImageProvider.ImageOpCallback
-import deckers.thibault.aves.model.provider.ImageProviderFactory.getProvider
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safe
+import anonymity.ac.viewer.model.FieldMap
+import anonymity.ac.viewer.model.provider.ImageProvider.ImageOpCallback
+import anonymity.ac.viewer.model.provider.ImageProviderFactory.getProvider
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler

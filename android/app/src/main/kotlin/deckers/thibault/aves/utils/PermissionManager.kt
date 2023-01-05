@@ -1,4 +1,4 @@
-package deckers.thibault.aves.utils
+package anonymity.ac.viewer.utils
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -13,10 +13,10 @@ import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.util.Log
 import androidx.annotation.RequiresApi
-import deckers.thibault.aves.MainActivity
-import deckers.thibault.aves.PendingStorageAccessResultHandler
-import deckers.thibault.aves.model.FieldMap
-import deckers.thibault.aves.utils.StorageUtils.PathSegments
+import anonymity.ac.viewer.MainActivity
+import anonymity.ac.viewer.PendingStorageAccessResultHandler
+import anonymity.ac.viewer.model.FieldMap
+import anonymity.ac.viewer.utils.StorageUtils.PathSegments
 import java.io.File
 import java.util.concurrent.CompletableFuture
 

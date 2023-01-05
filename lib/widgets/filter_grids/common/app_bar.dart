@@ -23,6 +23,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
+import '../../common/action_controls/togglers/presentation_lock.dart';
+import '../../common/action_controls/togglers/presentation_verify.dart';
+
 typedef ActionsBuilder<T extends CollectionFilter, CSAD extends ChipSetActionDelegate<T>> = List<Widget> Function(
   BuildContext context,
   AppMode appMode,
@@ -30,6 +33,7 @@ typedef ActionsBuilder<T extends CollectionFilter, CSAD extends ChipSetActionDel
   CSAD actionDelegate,
 );
 
+// 顶部app bar，非选择状态左至右：drawer, 带Text的搜索开关，actions pop icon .
 class FilterGridAppBar<T extends CollectionFilter, CSAD extends ChipSetActionDelegate<T>> extends StatefulWidget {
   final CollectionSource source;
   final String title;
@@ -60,6 +64,17 @@ class FilterGridAppBar<T extends CollectionFilter, CSAD extends ChipSetActionDel
           isMenuItem: true,
         );
         break;
+      case ChipSetAction.togglePresentationVerify:
+        child = const PresentationVerifyToggler(
+          isMenuItem: true,
+        );
+        break;
+
+      case ChipSetAction.toggleLockPresentation:
+        child = const PresentationLockToggler(
+          isMenuItem: true,
+        );
+        break;
       default:
         child = MenuRow(text: action.getText(context), icon: action.getIcon());
         break;
@@ -80,6 +95,7 @@ class _FilterGridAppBarState<T extends CollectionFilter, CSAD extends ChipSetAct
   final FocusNode _queryBarFocusNode = FocusNode();
   late final Listenable _queryFocusRequestNotifier;
 
+  // CollectionFilter:source
   CollectionSource get source => widget.source;
 
   static const browsingQuickActions = [
@@ -359,6 +375,14 @@ class _FilterGridAppBarState<T extends CollectionFilter, CSAD extends ChipSetAct
             );
           },
         );
+      case ChipSetAction.togglePresentationVerify:
+        return PresentationVerifyToggler(
+          onPressed: onPressed,
+        );
+      case ChipSetAction.toggleLockPresentation:
+        return PresentationLockToggler(
+          onPressed: onPressed,
+        );
       default:
         return IconButton(
           icon: action.getIcon(),
@@ -376,6 +400,14 @@ class _FilterGridAppBarState<T extends CollectionFilter, CSAD extends ChipSetAct
     switch (action) {
       case ChipSetAction.toggleTitleSearch:
         return TitleSearchTogglerCaption(
+          enabled: enabled,
+        );
+      case ChipSetAction.togglePresentationVerify:
+        return PresentationVerifyTogglerCaption(
+          enabled: enabled,
+        );
+      case ChipSetAction.toggleLockPresentation:
+        return PresentationLockTogglerCaption(
           enabled: enabled,
         );
       default:

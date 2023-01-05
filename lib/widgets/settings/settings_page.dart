@@ -25,6 +25,7 @@ import 'package:aves/widgets/settings/app_export/selection_dialog.dart';
 import 'package:aves/widgets/settings/display/display.dart';
 import 'package:aves/widgets/settings/language/language.dart';
 import 'package:aves/widgets/settings/navigation/navigation.dart';
+import 'package:aves/widgets/settings/present/present.dart';
 import 'package:aves/widgets/settings/privacy/privacy.dart';
 import 'package:aves/widgets/settings/settings_definition.dart';
 import 'package:aves/widgets/settings/settings_search.dart';
@@ -60,6 +61,7 @@ class _SettingsPageState extends State<SettingsPage> with FeedbackMixin {
     AccessibilitySection(),
     DisplaySection(),
     LanguageSection(),
+    PresentSection(),
   ];
 
   @override

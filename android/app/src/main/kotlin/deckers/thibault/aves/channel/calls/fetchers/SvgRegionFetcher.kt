@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.calls.fetchers
+package anonymity.ac.viewer.channel.calls.fetchers
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,10 +10,10 @@ import com.caverock.androidsvg.PreserveAspectRatio
 import com.caverock.androidsvg.RenderOptions
 import com.caverock.androidsvg.SVG
 import com.caverock.androidsvg.SVGParseException
-import deckers.thibault.aves.metadata.SvgHelper.normalizeSize
-import deckers.thibault.aves.utils.BitmapUtils.getBytes
-import deckers.thibault.aves.utils.MemoryUtils
-import deckers.thibault.aves.utils.StorageUtils
+import anonymity.ac.viewer.metadata.SvgHelper.normalizeSize
+import anonymity.ac.viewer.utils.BitmapUtils.getBytes
+import anonymity.ac.viewer.utils.MemoryUtils
+import anonymity.ac.viewer.utils.StorageUtils
 import io.flutter.plugin.common.MethodChannel
 import kotlin.math.ceil
 

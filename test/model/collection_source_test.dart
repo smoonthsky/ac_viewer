@@ -9,6 +9,9 @@ import 'package:aves/model/filters/album.dart';
 import 'package:aves/model/filters/tag.dart';
 import 'package:aves/model/metadata/address.dart';
 import 'package:aves/model/metadata/catalog.dart';
+import 'package:aves/model/present.dart';
+import 'package:aves/model/settings/defaults.dart';
+import 'package:aves/model/settings/enums/enums.dart';
 import 'package:aves/model/settings/settings.dart';
 import 'package:aves/model/source/collection_source.dart';
 import 'package:aves/model/source/media_store_source.dart';
@@ -179,6 +182,176 @@ void main() {
     await image1.toggleFavourite();
     expect(favourites.count, 0);
     expect(image1.isFavourite, false);
+  });
+
+  test('add/remove present tags', () async {
+
+    await _initSource();
+    expect(presentTags.count, 6);
+
+    final oldCount = presentTags.all.length;
+    final Set<PresentTagRow> tags = {
+      PresentTagRow(presentTagId: 11, presentTagString: 'Tag 11'),
+      PresentTagRow(presentTagId: 12, presentTagString: 'Tag 12'),
+    };
+
+    await presentTags.add(tags);
+
+    expect(presentTags.all.length, oldCount + 2);
+    expect(presentTags.all,containsAll(tags) );
+
+    final Set<PresentTagRow> removeTags = {
+      PresentTagRow(presentTagId: 1, presentTagString: 'Tag 1'),//not exist.
+      PresentTagRow(presentTagId: 2, presentTagString: 'Tag 2'),
+      PresentTagRow(presentTagId: 3, presentTagString: 'Tag 3'),
+    };
+
+    await presentTags.removeTags(removeTags);
+
+    expect(presentTags.all.length, oldCount+2-2);
+    expect(presentTags.all.where(removeTags.contains).toList(), isEmpty);
+  });
+
+  test('add/remove present entry', () async {
+    final image1 = FakeMediaStoreService.newImage(testAlbum, 'image1');
+    (mediaStoreService as FakeMediaStoreService).entries = {
+      image1,
+    };
+
+    await _initSource();
+    expect(presentEntries.count, 0);
+
+    settings.createPresentationMode = CreatePresentationMode.clearVisibleAndAutoDate;
+
+    await image1.togglePresent();
+    expect(presentEntries.count, 1);
+    expect(image1.isPresent, true);
+    expect(presentTags.allVisible.length, 1);
+    expect(presentTags.allVisible.first.presentTagId, greaterThan(SettingsDefaults.defaultPresentTag['id']!));
+    expect(presentTags.allVisible.first.presentTagString, matches(RegExp(r'\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}.\d{6}')));
+
+    await image1.togglePresent();
+    expect(presentEntries.count, 0);
+    expect(image1.isPresent, false);
+
+
+    settings.createPresentationMode = CreatePresentationMode.addToCurrentVisible;
+    //test if currentPresentTag is null
+    settings.setCurrentPresentTagRows({});
+    await image1.togglePresent();
+    expect(presentEntries.count, 1);
+    expect(image1.isPresent, true);
+    expect(presentTags.allVisible.first, equals(PresentTagRow.fromMap(SettingsDefaults.defaultPresentTag)));
+
+    await image1.togglePresent();
+    expect(presentEntries.count, 0);
+    expect(image1.isPresent, false);
+
+    //test only add to visual tags
+    final defaultPresentTags = PresentTagRow.fromMap(SettingsDefaults.defaultPresentTag);
+
+    // for sample presentTag
+    Set<PresentTagRow> _sampleRows = {};
+    for (int i = defaultPresentTags.presentTagId +1; i < defaultPresentTags.presentTagId + 4; i++) {
+      final PresentTagRow row = PresentTagRow(
+        presentTagId: i,
+        presentTagString: 'Tag $i',
+      );
+      _sampleRows.add(row);
+    }
+    settings.setCurrentPresentTagRows(_sampleRows);
+
+    await image1.togglePresent();
+    expect(presentEntries.count, 3);
+    expect(image1.isPresent, true);
+    expect(presentTags.allVisible, equals(_sampleRows));
+
+    await image1.togglePresent();
+    expect(presentEntries.count, 0);
+    expect(image1.isPresent, false);
+
+  });
+
+  test('presentation are kept when renaming entries', () async {
+    final image1 = FakeMediaStoreService.newImage(testAlbum, 'image1');
+    (mediaStoreService as FakeMediaStoreService).entries = {
+      image1,
+    };
+
+    final source = await _initSource();
+    await image1.togglePresent();
+    await source.updateAfterRename(
+      todoEntries: {image1},
+      movedOps: {
+        FakeMediaStoreService.moveOpEventForRename(image1, 'image1b.jpg'),
+      },
+      persist: true,
+    );
+    expect(presentEntries.count, 1);
+    expect(image1.isPresent, true);
+  });
+
+  test('presentation are cleared when removing entries', () async {
+    final image1 = FakeMediaStoreService.newImage(testAlbum, 'image1');
+    (mediaStoreService as FakeMediaStoreService).entries = {
+      image1,
+    };
+
+    final source = await _initSource();
+    await image1.togglePresent();
+    await source.removeEntries({image1.uri}, includeTrash: true);
+
+    expect(source.rawAlbums.length, 0);
+    expect(presentEntries.count, 0);
+
+  });
+
+  test('presentation are kept when moving entries', () async {
+    final image1 = FakeMediaStoreService.newImage(sourceAlbum, 'image1');
+    (mediaStoreService as FakeMediaStoreService).entries = {
+      image1,
+    };
+
+    final source = await _initSource();
+    await image1.togglePresent();
+
+    await source.updateAfterMove(
+      todoEntries: {image1},
+      moveType: MoveType.move,
+      destinationAlbums: {destinationAlbum},
+      movedOps: {
+        FakeMediaStoreService.moveOpEventForMove(image1, sourceAlbum, destinationAlbum),
+      },
+    );
+
+    expect(presentEntries.count, 1);
+    expect(image1.isPresent, true);
+  });
+
+
+  test('presentation are kept when renaming presentTag', () async {
+    final image1 = FakeMediaStoreService.newImage(testAlbum, 'image1');
+    (mediaStoreService as FakeMediaStoreService).entries = {
+      image1,
+    };
+
+    await _initSource();
+    final Set<PresentTagRow> setVisualTags = {presentTags.all.last};
+    settings.setCurrentPresentTagRows(setVisualTags);
+
+    await image1.togglePresent();
+
+    expect(presentEntries.count, 1);
+    expect(image1.isPresent, true);
+    final oldTagId = presentEntries.all.first.tagId;
+
+    Set<PresentTagRow> newTagRow={PresentTagRow(presentTagId: setVisualTags.first.presentTagId, presentTagString: "tag edit")};
+    await presentTags.update(newTagRow);
+
+    expect(presentEntries.count, 1);
+    expect(image1.isPresent, true);
+    expect(presentEntries.all.first.tagId, oldTagId);
+
   });
 
   test('set/unset entry as album cover', () async {

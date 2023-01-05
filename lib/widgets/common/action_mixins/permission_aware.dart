@@ -6,6 +6,7 @@ import 'package:aves/widgets/dialogs/aves_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+/// Provides methods for checking storage permissions and requesting access to storage directories.
 mixin PermissionAwareMixin {
   Future<bool> checkStoragePermission(BuildContext context, Set<AvesEntry> entries) {
     final storageDirs = entries.map((e) => e.storageDirectory).whereNotNull().toSet();

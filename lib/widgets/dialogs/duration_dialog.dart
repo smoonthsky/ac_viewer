@@ -17,14 +17,16 @@ class DurationDialog extends StatefulWidget {
   State<DurationDialog> createState() => _DurationDialogState();
 }
 
+// 在编辑日期与时间时显示。
 class _DurationDialogState extends State<DurationDialog> {
-  late ValueNotifier<int> _minutes, _seconds;
+  late ValueNotifier<int> _hours,_minutes, _seconds;
 
   @override
   void initState() {
     super.initState();
     final seconds = widget.initialSeconds;
-    _minutes = ValueNotifier(seconds ~/ secondsInMinute);
+    _hours = ValueNotifier(seconds ~/ secondsInHours);
+    _minutes = ValueNotifier((seconds % secondsInHours) ~/ secondsInMinute);
     _seconds = ValueNotifier(seconds % secondsInMinute);
   }
 
@@ -46,6 +48,8 @@ class _DurationDialogState extends State<DurationDialog> {
                   children: [
                     TableRow(
                       children: [
+                        Center(child: Text(context.l10n.durationDialogHours)),
+                        const SizedBox(width: 16),
                         Center(child: Text(context.l10n.durationDialogMinutes)),
                         const SizedBox(width: 16),
                         Center(child: Text(context.l10n.durationDialogSeconds)),
@@ -53,6 +57,22 @@ class _DurationDialogState extends State<DurationDialog> {
                     ),
                     TableRow(
                       children: [
+                        Align(
+                        alignment: Alignment.centerRight,
+                        child: WheelSelector(
+                          valueNotifier: _hours,
+                          values: List.generate(hoursInTwoDays, (i) => i),
+                          textStyle: textStyle,
+                          textAlign: TextAlign.end,
+                        ),
+                      ),
+                        const Padding(
+                          padding: EdgeInsets.only(bottom: 2),
+                          child: Text(
+                            ':',
+                            style: textStyle,
+                          ),
+                        ),
                         Align(
                           alignment: Alignment.centerRight,
                           child: WheelSelector(
@@ -93,9 +113,9 @@ class _DurationDialogState extends State<DurationDialog> {
               child: Text(MaterialLocalizations.of(context).cancelButtonLabel),
             ),
             AnimatedBuilder(
-              animation: Listenable.merge([_minutes, _seconds]),
+              animation: Listenable.merge([_hours, _minutes, _seconds]),
               builder: (context, child) {
-                final isValid = _minutes.value > 0 || _seconds.value > 0;
+                final isValid = _hours.value > 0 || _minutes.value > 0 || _seconds.value > 0;
                 return TextButton(
                   onPressed: isValid ? () => _submit(context) : null,
                   child: child!,
@@ -109,5 +129,5 @@ class _DurationDialogState extends State<DurationDialog> {
     );
   }
 
-  void _submit(BuildContext context) => Navigator.pop(context, _minutes.value * secondsInMinute + _seconds.value);
+  void _submit(BuildContext context) => Navigator.pop(context, _hours.value * secondsInHours + _minutes.value * secondsInMinute + _seconds.value);
 }

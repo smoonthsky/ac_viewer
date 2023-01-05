@@ -9,6 +9,11 @@ import 'package:aves/widgets/common/grid/sections/list_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// provide grid selection functionality.
+// It has several properties like scrollableKey, selectable, items, scrollController, appBarHeightNotifier, and child.
+// When the user performs a long press on the child widget, it starts the grid selection process and updates the selection as the user moves their finger.
+// The class also contains a nested class called _GridSelectionGestureDetectorState which holds the state of the GridSelectionGestureDetector and manages the scrolling of the grid while the user is making a selection.
+// 简单来说，可以长按界面然后滑动选择所有滑过的选项。
 class GridSelectionGestureDetector<T> extends StatefulWidget {
   final GlobalKey scrollableKey;
   final bool selectable;

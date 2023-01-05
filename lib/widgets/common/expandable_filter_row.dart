@@ -5,6 +5,7 @@ import 'package:aves/utils/constants.dart';
 import 'package:aves/widgets/common/identity/aves_filter_chip.dart';
 import 'package:flutter/material.dart';
 
+// 搜索界面切换种种filter时使用
 class TitledExpandableFilterRow extends StatelessWidget {
   final String title;
   final List<CollectionFilter> filters;

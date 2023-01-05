@@ -2,6 +2,17 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
+/// XMP (Extensible Metadata Platform) is a standard for embedding metadata (i.e. information about a file) into the file itself, using XML (eXtensible Markup Language) format.
+///
+/// It is typically used for images, but can be applied to other types of files as well.
+///
+/// XMP allows metadata to be added or modified in a way that is independent of the file format, and also provides a way to preserve metadata when files are converted to different formats.
+///
+/// It also allows for metadata fields that aren't present in the file format, to be added.
+///
+/// It was developed by Adobe Systems.
+///
+/// The metadata information that can be stored in XMP include things such as keywords, captions, date taken, camera settings, and copyright information.
 @immutable
 class AvesXmp extends Equatable {
   final String? xmpString;

@@ -1,4 +1,4 @@
-package deckers.thibault.aves.decoder
+package anonymity.ac.viewer.decoder
 
 import android.content.Context
 import android.graphics.Bitmap

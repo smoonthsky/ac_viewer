@@ -2,6 +2,13 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+// OutlinedText is a custom widget that displays text with an outline around it.
+// The text is rendered as a Stack with two Text.rich widgets.
+// The first one is used to draw the outline, it's style is set to have a stroke and the color and width of the stroke are determined by the outlineColor and outlineWidth properties respectively.
+// If outlineBlurSigma is provided, the outline is also blurred using ImageFilter.blur.
+// The second one is used to draw the text and it's style is set to have a transparent background color.
+// The textAlign, softWrap, overflow and maxLines properties are passed down to both Text.rich widgets.
+// The text to be rendered is passed via textSpans and it can be more complex than a single string, it can be a list of TextSpans.
 class OutlinedText extends StatelessWidget {
   final List<TextSpan> textSpans;
   final double outlineWidth;

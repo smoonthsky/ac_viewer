@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:aves/model/covers.dart';
 import 'package:aves/model/entry.dart';
 import 'package:aves/model/favourites.dart';
+import 'package:aves/model/present.dart';
 import 'package:aves/model/settings/settings.dart';
 import 'package:aves/model/source/analysis_controller.dart';
 import 'package:aves/model/source/collection_source.dart';
@@ -24,6 +25,8 @@ class MediaStoreSource extends CollectionSource {
     AnalysisController? analysisController,
     String? directory,
     bool loadTopEntriesFirst = false,
+    //bool canAnalyze = true,
+    //modify 2023-01-27-stop all analyze.
     bool canAnalyze = true,
   }) async {
     if (_initState == SourceInitializationState.none) {
@@ -39,13 +42,18 @@ class MediaStoreSource extends CollectionSource {
       canAnalyze: canAnalyze,
     ));
   }
-
+/// The _loadEssentials method is being used to initialize the necessary data and services to correctly load media files,
+/// while the _loadEntries method is used to load the actual media files.
   Future<void> _loadEssentials() async {
     final stopwatch = Stopwatch()..start();
     state = SourceState.loading;
     await metadataDb.init();
     await favourites.init();
     await covers.init();
+
+    await presentTags.init();
+    await presentEntries.init();
+
     final currentTimeZone = await deviceService.getDefaultTimeZone();
     if (currentTimeZone != null) {
       final catalogTimeZone = settings.catalogTimeZone;

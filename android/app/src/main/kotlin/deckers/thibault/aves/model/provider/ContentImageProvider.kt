@@ -1,17 +1,17 @@
-package deckers.thibault.aves.model.provider
+package anonymity.ac.viewer.model.provider
 
 import android.content.Context
 import android.net.Uri
 import android.provider.MediaStore
 import android.provider.OpenableColumns
 import android.util.Log
-import deckers.thibault.aves.metadata.Metadata
-import deckers.thibault.aves.metadata.metadataextractor.Helper
-import deckers.thibault.aves.model.FieldMap
-import deckers.thibault.aves.model.SourceEntry
-import deckers.thibault.aves.utils.LogUtils
-import deckers.thibault.aves.utils.MimeTypes
-import deckers.thibault.aves.utils.StorageUtils
+import anonymity.ac.viewer.metadata.Metadata
+import anonymity.ac.viewer.metadata.metadataextractor.Helper
+import anonymity.ac.viewer.model.FieldMap
+import anonymity.ac.viewer.model.SourceEntry
+import anonymity.ac.viewer.utils.LogUtils
+import anonymity.ac.viewer.utils.MimeTypes
+import anonymity.ac.viewer.utils.StorageUtils
 
 internal class ContentImageProvider : ImageProvider() {
     override fun fetchSingle(context: Context, uri: Uri, sourceMimeType: String?, callback: ImageOpCallback) {

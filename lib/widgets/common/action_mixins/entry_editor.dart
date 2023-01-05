@@ -20,6 +20,12 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 
+// The EntryEditorMixin is a mixin that provides methods for editing various properties of an AvesEntry, such as the date, location, title, and tags.
+// These methods involve showing modal dialogs to the user, allowing them to make changes to the entry's properties.
+// For example, the selectDateModifier method shows a dialog that allows the user to edit the date of the entry, while the selectTitleDescriptionModifier method shows a dialog that allows the user to edit the title and description of the entry.
+// Some of the methods also allow to edit properties of multiple entries together, by passing a set of entries to the method.
+
+/// work in selection page.
 mixin EntryEditorMixin {
   Future<DateModifier?> selectDateModifier(BuildContext context, Set<AvesEntry> entries, CollectionLens? collection) async {
     if (entries.isEmpty) return null;

@@ -6,6 +6,8 @@ import 'package:aves/widgets/common/identity/buttons/captioned_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+/// 标题过滤器，app bar， 不是搜索界面。
+/// see: https://pictogrammers.github.io/@mdi/font/2.0.46/
 class TitleSearchToggler extends StatelessWidget {
   final bool queryEnabled, isMenuItem;
   final VoidCallback? onPressed;
@@ -34,6 +36,8 @@ class TitleSearchToggler extends StatelessWidget {
   }
 }
 
+/// 开关与标题文字分开绘制。
+/// The Toggler button and title text are drawn separately.
 class TitleSearchTogglerCaption extends StatelessWidget {
   final bool enabled;
 

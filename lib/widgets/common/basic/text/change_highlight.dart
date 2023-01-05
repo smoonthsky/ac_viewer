@@ -1,6 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+// The ChangeHighlightText widget is a custom text widget that animates the transition of text styles when the text data changes.
+// It uses an animation controller to animate the transition between the original text style and the changed text style.
+// The transition is defined by the ShadowedTextStyleTween class, which is a custom tween that interpolates between the text styles while also preserving and interpolating the shadows of the text.
+// The animation is controlled by the AnimationController and the animation curve, which can be specified in the widget's constructor.
+// It's use case could be to visually indicate that text has been changed.
 class ChangeHighlightText extends StatefulWidget {
   final String data;
   final TextStyle style, changedStyle;

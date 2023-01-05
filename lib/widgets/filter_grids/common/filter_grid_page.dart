@@ -48,6 +48,7 @@ import 'package:tuple/tuple.dart';
 
 typedef QueryTest<T extends CollectionFilter> = List<FilterGridItem<T>> Function(BuildContext context, List<FilterGridItem<T>> filters, String query);
 
+// 基本就是相册浏览界面，被filter_nav_page调用
 class FilterGridPage<T extends CollectionFilter> extends StatelessWidget {
   final String? settingsRouteKey;
   final Widget appBar;
@@ -209,6 +210,10 @@ class _FilterGridState<T extends CollectionFilter> extends State<_FilterGrid<T>>
       horizontalPadding: 2,
     );
     return AvesPopScope(
+      // 在fliter缩略图界面（相册界面）回退优先级：
+      // 如果是选择中，则回退成浏览状态；
+      // 如果是drawer导航，则回退出drawer，成浏览状态；
+      // 如果是浏览状态，按是否设置连续两次退出，退出。
       handlers: [
         (context) {
           final selection = context.read<Selection<FilterGridItem<T>>>();
@@ -652,6 +657,7 @@ class _FilterScrollView<T extends CollectionFilter> extends StatelessWidget {
   }
 
   ScrollView _buildScrollView(BuildContext context) {
+
     return CustomScrollView(
       key: scrollableKey,
       controller: scrollController,

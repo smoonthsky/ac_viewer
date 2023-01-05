@@ -1,16 +1,16 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
 import android.content.ContextWrapper
 import android.net.Uri
 import android.util.Log
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safe
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safeSuspend
-import deckers.thibault.aves.model.FieldMap
-import deckers.thibault.aves.model.NameConflictStrategy
-import deckers.thibault.aves.model.provider.ImageProvider.ImageOpCallback
-import deckers.thibault.aves.model.provider.ImageProviderFactory.getProvider
-import deckers.thibault.aves.utils.LogUtils
-import deckers.thibault.aves.utils.StorageUtils.ensureTrailingSeparator
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safe
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safeSuspend
+import anonymity.ac.viewer.model.FieldMap
+import anonymity.ac.viewer.model.NameConflictStrategy
+import anonymity.ac.viewer.model.provider.ImageProvider.ImageOpCallback
+import anonymity.ac.viewer.model.provider.ImageProviderFactory.getProvider
+import anonymity.ac.viewer.utils.LogUtils
+import anonymity.ac.viewer.utils.StorageUtils.ensureTrailingSeparator
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler

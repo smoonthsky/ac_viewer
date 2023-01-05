@@ -5,6 +5,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tuple/tuple.dart';
 
+// The AnimatedDiffText widget is a custom widget that animates the transition between two different texts.
+// It uses an animation controller and a curved animation to smoothly transition between the two texts.
+// The widget also uses the Text.rich method to create a TextSpan with different styles for different parts of the text, and the WidgetSpan to display different widgets inside the text.
+// The widget uses an algorithm to compute the difference between the old text and the new text and stores the differences in a list called _diffs.
+// When the animation is played, the widget displays the text from the _diffs list, and animates the size and the text of each diff according to the animation's value.
+// The widget also have some additional features like allowing to set a text style, strut style, curve and duration for the animation.
+
 class AnimatedDiffText extends StatefulWidget {
   final String text;
   final TextStyle? textStyle;

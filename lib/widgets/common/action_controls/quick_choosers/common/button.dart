@@ -5,6 +5,13 @@ import 'package:aves/widgets/common/action_controls/quick_choosers/common/route_
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+//This is a class that defines a button that when pressed and held, opens a "chooser" overlay (a pop-up menu) with some options.
+// The ChooserQuickButton class takes in a boolean blurred property, a callback onChooserValue that's called when a value is selected from the chooser, and a callback onPressed that's called when the button is pressed.
+// The ChooserQuickButtonState class is a stateful widget that manages the animation, overlay entry, and value notifier for the chooser.
+// It defines an icon property which is the widget that represents the button, a tooltip property that provides a string to show when the button is hovered over, and a defaultValue property that is the default value that is selected when the chooser is opened.
+// It also has a animationDuration and animationCurve properties, which determine how long the animation for the chooser takes and the curve of the animation, respectively.
+// It also has a pointerGlobalPosition stream, which emits the global positions of pointer events when the button is being pressed.
+
 abstract class ChooserQuickButton<T> extends StatefulWidget {
   final bool blurred;
   final ValueSetter<T>? onChooserValue;

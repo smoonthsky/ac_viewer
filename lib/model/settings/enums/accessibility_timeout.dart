@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'enums.dart';
 
+/// work for settingsAccessibilitySectionTitle
 extension ExtraAccessibilityTimeout on AccessibilityTimeout {
   String getName(BuildContext context) {
     switch (this) {

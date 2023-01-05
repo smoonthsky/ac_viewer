@@ -12,6 +12,11 @@ import 'package:aves/widgets/dialogs/aves_dialog.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
+
+/// The SizeAwareMixin is a mixin that adds functionality related to checking available storage space on the device.
+/// It provides two functions: checkFreeSpaceForMove and checkFreeSpace.
+/// checkFreeSpaceForMove checks if there is enough free space on the storage volume that contains the destination album to move or copy the AvesEntry objects to it. If there isn't enough space, it shows a dialog to the user informing them of this.
+/// checkFreeSpace checks if there is enough free space on the storage volume that contains the destination album for the specified amount of space. If there isn't enough space, it shows a dialog to the user informing them of this.
 mixin SizeAwareMixin {
   Future<bool> checkFreeSpaceForMove(
     BuildContext context,

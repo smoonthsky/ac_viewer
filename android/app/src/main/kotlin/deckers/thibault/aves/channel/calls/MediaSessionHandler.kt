@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
 import android.content.Context
 import android.media.session.PlaybackState
@@ -7,10 +7,10 @@ import android.support.v4.media.MediaMetadataCompat
 import android.support.v4.media.session.MediaSessionCompat
 import android.support.v4.media.session.PlaybackStateCompat
 import android.util.Log
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safe
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safeSuspend
-import deckers.thibault.aves.utils.FlutterUtils
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safe
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safeSuspend
+import anonymity.ac.viewer.utils.FlutterUtils
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler

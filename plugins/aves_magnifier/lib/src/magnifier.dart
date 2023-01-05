@@ -39,6 +39,7 @@ class AvesMagnifier extends StatelessWidget {
   // The size of the custom [child]. This value is used to compute the relation between the child and the container's size to calculate the scale value.
   final Size childSize;
 
+  ///work for set wallpaper,  force it be ScaleReference.covered,
   final bool allowOriginalScaleBeyondRange;
 
   // Defines the minimum size in which the image will be allowed to assume, it is proportional to the original image size.

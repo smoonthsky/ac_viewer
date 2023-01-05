@@ -12,6 +12,7 @@ import 'package:flutter/widgets.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
+/// takes two parameters: sw and ne which are the latitude and longitude value of the south-west and north-east corner of a rectangle that represents the area where the image is captured.
 class CoordinateFilter extends CollectionFilter {
   static const type = 'coordinate';
 

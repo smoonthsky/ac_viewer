@@ -17,8 +17,8 @@ void main() {
       await copyContent(shadersSourceDir, shadersTargetDirAdb);
       await Future.forEach<String>(
           [
-            'deckers.thibault.aves.debug',
-            'deckers.thibault.aves.profile',
+            'anonymity.ac.viewer.debug',
+            'anonymity.ac.viewer.profile',
           ],
           (package) => grantPermissions(package, [
                 'android.permission.READ_EXTERNAL_STORAGE',

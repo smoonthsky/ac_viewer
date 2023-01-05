@@ -1,5 +1,8 @@
 import 'package:flutter/services.dart';
 
+/// This is an implementation of a MethodCodec, a class that is used to encode and decode method calls and their arguments when communicating with a platform plugin via MethodChannels.
+///
+/// The AvesByteReceivingMethodCodec extends the built-in StandardMethodCodec to handle decoding of the method call's envelope.
 class AvesByteReceivingMethodCodec extends StandardMethodCodec {
   const AvesByteReceivingMethodCodec() : super();
 

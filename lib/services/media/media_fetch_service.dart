@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:streams_channel/streams_channel.dart';
 
+/// an abstract class which defines methods for fetching various types of media data.
 abstract class MediaFetchService {
   Future<AvesEntry?> getEntry(String uri, String? mimeType);
 
@@ -67,6 +68,17 @@ abstract class MediaFetchService {
   Future<T>? resumeLoading<T>(Object taskKey);
 }
 
+/// A class that implements the MediaFetchService interface.
+///
+/// This service allows you to fetch various data types (e.g entries, svg, images, regions, and thumbnails) from a given uri and mimetype.
+///
+/// It communicates with the native platform using MethodChannels, StreamsChannel and OutputBuffer.
+///
+/// The class defines several methods for fetching different data types such as getEntry, getSvg, getImage, getRegion, getThumbnail.
+///
+/// Methods like clearSizedThumbnailDiskCache, cancelRegion and cancelThumbnail provide options to clear cache, cancel fetching regions and thumbnails based on the task key provided.
+///
+/// resumeLoading method returns the future of the loading task.
 class PlatformMediaFetchService implements MediaFetchService {
   static const _platformObject = MethodChannel('deckers.thibault/aves/media_fetch_object');
   static const _platformBytes = MethodChannel('deckers.thibault/aves/media_fetch_bytes', AvesByteReceivingMethodCodec());

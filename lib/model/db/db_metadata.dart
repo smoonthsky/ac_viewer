@@ -7,6 +7,8 @@ import 'package:aves/model/metadata/catalog.dart';
 import 'package:aves/model/metadata/trash.dart';
 import 'package:aves/model/video_playback.dart';
 
+import '../present.dart';
+
 abstract class MetadataDb {
   int get nextId;
 
@@ -81,6 +83,33 @@ abstract class MetadataDb {
   Future<void> updateFavouriteId(int id, FavouriteRow row);
 
   Future<void> removeFavourites(Iterable<FavouriteRow> rows);
+
+  /* AC Viewer : add for present mode , start */
+  // present tags
+  Future<void> clearPresentTags();
+
+  Future<Set<PresentTagRow>> loadAllPresentTags();
+
+  Future<void> addPresentTags(Iterable<PresentTagRow> rows);
+
+  Future<void> updatePresentTags(Iterable<PresentTagRow> rows);
+
+  Future<void> removePresentTags(Iterable<PresentTagRow> rows);
+
+  // present entries
+  Future<void> clearPresentEntries();
+
+  Future<Set<PresentEntryRow>> loadAllPresentEntries();
+
+  Future<void> addPresentEntries(Iterable<PresentEntryRow> rows);
+
+  //Future<void> updatePresentId(int id, PresentEntryRow row);
+  Future<void> removePresentEntriesByTagIds(Iterable<int> ids );
+  Future<void> removePresentEntriesByEntryIds(Iterable<int> ids);
+  Future<void> removePresentEntries(Iterable<PresentEntryRow> rows);
+
+
+  /* AC Viewer : add for present mode , end */
 
   // covers
 

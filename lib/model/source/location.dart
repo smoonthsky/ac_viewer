@@ -14,6 +14,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tuple/tuple.dart';
 
+/// add location-related functionality to a class that extends SourceBase.
 mixin LocationMixin on SourceBase {
   static const commitCountThreshold = 200;
   static const _stopCheckCountThreshold = 50;
@@ -21,6 +22,7 @@ mixin LocationMixin on SourceBase {
   List<String> sortedCountries = List.unmodifiable([]);
   List<String> sortedPlaces = List.unmodifiable([]);
 
+  /// loads saved addresses from the metadata database and assigns them to the corresponding entries.
   Future<void> loadAddresses({Set<int>? ids}) async {
     final saved = await (ids != null ? metadataDb.loadAddressesById(ids) : metadataDb.loadAddresses());
     final idMap = entryById;
@@ -29,6 +31,9 @@ mixin LocationMixin on SourceBase {
     onAddressMetadataChanged();
   }
 
+  /// locates countries and places for a set of candidate entries.
+  /// calls the _locateCountries and _locatePlaces methods to locate countries and places for the candidate entries.
+  /// These methods use an offline asset and the Google Play Services, respectively, to perform the reverse geocoding.
   Future<void> locateEntries(AnalysisController controller, Set<AvesEntry> candidateEntries) async {
     await _locateCountries(controller, candidateEntries);
     await _locatePlaces(controller, candidateEntries);
@@ -44,7 +49,7 @@ mixin LocationMixin on SourceBase {
 
   static bool locatePlacesTest(AvesEntry entry) => entry.hasGps && !entry.hasFineAddress;
 
-  // quick reverse geocoding to find the countries, using an offline asset
+  /// quick reverse geocoding to find the countries, using an offline asset
   Future<void> _locateCountries(AnalysisController controller, Set<AvesEntry> candidateEntries) async {
     if (controller.isStopping) return;
 
@@ -74,7 +79,7 @@ mixin LocationMixin on SourceBase {
     }
   }
 
-  // full reverse geocoding, requiring Play Services and some connectivity
+  /// full reverse geocoding, requiring Play Services and some connectivity
   Future<void> _locatePlaces(AnalysisController controller, Set<AvesEntry> candidateEntries) async {
     if (controller.isStopping) return;
     if (!await availability.canLocatePlaces) return;

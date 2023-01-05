@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+/// 记录已选项目，并通知
 class Selection<T> extends ChangeNotifier {
   bool _isSelecting = false;
 

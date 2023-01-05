@@ -1,11 +1,16 @@
-package deckers.thibault.aves
+package anonymity.ac.viewer
 
 import android.appwidget.AppWidgetManager
 import android.content.Intent
 import android.os.Bundle
-import deckers.thibault.aves.utils.FlutterUtils
-import deckers.thibault.aves.utils.FlutterUtils.enableSoftwareRendering
+import anonymity.ac.viewer.utils.FlutterUtils
+import anonymity.ac.viewer.utils.FlutterUtils.enableSoftwareRendering
 import io.flutter.plugin.common.MethodChannel
+
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.os.SystemClock
 
 class HomeWidgetSettingsActivity : MainActivity() {
     private var appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID

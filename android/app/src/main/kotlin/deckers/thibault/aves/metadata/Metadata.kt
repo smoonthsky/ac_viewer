@@ -1,11 +1,11 @@
-package deckers.thibault.aves.metadata
+package anonymity.ac.viewer.metadata
 
 import android.content.Context
 import android.net.Uri
 import androidx.exifinterface.media.ExifInterface
-import deckers.thibault.aves.utils.FileUtils.transferFrom
-import deckers.thibault.aves.utils.MimeTypes
-import deckers.thibault.aves.utils.StorageUtils
+import anonymity.ac.viewer.utils.FileUtils.transferFrom
+import anonymity.ac.viewer.utils.MimeTypes
+import anonymity.ac.viewer.utils.StorageUtils
 import java.io.File
 import java.io.InputStream
 import java.text.ParseException

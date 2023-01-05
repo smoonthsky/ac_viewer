@@ -10,6 +10,15 @@ import 'package:provider/provider.dart';
 
 typedef CoverRatioResolver<T> = double Function(T item);
 
+// The SectionedListLayout is an abstract class that defines the layout of a sectioned list.
+// It takes a map of sections, each of which is keyed by a SectionKey and contains a list of items of type T.
+// The layout also takes a boolean value to indicate whether to show headers, the spacing between tiles and the horizontal padding around the edges of the layout.
+// It also takes a list of SectionLayout objects, which are used to store layout-specific information for each section.
+//
+// The class provides three abstract methods that need to be implemented by subclasses: getTileRect(T item), getSectionAt(double offsetY) and getItemAt(Offset position).
+// The first method takes an item and returns the rectangle of the tile in the layout space, where x=0 is the start.
+// The second method takes an offset along the y-axis and returns the layout of the section at that offset.
+// The last method takes a position in layout space and returns the item at that position.
 abstract class SectionedListLayoutProvider<T> extends StatelessWidget {
   final double scrollableWidth;
   final TileLayout tileLayout;

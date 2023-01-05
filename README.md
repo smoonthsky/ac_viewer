@@ -11,7 +11,7 @@ Aves is a gallery and metadata explorer app. It is built for Android, with Flutt
 
 [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
       alt='Get it on Google Play'
-      height="80">](https://play.google.com/store/apps/details?id=deckers.thibault.aves&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
+      height="80">](https://play.google.com/store/apps/details?id=anonymity.ac.viewer&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1)
 [<img src="https://raw.githubusercontent.com/deckerst/common/main/assets/huawei-appgallery-badge-english-black.png"
       alt='Get it on Huawei AppGallery'
       height="80">](https://appgallery.huawei.com/app/C106014023)
@@ -23,10 +23,10 @@ Aves is a gallery and metadata explorer app. It is built for Android, with Flutt
       height="80">](https://www.amazon.com/dp/B09XQHQQ72)
 [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png"
       alt='Get it on IzzyOnDroid'
-      height="80">](https://apt.izzysoft.de/fdroid/index/apk/deckers.thibault.aves)
+      height="80">](https://apt.izzysoft.de/fdroid/index/apk/anonymity.ac.viewer)
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
       alt='Get it on F-Droid'
-      height="80">](https://f-droid.org/packages/deckers.thibault.aves.libre)
+      height="80">](https://f-droid.org/packages/anonymity.ac.viewer.libre)
 [<img src="https://raw.githubusercontent.com/deckerst/common/main/assets/get-it-on-github.png"
       alt='Get it on GitHub'
       height="80">](https://github.com/deckerst/aves/releases/latest)

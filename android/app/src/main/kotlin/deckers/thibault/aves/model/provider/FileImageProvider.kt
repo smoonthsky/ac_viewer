@@ -1,11 +1,11 @@
-package deckers.thibault.aves.model.provider
+package anonymity.ac.viewer.model.provider
 
 import android.content.Context
 import android.content.ContextWrapper
 import android.net.Uri
 import android.util.Log
-import deckers.thibault.aves.model.SourceEntry
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.model.SourceEntry
+import anonymity.ac.viewer.utils.LogUtils
 import java.io.File
 
 internal class FileImageProvider : ImageProvider() {

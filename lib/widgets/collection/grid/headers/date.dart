@@ -5,6 +5,7 @@ import 'package:aves/widgets/common/grid/header.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+/// used to build section headers for a list of entries.
 class DaySectionHeader<T> extends StatelessWidget {
   final DateTime? date;
   final bool selectable;
@@ -24,16 +25,6 @@ class DaySectionHeader<T> extends StatelessWidget {
   // `yMMMMEEEEd`:  `Wednesday, April 15, 2020`
   // `MEd`:         `Wed, 4/15`
   // `yMEd`:        `Wed, 4/15/2020`
-
-  // Examples (ko):
-  // `MMMMd`:       `1월 26일`
-  // `yMMMMd`:      `2021년 1월 26일`
-  // `MMMEd`:       `1월 26일 (화)`
-  // `yMMMEd`:      `2021년 1월 26일 (화)`
-  // `MMMMEEEEd`:   `1월 26일 화요일`
-  // `yMMMMEEEEd`:  `2021년 1월 26일 화요일`
-  // `MEd`:         `1. 26. (화)`
-  // `yMEd`:        `2021. 1. 26. (화)`
 
   static String _formatDate(BuildContext context, DateTime? date) {
     final l10n = context.l10n;
@@ -55,6 +46,7 @@ class DaySectionHeader<T> extends StatelessWidget {
   }
 }
 
+///used to build section headers for a list of entries grouped by month
 class MonthSectionHeader<T> extends StatelessWidget {
   final DateTime? date;
   final bool selectable;

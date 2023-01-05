@@ -4,6 +4,9 @@ import 'package:flutter/widgets.dart';
 
 import 'enums.dart';
 
+
+/// These extensions allow the app to easily display the names and icons of these enums in a user-friendly way, and to provide localized names for the sort order.
+
 extension ExtraEntrySortFactor on EntrySortFactor {
   String getName(BuildContext context) {
     final l10n = context.l10n;

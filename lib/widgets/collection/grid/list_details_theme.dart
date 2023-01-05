@@ -5,6 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
+
+//
+// The EntryListDetailsTheme widget uses a ProxyProvider to update the EntryListDetailsThemeData object based on the MediaQueryData.
+//
+// The update method in the ProxyProvider is responsible for determining the values of the various fields of the EntryListDetailsThemeData object.
+//
+// It computes the values by measuring the height of the text using RenderParagraph and using that to determine how many lines of text can fit in the given extent.
+//
+// It then uses this information to decide whether to show the date, location, and how many lines the title should be, and set the styles for title, caption and icon theme.
+//
+
+/// The EntryListDetailsThemeData object contains various data such as the maximum number of lines for the title, whether the date and location should be shown, the style for the title and caption, and the icon theme.
 class EntryListDetailsTheme extends StatelessWidget {
   final double extent;
   final Widget child;

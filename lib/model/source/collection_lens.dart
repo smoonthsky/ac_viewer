@@ -11,6 +11,7 @@ import 'package:aves/model/filters/location.dart';
 import 'package:aves/model/filters/query.dart';
 import 'package:aves/model/filters/rating.dart';
 import 'package:aves/model/filters/trash.dart';
+import 'package:aves/model/present.dart';
 import 'package:aves/model/settings/settings.dart';
 import 'package:aves/model/source/collection_source.dart';
 import 'package:aves/model/source/events.dart';
@@ -22,17 +23,26 @@ import 'package:aves/utils/collection_utils.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
+import '../filters/present.dart';
 import 'enums/enums.dart';
 
+
+/// The CollectionLens class is a data model that represents a filtered and sorted view of a collection of media (images and videos). It is used to display a list of media in the app.
+/// Lens:镜头，指从所有媒体集中取的一个小集，如目录、标签、日期、搜索结果，等。
 class CollectionLens with ChangeNotifier {
+  /// The source field specifies the collection from which the media are taken.
   final CollectionSource source;
+  /// The filters field specifies a set of filters that are applied to the collection to determine which media to include in the view.
   final Set<CollectionFilter> filters;
+  /// The sectionFactor field specifies how the media are grouped into sections.
   EntryGroupFactor sectionFactor;
+  /// The sortFactor field specifies how the media are sorted within each section.
   EntrySortFactor sortFactor;
   bool sortReverse;
   final AChangeNotifier filterChangeNotifier = AChangeNotifier(), sortSectionChangeNotifier = AChangeNotifier();
   final List<StreamSubscription> _subscriptions = [];
   int? id;
+  /// The groupBursts field specifies whether burst photos should be grouped together in the same section.
   bool listenToSource, groupBursts, fixedSort;
   List<AvesEntry>? fixedSelection;
 
@@ -81,6 +91,8 @@ class CollectionLens with ChangeNotifier {
         }
       }));
       favourites.addListener(_onFavouritesChanged);
+      presentEntries.addListener(_onPresentationChanged);
+      presentTags.addListener(_onPresentationChanged);
     }
     _subscriptions.add(settings.updateStream
         .where((event) => [
@@ -89,6 +101,11 @@ class CollectionLens with ChangeNotifier {
               Settings.collectionSortReverseKey,
             ].contains(event.key))
         .listen((_) => _onSettingsChanged()));
+    _subscriptions.add(settings.updateStream
+        .where((event) => [
+      Settings.presentationVerifyPrefix,
+    ].contains(event.key))
+        .listen((_) => _onPresentationVerifyChange()));
     refresh();
   }
 
@@ -98,6 +115,8 @@ class CollectionLens with ChangeNotifier {
       ..forEach((sub) => sub.cancel())
       ..clear();
     favourites.removeListener(_onFavouritesChanged);
+    presentEntries.removeListener(_onPresentationChanged);
+    presentTags.removeListener(_onPresentationChanged);
     super.dispose();
   }
 
@@ -179,8 +198,13 @@ class CollectionLens with ChangeNotifier {
 
   void _applyFilters() {
     final entries = fixedSelection ?? (filters.contains(TrashFilter.instance) ? source.trashedEntries : source.visibleEntries);
-    _filteredSortedEntries = List.of(filters.isEmpty ? entries : entries.where((entry) => filters.every((filter) => filter.test(entry))));
 
+    _filteredSortedEntries = List.of(filters.isEmpty ? entries : entries.where((entry) => filters.every((filter) => filter.test(entry))));
+    // AC Viewer: add for present mode.
+    if(settings.presentationVerify){
+      _filteredSortedEntries = List.of(_filteredSortedEntries.where((element) => element.isPresent) );
+    }
+    // AC Viewer: add for present mode.
     if (groupBursts) {
       _groupBursts();
     }
@@ -283,6 +307,16 @@ class CollectionLens with ChangeNotifier {
     if (filters.any((filter) => filter is FavouriteFilter)) {
       refresh();
     }
+  }
+
+  void _onPresentationChanged() {
+    if (filters.any((filter) => filter is PresentFilter) || settings.presentationVerify) {
+      refresh();
+    }
+  }
+
+  void _onPresentationVerifyChange() {
+    refresh();
   }
 
   void _onSettingsChanged() {

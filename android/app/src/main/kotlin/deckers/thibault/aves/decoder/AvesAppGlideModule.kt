@@ -1,4 +1,4 @@
-package deckers.thibault.aves.decoder
+package anonymity.ac.viewer.decoder
 
 import android.content.Context
 import android.util.Log
@@ -9,7 +9,7 @@ import com.bumptech.glide.annotation.GlideModule
 import com.bumptech.glide.load.ImageHeaderParser
 import com.bumptech.glide.load.resource.bitmap.ExifInterfaceImageHeaderParser
 import com.bumptech.glide.module.AppGlideModule
-import deckers.thibault.aves.utils.compatRemoveIf
+import anonymity.ac.viewer.utils.compatRemoveIf
 
 @GlideModule
 class AvesAppGlideModule : AppGlideModule() {

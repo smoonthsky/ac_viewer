@@ -3,6 +3,7 @@ import 'package:aves/services/common/services.dart';
 import 'package:aves/utils/constants.dart';
 import 'package:flutter/services.dart';
 
+/// EmbeddedDataService is an abstract class that defines an interface for extracting data from embedded files such as EXIF thumbnails, motion photos, and XMP data properties.
 abstract class EmbeddedDataService {
   Future<List<Uint8List>> getExifThumbnails(AvesEntry entry);
 
@@ -15,6 +16,13 @@ abstract class EmbeddedDataService {
   Future<Map> extractXmpDataProp(AvesEntry entry, List<dynamic>? props, String? propMimeType);
 }
 
+/// A concrete implementation of EmbeddedDataService that uses a MethodChannel to invoke native platform methods on Android to extract the data.
+///
+/// The methods in this class invoke methods on the native side of the app using the MethodChannel.
+///
+/// The response is returned as a future and cast as a Map, which is expected to be the format of the response.
+///
+/// Each method invokes a different native method, which is responsible for extracting the desired data, and is passed the necessary information such as the file's mime type, uri and other details needed to identify the file.
 class PlatformEmbeddedDataService implements EmbeddedDataService {
   static const _platform = MethodChannel('deckers.thibault/aves/embedded');
 

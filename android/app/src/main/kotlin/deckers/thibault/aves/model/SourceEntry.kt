@@ -1,4 +1,4 @@
-package deckers.thibault.aves.model
+package anonymity.ac.viewer.model
 
 import android.annotation.SuppressLint
 import android.content.ContentResolver
@@ -14,21 +14,21 @@ import com.drew.metadata.jpeg.JpegDirectory
 import com.drew.metadata.mp4.Mp4Directory
 import com.drew.metadata.mp4.media.Mp4VideoDirectory
 import com.drew.metadata.photoshop.PsdHeaderDirectory
-import deckers.thibault.aves.metadata.ExifInterfaceHelper.getSafeDateMillis
-import deckers.thibault.aves.metadata.ExifInterfaceHelper.getSafeInt
-import deckers.thibault.aves.metadata.MediaMetadataRetrieverHelper.getSafeDateMillis
-import deckers.thibault.aves.metadata.MediaMetadataRetrieverHelper.getSafeInt
-import deckers.thibault.aves.metadata.MediaMetadataRetrieverHelper.getSafeLong
-import deckers.thibault.aves.metadata.MediaMetadataRetrieverHelper.getSafeString
-import deckers.thibault.aves.metadata.Metadata
-import deckers.thibault.aves.metadata.Metadata.getRotationDegreesForExifCode
-import deckers.thibault.aves.metadata.metadataextractor.Helper
-import deckers.thibault.aves.metadata.metadataextractor.Helper.getSafeDateMillis
-import deckers.thibault.aves.metadata.metadataextractor.Helper.getSafeInt
-import deckers.thibault.aves.metadata.metadataextractor.Helper.getSafeLong
-import deckers.thibault.aves.utils.MimeTypes
-import deckers.thibault.aves.utils.StorageUtils
-import deckers.thibault.aves.utils.UriUtils.tryParseId
+import anonymity.ac.viewer.metadata.ExifInterfaceHelper.getSafeDateMillis
+import anonymity.ac.viewer.metadata.ExifInterfaceHelper.getSafeInt
+import anonymity.ac.viewer.metadata.MediaMetadataRetrieverHelper.getSafeDateMillis
+import anonymity.ac.viewer.metadata.MediaMetadataRetrieverHelper.getSafeInt
+import anonymity.ac.viewer.metadata.MediaMetadataRetrieverHelper.getSafeLong
+import anonymity.ac.viewer.metadata.MediaMetadataRetrieverHelper.getSafeString
+import anonymity.ac.viewer.metadata.Metadata
+import anonymity.ac.viewer.metadata.Metadata.getRotationDegreesForExifCode
+import anonymity.ac.viewer.metadata.metadataextractor.Helper
+import anonymity.ac.viewer.metadata.metadataextractor.Helper.getSafeDateMillis
+import anonymity.ac.viewer.metadata.metadataextractor.Helper.getSafeInt
+import anonymity.ac.viewer.metadata.metadataextractor.Helper.getSafeLong
+import anonymity.ac.viewer.utils.MimeTypes
+import anonymity.ac.viewer.utils.StorageUtils
+import anonymity.ac.viewer.utils.UriUtils.tryParseId
 import org.beyka.tiffbitmapfactory.TiffBitmapFactory
 import java.io.IOException
 

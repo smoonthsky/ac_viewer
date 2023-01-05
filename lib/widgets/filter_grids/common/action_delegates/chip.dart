@@ -10,6 +10,7 @@ import 'package:aves/widgets/filter_grids/tags_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+
 class ChipActionDelegate {
   void onActionSelected(BuildContext context, CollectionFilter filter, ChipAction action) {
     switch (action) {

@@ -1,9 +1,9 @@
-package deckers.thibault.aves.channel.calls.fetchers
+package anonymity.ac.viewer.channel.calls.fetchers
 
 import android.content.Context
 import android.graphics.Rect
 import android.net.Uri
-import deckers.thibault.aves.utils.BitmapUtils.getBytes
+import anonymity.ac.viewer.utils.BitmapUtils.getBytes
 import io.flutter.plugin.common.MethodChannel
 import org.beyka.tiffbitmapfactory.DecodeArea
 import org.beyka.tiffbitmapfactory.TiffBitmapFactory

@@ -32,6 +32,7 @@ class NavigationSection extends SettingsSection {
   @override
   FutureOr<List<SettingsTile>> tiles(BuildContext context) => [
         SettingsTileNavigationHomePage(),
+        SettingsShowAllCollectionWhenNoneFilter(),
         if (!device.isTelevision) SettingsTileNavigationKeepScreenOn(),
         if (!device.isTelevision) SettingsTileShowBottomNavigationBar(),
         if (!device.isTelevision) SettingsTileNavigationDoubleBackExit(),
@@ -54,6 +55,20 @@ class SettingsTileNavigationHomePage extends SettingsTile {
         dialogTitle: context.l10n.settingsHomeDialogTitle,
       );
 }
+
+// AC Viewer: start,
+class SettingsShowAllCollectionWhenNoneFilter extends SettingsTile {
+  @override
+  String title(BuildContext context) => context.l10n.settingsShowAllCollectionWhenNoneFilter;
+
+  @override
+  Widget build(BuildContext context) => SettingsSwitchListTile(
+    selector: (context, s) => s.showAllCollectionWhenNoneFilter,
+    onChanged: (v) => settings.showAllCollectionWhenNoneFilter = v,
+    title: title(context),
+  );
+}
+// AC Viewer: end.
 
 class SettingsTileShowBottomNavigationBar extends SettingsTile {
   @override

@@ -13,6 +13,10 @@ class IntentService {
   static Future<Map<String, dynamic>> getIntentData() async {
     try {
       // returns nullable map with 'action' and possibly 'uri' 'mimeType'
+      // see more detail , find in file:
+      // intentDataMap = extractIntentData(intent)
+      // and
+      // open fun extractIntentData(intent: Intent?): MutableMap<String, Any?>
       final result = await _platform.invokeMethod('getIntentData');
       if (result != null) return (result as Map).cast<String, dynamic>();
     } on PlatformException catch (e, stack) {

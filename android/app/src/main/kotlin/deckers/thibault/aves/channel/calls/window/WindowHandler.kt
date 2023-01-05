@@ -1,10 +1,10 @@
-package deckers.thibault.aves.channel.calls.window
+package anonymity.ac.viewer.channel.calls.window
 
 import android.content.ContextWrapper
 import android.provider.Settings
 import android.util.Log
-import deckers.thibault.aves.channel.calls.Coresult
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.channel.calls.Coresult
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 

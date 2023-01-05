@@ -2,6 +2,7 @@ import 'package:aves/theme/icons.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 
+/// Used during slideshow playback, resumes playback after pausing, or locates and displays the current content being played in the media collection.
 enum SlideshowAction {
   resume,
   showInCollection,

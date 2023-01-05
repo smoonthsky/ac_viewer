@@ -2,6 +2,7 @@ import 'package:aves/services/common/services.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+///an abstract class that defines several methods for interacting with the window of the app.
 abstract class WindowService {
   Future<bool> isActivity();
 

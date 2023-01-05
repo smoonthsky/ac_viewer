@@ -4,7 +4,7 @@ plugins {
     id 'kotlin-kapt'
 }
 
-def packageName = "deckers.thibault.aves"
+def packageName = "anonymity.ac.viewer"
 
 // Flutter properties
 

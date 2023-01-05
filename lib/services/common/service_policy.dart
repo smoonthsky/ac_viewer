@@ -5,8 +5,28 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tuple/tuple.dart';
 
+/// singleton.
+///
+/// ServicePolicy is a utility class that allows developers to manage multiple concurrent calls to the platform by using a set of priorities to determine which calls should be executed first.
+///
+/// It also allows pausing, resuming, canceling and prioritizing of requests.
+///
+/// The call method is used to invoke a platform call and it will be added to a queue of tasks that are waiting to be executed.
+///
+/// The pickNext method is used to select the next task to execute based on the priorities of the tasks in the queue.
+///
+/// The cancel, resume and pause methods are used to control the lifecycle of a task once it has been added to the queue.
 final ServicePolicy servicePolicy = ServicePolicy._private();
 
+/// ServicePolicy is a utility class that allows developers to manage multiple concurrent calls to the platform by using a set of priorities to determine which calls should be executed first.
+///
+/// It also allows pausing, resuming, canceling and prioritizing of requests.
+///
+/// The call method is used to invoke a platform call and it will be added to a queue of tasks that are waiting to be executed.
+///
+/// The pickNext method is used to select the next task to execute based on the priorities of the tasks in the queue.
+///
+/// The cancel, resume and pause methods are used to control the lifecycle of a task once it has been added to the queue.
 class ServicePolicy {
   final StreamController<QueueState> _queueStreamController = StreamController.broadcast();
   final Map<Object, Tuple2<int, _Task>> _paused = {};

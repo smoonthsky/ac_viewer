@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:100907092477:android:883192cb81028ac9ec7194",
         "android_client_info": {
-          "package_name": "deckers.thibault.aves"
+          "package_name": "anonymity.ac.viewer"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "100907092477-1mredcehjo66opfirr6k3kokjqmc99ee.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "deckers.thibault.aves",
+            "package_name": "anonymity.ac.viewer",
             "certificate_hash": "59a50013fa7a2f97911b52d681cafaebf83505e8"
           }
         },
@@ -26,7 +26,7 @@
           "client_id": "100907092477-ml1c4hr4l24ekg7l7nqid06n03kek6c8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "deckers.thibault.aves",
+            "package_name": "anonymity.ac.viewer",
             "certificate_hash": "1395888aacca42247286fdd2aba2d4047fe6cdad"
           }
         },
@@ -55,7 +55,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:100907092477:android:f3d6f758d2ed896aec7194",
         "android_client_info": {
-          "package_name": "deckers.thibault.aves.debug"
+          "package_name": "anonymity.ac.viewer.debug"
         }
       },
       "oauth_client": [
@@ -63,7 +63,7 @@
           "client_id": "100907092477-8vgakbtass73c6dad5mqflq2dd4h4904.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "deckers.thibault.aves.debug",
+            "package_name": "anonymity.ac.viewer.debug",
             "certificate_hash": "744592fedb021fd82372966a6cb30569579fa9cc"
           }
         },
@@ -92,7 +92,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:100907092477:android:92d0e4e5e6c971b4ec7194",
         "android_client_info": {
-          "package_name": "deckers.thibault.aves.profile"
+          "package_name": "anonymity.ac.viewer.profile"
         }
       },
       "oauth_client": [
@@ -100,7 +100,7 @@
           "client_id": "100907092477-4a6968gloaaq70uti1offkk7raduond6.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "deckers.thibault.aves.profile",
+            "package_name": "anonymity.ac.viewer.profile",
             "certificate_hash": "744592fedb021fd82372966a6cb30569579fa9cc"
           }
         },

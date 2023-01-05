@@ -5,14 +5,17 @@ import 'package:aves/widgets/collection/filter_bar.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 
+// 桌面widget设置时使用
 class SettingsCollectionTile extends StatelessWidget {
   final Set<CollectionFilter> filters;
   final void Function(Set<CollectionFilter>) onSelection;
+  final String textTitle;
 
   const SettingsCollectionTile({
     super.key,
     required this.filters,
     required this.onSelection,
+    this.textTitle='',
   });
 
   @override
@@ -38,7 +41,7 @@ class SettingsCollectionTile extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        l10n.settingsCollectionTile,
+                        textTitle.isEmpty ? l10n.settingsCollectionTile : textTitle,
                         style: textTheme.titleMedium!,
                       ),
                       if (hasSubtitle)

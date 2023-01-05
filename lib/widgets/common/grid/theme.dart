@@ -5,6 +5,7 @@ import 'package:aves/widgets/common/identity/aves_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// 是否在缩略图上显示一些状态小图标，比如已加入收藏，已有标签，已定位，等。
 class GridTheme extends StatelessWidget {
   final double extent;
   final bool? showLocation, showTrash;
@@ -31,6 +32,7 @@ class GridTheme extends StatelessWidget {
           iconSize: iconSize,
           fontSize: fontSize,
           highlightBorderWidth: highlightBorderWidth,
+          showPresent: settings.showThumbnailPresent,
           showFavourite: settings.showThumbnailFavourite,
           showLocation: showLocation ?? settings.showThumbnailLocation,
           showMotionPhoto: settings.showThumbnailMotionPhoto,
@@ -48,12 +50,13 @@ class GridTheme extends StatelessWidget {
 
 class GridThemeData {
   final double iconSize, fontSize, highlightBorderWidth;
-  final bool showFavourite, showLocation, showMotionPhoto, showRating, showRaw, showTag, showTrash, showVideoDuration;
+  final bool showPresent,showFavourite, showLocation, showMotionPhoto, showRating, showRaw, showTag, showTrash, showVideoDuration;
 
   const GridThemeData({
     required this.iconSize,
     required this.fontSize,
     required this.highlightBorderWidth,
+    required this.showPresent,
     required this.showFavourite,
     required this.showLocation,
     required this.showMotionPhoto,

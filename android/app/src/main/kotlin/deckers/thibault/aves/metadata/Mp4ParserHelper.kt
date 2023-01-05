@@ -1,8 +1,8 @@
-package deckers.thibault.aves.metadata
+package anonymity.ac.viewer.metadata
 
 import android.content.Context
 import android.net.Uri
-import deckers.thibault.aves.utils.StorageUtils
+import anonymity.ac.viewer.utils.StorageUtils
 import org.mp4parser.*
 import org.mp4parser.boxes.UserBox
 import org.mp4parser.boxes.apple.AppleGPSCoordinatesBox

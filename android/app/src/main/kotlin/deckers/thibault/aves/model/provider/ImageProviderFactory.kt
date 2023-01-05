@@ -1,8 +1,8 @@
-package deckers.thibault.aves.model.provider
+package anonymity.ac.viewer.model.provider
 
 import android.content.ContentResolver
 import android.net.Uri
-import deckers.thibault.aves.utils.StorageUtils
+import anonymity.ac.viewer.utils.StorageUtils
 import java.util.*
 
 object ImageProviderFactory {

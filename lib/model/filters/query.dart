@@ -8,6 +8,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+/// The QueryFilter class is a filter that allows for searching for entries based on a user-provided query string. The query string can be used to search for entries that have specific properties, such as a specific title or a specific date.
+/// The fieldTest(String upQuery) method attempts to match the query against a pattern of fieldName operator value. Where the fieldName can be one of several supported field type such as ID, YEAR, MONTH, DAY, WIDTH, HEIGHT, SIZE. and operator can be one of =, <, >.
+///
+/// For example:
+/// ID = 1234 this will only return entries that have contentId equal to 1234
+/// YEAR < 2020 will only return entries that the bestDate's year is less than 2020
+/// SIZE > 10M will only return entries that the byte size is greater than 10MB
+/// Otherwise, the query is a simple search.
+/// It can include '-' at the begining of the query string to exclude entries that match the query string.
+/// The class uses another regex pattern exactRegex to check if the query string is enclosed in double quotes to indicate an exact match.
+/// If not it will test the title of the entry to see if it contains the query string, and returns a EntryFilter that tests the title with the contains method
 class QueryFilter extends CollectionFilter {
   static const type = 'query';
 

@@ -2,6 +2,13 @@ import 'package:aves/model/settings/store/store.dart';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+/// an implementation of the SettingsStore interface.
+///
+/// uses the SharedPreferences plugin from Flutter, to persist the application settings.
+///
+/// The SharedPreferences object is stored in the _prefs static variable.
+///
+/// The class implements all the methods of the SettingsStore interface.
 class SharedPrefSettingsStore implements SettingsStore {
   static SharedPreferences? _prefs;
 

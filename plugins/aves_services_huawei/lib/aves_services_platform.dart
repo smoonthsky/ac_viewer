@@ -13,7 +13,7 @@ class PlatformMobileServices extends MobileServices {
   // cf https://developer.huawei.com/consumer/en/doc/development/hmscore-common-References/huaweiapiavailability-0000001050121134#section9492524178
   static const int _hmsCoreAvailable = 0;
 
-  static const manifestApiKey = 'deckers.thibault.aves.huawei.API_KEY';
+  static const manifestApiKey = 'anonymity.ac.viewer.huawei.API_KEY';
 
   bool _isAvailable = false;
 

@@ -13,6 +13,11 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'package:flutter/foundation.dart';
+
+import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
+
+
 const _widgetDrawChannel = MethodChannel('deckers.thibault/aves/widget_draw');
 
 void widgetMainCommon(AppFlavor flavor) async {
@@ -27,11 +32,47 @@ void widgetMainCommon(AppFlavor flavor) async {
     switch (call.method) {
       case 'drawWidget':
         return _drawWidget(call.arguments);
+      case 'getWidgetUpdateInterval':
+        // debugPrint('call by HomeWidgetProvider scheduleNextUpdate ${call.method} ');
+        return _getWidgetUpdateInterval(call.arguments);
       default:
         throw PlatformException(code: 'not-implemented', message: 'failed to handle method=${call.method}');
     }
   });
 }
+
+/* AC Viewer : Widget update use AlarmManager in Kotlin side  */
+Future<int> _getWidgetUpdateInterval(dynamic arguments) async {
+  final widgetId = arguments as int;
+  // debugPrint('get widgetId from HomeWidgetProvider scheduleNextUpdate ${widgetId} ');
+  int widgetUpdateInterval =settings.getWidgetUpdateInterval(widgetId);
+  // debugPrint('return  widgetUpdateInterval to HomeWidgetProvider scheduleNextUpdate ${widgetUpdateInterval} ');
+  return widgetUpdateInterval;
+}
+
+Future<void> _setWallpaperFromWidget(int widgetId,AvesEntry? entry) async{
+  if (entry != null) {
+    WidgetWallpaperLocation location = settings.getWidgetWallpaperLocation(
+        widgetId);
+    switch (location) {
+      case WidgetWallpaperLocation.none:
+        break;
+      case WidgetWallpaperLocation.homeScreen:
+        await WallpaperManager.setWallpaperFromFile(
+            entry.toMap()['path'], WallpaperManager.HOME_SCREEN);
+        break;
+      case WidgetWallpaperLocation.lockScreen:
+        await WallpaperManager.setWallpaperFromFile(
+            entry.toMap()['path'], WallpaperManager.LOCK_SCREEN);
+        break;
+      case WidgetWallpaperLocation.bothScreen:
+        await WallpaperManager.setWallpaperFromFile(
+            entry.toMap()['path'], WallpaperManager.BOTH_SCREEN);
+        break; //provide image path
+    }
+  }
+}
+/* AC Viewer : Widget set Wallpaper end */
 
 Future<Uint8List> _drawWidget(dynamic args) async {
   final widgetId = args['widgetId'] as int;
@@ -42,6 +83,9 @@ Future<Uint8List> _drawWidget(dynamic args) async {
   final reuseEntry = args['reuseEntry'] as bool;
 
   final entry = drawEntryImage ? await _getWidgetEntry(widgetId, reuseEntry) : null;
+
+  await _setWallpaperFromWidget(widgetId,entry);
+
   final painter = HomeWidgetPainter(
     entry: entry,
     devicePixelRatio: devicePixelRatio,

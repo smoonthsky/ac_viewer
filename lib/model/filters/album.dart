@@ -9,6 +9,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
+///Allows filtering a collection of media entries based on their containing album.
+///An album is a virtual folder that groups media entries, such as images or videos, based on their location in the file system.
+///Property album represents the path of the album in the file system.
+///Property displayName represents the display name of the album, which may be different from the actual folder name.
 class AlbumFilter extends CoveredCollectionFilter {
   static const type = 'album';
 
@@ -39,6 +43,7 @@ class AlbumFilter extends CoveredCollectionFilter {
         'reversed': reversed,
       };
 
+  ///Cchecks if the entry's directory property, which represents the path of the folder containing the entry, is equal to the album property of the AlbumFilter object.
   @override
   EntryFilter get positiveTest => _test;
 

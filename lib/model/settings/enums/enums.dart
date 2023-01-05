@@ -1,3 +1,5 @@
+// all for setting page
+
 enum AccessibilityAnimations { system, disabled, enabled }
 
 enum AccessibilityTimeout { system, s1, s3, s5, s10, s30 }
@@ -31,9 +33,16 @@ enum VideoLoopMode { never, shortOnly, always }
 enum VideoAutoPlayMode { disabled, playMuted, playWithSound }
 
 enum ViewerTransition { slide, parallax, fade, zoomIn, none }
+/// TODO enum ViewerTransition { slide, parallax, fade, zoomIn, random, none }
 
 enum WidgetDisplayedItem { random, mostRecent }
 
 enum WidgetOpenPage { home, collection, viewer }
 
+enum WidgetWallpaperLocation {none, homeScreen, lockScreen, bothScreen}
+
 enum WidgetShape { rrect, circle, heart }
+
+/// for present
+enum RightLockAfterPresent { lockImmediately, lockManually }
+enum CreatePresentationMode { clearVisibleAndAutoDate , addToCurrentVisible }

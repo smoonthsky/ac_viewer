@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.calls.window
+package anonymity.ac.viewer.channel.calls.window
 
 import android.app.Service
 import io.flutter.plugin.common.MethodCall

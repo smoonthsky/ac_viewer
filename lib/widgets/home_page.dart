@@ -60,7 +60,10 @@ class _HomePageState extends State<HomePage> {
   static const actionScreenSaverSettings = 'screen_saver_settings';
   static const actionSearch = 'search';
   static const actionSetWallpaper = 'set_wallpaper';
+
   static const actionView = 'view';
+
+  ///指从桌面小部件widget打开,包括各种快捷方式添加的widget?
   static const actionWidgetOpen = 'widget_open';
   static const actionWidgetSettings = 'widget_settings';
 
@@ -73,6 +76,7 @@ class _HomePageState extends State<HomePage> {
   static const intentDataKeyUri = 'uri';
   static const intentDataKeyWidgetId = 'widgetId';
 
+  // TODO AC: 似乎只有collection, thumnails ,搜索结果页，可以添加快捷方式，pageView不行。包括相册页。
   static const allowedShortcutRoutes = [
     CollectionPage.routeName,
     AlbumListPage.routeName,
@@ -106,6 +110,7 @@ class _HomePageState extends State<HomePage> {
 
     var appMode = AppMode.main;
     final intentData = widget.intentData ?? await IntentService.getIntentData();
+    // Intent.ACTION_MAIN ,app正常启动不返回intentAction
     final intentAction = intentData[intentDataKeyAction];
     _initialFilters = null;
 
@@ -121,6 +126,7 @@ class _HomePageState extends State<HomePage> {
         case actionWidgetOpen:
           String? uri, mimeType;
           final widgetId = intentData[intentDataKeyWidgetId];
+          // only actionWidgetOpen has intentDataKeyWidgetId
           if (widgetId != null) {
             // widget settings may be modified in a different process after channel setup
             await settings.reload();
@@ -151,7 +157,7 @@ class _HomePageState extends State<HomePage> {
           }
           break;
         case actionPickItems:
-          // TODO TLAD apply pick mimetype(s)
+          // TODO TLAD(To Look At Later.)  apply pick mimetype(s)
           // some apps define multiple types, separated by a space (maybe other signs too, like `,` `;`?)
           String? pickMimeTypes = intentData[intentDataKeyMimeType];
           final multiple = intentData[intentDataKeyAllowMultiple] ?? false;
@@ -199,6 +205,7 @@ class _HomePageState extends State<HomePage> {
     unawaited(reportService.setCustomKey('app_mode', appMode.toString()));
     debugPrint('Storage check complete in ${stopwatch.elapsed.inMilliseconds}ms');
 
+    // determine whether should init CollectionSource.
     switch (appMode) {
       case AppMode.main:
       case AppMode.pickCollectionFiltersExternal:
@@ -208,6 +215,7 @@ class _HomePageState extends State<HomePage> {
         unawaited(AnalysisService.registerCallback());
         final source = context.read<CollectionSource>();
         await source.init(
+          //主页设定是否为[所有媒体集]
           loadTopEntriesFirst: settings.homePage == HomePageSetting.collection,
         );
         break;
@@ -217,6 +225,7 @@ class _HomePageState extends State<HomePage> {
           canAnalyze: false,
         );
         break;
+    // When a user accesses the home page via shortcuts, it is necessary to initialize a specific CollectionSource to ensure the correct content is displayed.
       case AppMode.view:
         if (_isViewerSourceable(_viewerEntry)) {
           final directory = _viewerEntry?.directory;
@@ -275,6 +284,7 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
+    ///if view a single media , both from widget and app
     if (appMode == AppMode.view) {
       AvesEntry viewerEntry = _viewerEntry!;
       CollectionLens? collection;

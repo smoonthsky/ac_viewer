@@ -41,6 +41,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
+///查看单个媒体（图片/视频）实际Widget，查看器，EntryViewer
 class EntryViewerStack extends StatefulWidget {
   final CollectionLens? collection;
   final AvesEntry initialEntry;
@@ -59,7 +60,9 @@ class EntryViewerStack extends StatefulWidget {
 
 class _EntryViewerStackState extends State<EntryViewerStack> with EntryViewControllerMixin, FeedbackMixin, SingleTickerProviderStateMixin, WidgetsBindingObserver {
   late int _currentEntryIndex;
+  ///用于显示媒体信息，page 1 为媒体，page2为信息页
   late ValueNotifier<int> _currentVerticalPage;
+
   late PageController _horizontalPager, _verticalPager;
   final AChangeNotifier _verticalScrollNotifier = AChangeNotifier();
   bool _overlayInitialized = false;

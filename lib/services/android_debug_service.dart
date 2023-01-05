@@ -3,6 +3,13 @@ import 'package:aves/ref/mime_types.dart';
 import 'package:aves/services/common/services.dart';
 import 'package:flutter/services.dart';
 
+/// Intended to be used for debugging purposes.
+///
+/// The methods in this class invoke methods on a platform channel named 'deckers.thibault/aves/debug'.
+///
+/// These methods are intended for debugging purposes and would not be included in a production version of the app , controlled by the build_mode setting in the pubspec.yaml file.
+///
+// You can set your app to release mode by running command flutter run --release and this will not include any debugging code on the final app.
 class AndroidDebugService {
   static const _platform = MethodChannel('deckers.thibault/aves/debug');
 

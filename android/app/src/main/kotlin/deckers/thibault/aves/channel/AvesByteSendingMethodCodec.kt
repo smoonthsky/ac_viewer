@@ -1,7 +1,7 @@
-package deckers.thibault.aves.channel
+package anonymity.ac.viewer.channel
 
 import android.util.Log
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodCodec
 import io.flutter.plugin.common.StandardMessageCodec

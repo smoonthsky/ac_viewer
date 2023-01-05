@@ -14,6 +14,7 @@ import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+/// provides an interface to interact with an analysis service.
 class AnalysisService {
   static const _platform = MethodChannel('deckers.thibault/aves/analysis');
 
@@ -42,6 +43,31 @@ class AnalysisService {
 
 const _channel = MethodChannel('deckers.thibault/aves/analysis_service_background');
 
+// The Dart entrypoint executed within this Activity is "main()" by default.
+//
+// To change the entrypoint that a FlutterActivity executes, subclass FlutterActivity and override getDartEntrypointFunctionName(). For non-main Dart entrypoints to not be tree-shaken away, you need to annotate those functions with @pragma('vm:entry-point') in Dart.
+//
+// The Dart entrypoint arguments will be passed as a list of string to Dart's entrypoint function. It can be passed using a FlutterActivity.NewEngineIntentBuilder via FlutterActivity.NewEngineIntentBuilder.dartEntrypointArgs.
+//
+// The Flutter route that is initially loaded within this Activity is "/". The initial route may be specified explicitly by passing the name of the route as a String in FlutterActivityLaunchConfigs.EXTRA_INITIAL_ROUTE, e.g., "my/deep/link".
+//
+// The initial route can each be controlled using a FlutterActivity.NewEngineIntentBuilder via FlutterActivity.NewEngineIntentBuilder.initialRoute.
+//
+// The app bundle path, Dart entrypoint, Dart entrypoint arguments, and initial route can also be controlled in a subclass of FlutterActivity by overriding their respective methods:
+
+// The Dart entrypoint and app bundle path are not supported as Intent parameters since your Dart library entrypoints are your private APIs and Intents are invocable by other processes.
+//
+// see:
+//
+// https://api.flutter.dev/javadoc/io/flutter/embedding/android/FlutterActivity.html
+
+/// This code is an entry point function that initializes various services and sets up a background process for analyzing data.
+///
+/// It calls initPlatformServices() method to initialize the platform-specific services.
+///
+/// It initializes various services like androidFileUtils, metadataDb, device, mobileServices and settings using the await keyword.
+///
+/// It creates an instance of the Analyzer class and sets up a method call handler on the _channel object, which handles the start and stop methods for the background process.
 @pragma('vm:entry-point')
 Future<void> _init() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -76,6 +102,8 @@ Future<void> _init() async {
 
 enum AnalyzerState { running, stopping, stopped }
 
+
+/// used to start, stop, and update an analysis process.
 class Analyzer {
   late AppLocalizations _l10n;
   final ValueNotifier<AnalyzerState> _serviceStateNotifier = ValueNotifier<AnalyzerState>(AnalyzerState.stopped);

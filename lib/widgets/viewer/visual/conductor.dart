@@ -6,6 +6,16 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:tuple/tuple.dart';
 
+//The ViewStateConductor class is responsible for managing a list of ValueNotifier objects, each of which holds a ViewState object.
+// The ViewState object holds information about the position, scale, and size of a view.
+//
+// The getOrCreateController(AvesEntry entry) method is used to retrieve the ValueNotifier object for a given AvesEntry.
+// If there is no existing ValueNotifier object for the entry, a new one is created and added to the list.
+// If the number of ValueNotifier objects in the list exceeds maxControllerCount, the last one is removed from the list and its dispose() method is called.
+//
+// The reset(AvesEntry entry) method is used to remove the ValueNotifier objects for a given entry and all its burst entries from the list.
+
+
 class ViewStateConductor {
   final List<Tuple2<String, ValueNotifier<ViewState>>> _controllers = [];
   Size _viewportSize = Size.zero;

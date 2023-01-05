@@ -1,4 +1,4 @@
-package deckers.thibault.aves.aves_platform_meta
+package anonymity.ac.viewer.aves_platform_meta
 
 import android.content.Context
 import android.content.pm.PackageManager

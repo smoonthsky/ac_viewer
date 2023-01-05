@@ -3,6 +3,7 @@ import 'package:aves/theme/icons.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/widgets.dart';
 
+/// used to filter AvesEntry objects based on their rating property.
 class RatingFilter extends CollectionFilter {
   static const type = 'rating';
 

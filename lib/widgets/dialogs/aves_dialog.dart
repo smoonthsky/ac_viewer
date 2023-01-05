@@ -3,6 +3,12 @@ import 'dart:ui';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 
+/// AvesDialog is a custom implementation of the Flutter AlertDialog widget.
+/// It provides additional features such as a scrollable content area, a customizable dialog title, and the ability to show or hide a scroll bar.
+/// It is used to display a dialog to the user with a message and a set of actions that the user can take.
+/// The actions are typically presented as buttons at the bottom of the dialog.
+/// The content area can be either a single widget or a scrollable list of widgets.
+/// The AvesDialog also allows for customization of the appearance of the dialog, such as the corner radius and the horizontal padding of the content area.
 class AvesDialog extends StatelessWidget {
   final String? title;
   final ScrollController scrollController;

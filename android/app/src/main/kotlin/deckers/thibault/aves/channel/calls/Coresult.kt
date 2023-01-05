@@ -1,6 +1,6 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
-import deckers.thibault.aves.MainActivity
+import anonymity.ac.viewer.MainActivity
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.CoroutineScope

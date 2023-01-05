@@ -7,6 +7,7 @@ import 'package:aves/widgets/common/fx/borders.dart';
 import 'package:aves/widgets/common/thumbnail/image.dart';
 import 'package:flutter/material.dart';
 
+///"Used when setting album cover, shortcut desktop display icon."
 class ItemPicker extends StatelessWidget {
   final double extent;
   final AvesEntry entry;

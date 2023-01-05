@@ -1,16 +1,16 @@
-package deckers.thibault.aves
+package anonymity.ac.viewer
 
 import android.service.dreams.DreamService
 import android.util.Log
 import android.view.View
 import app.loup.streams_channel.StreamsChannel
-import deckers.thibault.aves.channel.AvesByteSendingMethodCodec
-import deckers.thibault.aves.channel.calls.*
-import deckers.thibault.aves.channel.calls.window.ServiceWindowHandler
-import deckers.thibault.aves.channel.calls.window.WindowHandler
-import deckers.thibault.aves.channel.streams.ImageByteStreamHandler
-import deckers.thibault.aves.channel.streams.MediaStoreStreamHandler
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.channel.AvesByteSendingMethodCodec
+import anonymity.ac.viewer.channel.calls.*
+import anonymity.ac.viewer.channel.calls.window.ServiceWindowHandler
+import anonymity.ac.viewer.channel.calls.window.WindowHandler
+import anonymity.ac.viewer.channel.streams.ImageByteStreamHandler
+import anonymity.ac.viewer.channel.streams.MediaStoreStreamHandler
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.FlutterInjector
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.android.FlutterSurfaceView

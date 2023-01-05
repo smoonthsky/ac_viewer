@@ -9,6 +9,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:streams_channel/streams_channel.dart';
 
+/// An abstract class that defines methods for performing various media editing operations,
+/// such as deletion, moving, exporting, renaming and capture a video frame as image .
+///
+/// Also cancelFileOp.
 abstract class MediaEditService {
   String get newOpId;
 
@@ -48,6 +52,13 @@ abstract class MediaEditService {
   });
 }
 
+/// An implementation of an abstract class MediaEditService,
+///
+/// which provides methods for performing various media-related operations on a mobile device,
+///
+/// such as deleting, moving, renaming , exporting files and capture a video frame as image .
+///
+/// Also cancelFileOp.
 class PlatformMediaEditService implements MediaEditService {
   static const _platform = MethodChannel('deckers.thibault/aves/media_edit');
   static final _opStream = StreamsChannel('deckers.thibault/aves/media_op_stream');

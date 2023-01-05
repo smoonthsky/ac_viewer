@@ -5,6 +5,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tuple/tuple.dart';
 
+// TileExtentController is a utility class that helps control the size of tiles in a grid-like layout.
+// It takes in a number of parameters such as the minimum and maximum tile size, the minimum and default number of columns, the spacing between tiles and horizontal padding.
+// These parameters are used to calculate the optimal tile size for a given viewport size.
+// The class also includes a ValueNotifier, which can be used to notify other widgets of changes in the tile size.
+// Additionally, it also has methods to set the user preferred column count and extent. It also updates the settings when the user preferred column count or extent changes, so that the user's preference can be retained across sessions.
+
 class TileExtentController {
   final String settingsRouteKey;
   final int columnCountMin, columnCountDefault;

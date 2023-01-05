@@ -30,6 +30,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// TODO AC: fix clash much items
 class CollectionPage extends StatefulWidget {
   static const routeName = '/collection';
 

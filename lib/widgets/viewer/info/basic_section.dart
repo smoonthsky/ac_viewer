@@ -5,6 +5,7 @@ import 'package:aves/model/entry.dart';
 import 'package:aves/model/favourites.dart';
 import 'package:aves/model/filters/album.dart';
 import 'package:aves/model/filters/favourite.dart';
+import 'package:aves/model/filters/present.dart';
 import 'package:aves/model/filters/mime.dart';
 import 'package:aves/model/filters/rating.dart';
 import 'package:aves/model/filters/tag.dart';
@@ -81,6 +82,7 @@ class BasicSection extends StatelessWidget {
         final effectiveFilters = [
           ...filters,
           if (entry.isFavourite) FavouriteFilter.instance,
+          if (entry.isPresent) PresentFilter.instance,
         ]..sort();
 
         return Padding(

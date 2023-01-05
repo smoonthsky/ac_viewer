@@ -6,6 +6,18 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+//The FixedExtentSectionedListLayout is a custom layout for use with SectionedList widgets.
+//It lays out items in a grid with a fixed number of columns and fixed width and height for each tile.
+// It overrides the getTileRect and getItemAt methods of the SectionedListLayout to provide the grid layout.
+//
+// The getTileRect method is used to determine the position of a given tile (item) in the grid.
+// It takes an item as an argument, and returns a Rect that represents the position of that item in the grid.
+// It does this by first finding the section that the item belongs to, then using the sectionLayouts to determine the position of that item in the grid.
+//
+// The getItemAt method is used to determine the item that is at a given position in the grid.
+// It takes an Offset as an argument, and returns the item that is at that position.
+// It does this by first finding the section that the position belongs to, then using the position to determine the row and column of the item, and finally returning the item at that position in the section.
+
 class FixedExtentSectionedListLayout<T> extends SectionedListLayout<T> {
   final int columnCount;
   final double tileWidth, tileHeight;

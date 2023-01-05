@@ -1,4 +1,4 @@
-package deckers.thibault.aves.model
+package anonymity.ac.viewer.model
 
 import android.net.Uri
 

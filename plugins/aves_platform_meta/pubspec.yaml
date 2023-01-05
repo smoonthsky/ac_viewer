@@ -17,5 +17,5 @@ flutter:
   plugin:
     platforms:
       android:
-        package: deckers.thibault.aves.aves_platform_meta
+        package: anonymity.ac.viewer.aves_platform_meta
         pluginClass: AvesPlatformMetaPlugin

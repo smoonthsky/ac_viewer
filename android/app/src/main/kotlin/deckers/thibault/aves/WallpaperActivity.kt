@@ -1,4 +1,4 @@
-package deckers.thibault.aves
+package anonymity.ac.viewer
 
 import android.app.Activity
 import android.content.Intent
@@ -9,15 +9,15 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import app.loup.streams_channel.StreamsChannel
-import deckers.thibault.aves.channel.AvesByteSendingMethodCodec
-import deckers.thibault.aves.channel.calls.*
-import deckers.thibault.aves.channel.calls.window.ActivityWindowHandler
-import deckers.thibault.aves.channel.calls.window.WindowHandler
-import deckers.thibault.aves.channel.streams.ImageByteStreamHandler
-import deckers.thibault.aves.utils.FlutterUtils
-import deckers.thibault.aves.utils.FlutterUtils.enableSoftwareRendering
-import deckers.thibault.aves.utils.LogUtils
-import deckers.thibault.aves.utils.getParcelableExtraCompat
+import anonymity.ac.viewer.channel.AvesByteSendingMethodCodec
+import anonymity.ac.viewer.channel.calls.*
+import anonymity.ac.viewer.channel.calls.window.ActivityWindowHandler
+import anonymity.ac.viewer.channel.calls.window.WindowHandler
+import anonymity.ac.viewer.channel.streams.ImageByteStreamHandler
+import anonymity.ac.viewer.utils.FlutterUtils
+import anonymity.ac.viewer.utils.FlutterUtils.enableSoftwareRendering
+import anonymity.ac.viewer.utils.LogUtils
+import anonymity.ac.viewer.utils.getParcelableExtraCompat
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel

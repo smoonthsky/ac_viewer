@@ -47,6 +47,9 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
+import '../../../model/settings/home_screen_widget/filter_exchanger.dart';
+
+// TODO AC: add present
 class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMixin, SingleEntryEditorMixin, EntryStorageMixin {
   final AvesEntry mainEntry, pageEntry;
   final CollectionLens? collection;
@@ -71,19 +74,22 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
       switch (action) {
         case EntryAction.toggleFavourite:
           return collection != null;
+        case EntryAction.togglePresent:
+        case EntryAction.toggleWidgetFiltersBak:
+          return (collection != null) && !settings.presentationLock;
         case EntryAction.delete:
         case EntryAction.rename:
         case EntryAction.move:
-          return targetEntry.canEdit;
+          return targetEntry.canEdit && !settings.presentationLock;
         case EntryAction.copy:
           return canWrite;
         case EntryAction.rotateCCW:
         case EntryAction.rotateCW:
-          return targetEntry.canRotate;
+          return targetEntry.canRotate && !settings.presentationLock;
         case EntryAction.flip:
           return targetEntry.canFlip;
         case EntryAction.convert:
-          return canWrite && !targetEntry.isVideo;
+          return canWrite && !targetEntry.isVideo && !settings.presentationLock;
         case EntryAction.print:
           return device.canPrint && !targetEntry.isVideo;
         case EntryAction.openMap:
@@ -216,6 +222,12 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
       case EntryAction.toggleFavourite:
         targetEntry.toggleFavourite();
         break;
+      case EntryAction.togglePresent:
+        targetEntry.togglePresent();
+        break;
+      case EntryAction.toggleWidgetFiltersBak:
+        widgetFiltersExchanger.toggleWidgetFiltersBakExchange(context);
+        break;
       // raster
       case EntryAction.rotateCCW:
         _rotate(context, targetEntry, clockwise: false);
@@ -246,9 +258,7 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
         }
         break;
       case EntryAction.edit:
-        androidAppService.edit(targetEntry.uri, targetEntry.mimeType).then((success) {
-          if (!success) showNoMatchingAppDialog(context);
-        });
+        _copyBeforeEdit(context);
         break;
       case EntryAction.open:
         androidAppService.open(targetEntry.uri, targetEntry.mimeTypeAnySubtype, forceChooser: true).then((success) {
@@ -286,6 +296,29 @@ class EntryActionDelegate with FeedbackMixin, PermissionAwareMixin, SizeAwareMix
       case EntryAction.debug:
         _goToDebug(context, targetEntry);
         break;
+    }
+  }
+
+  Future<void> _editEntry(BuildContext context,AvesEntry editEntry) async {
+    debugPrint('_editEntry editEntry $editEntry');
+    await androidAppService.edit(editEntry.uri, editEntry.mimeType).then((success) {
+      if (!success) showNoMatchingAppDialog(context);
+    });
+  }
+  // copy entry before edit , for user sometimes don't want to overwrite the origin file.
+  Future<void> _copyBeforeEdit(BuildContext context) async {
+    final targetEntry = _getTargetEntry(context, EntryAction.copy );
+    final targetAlbum = targetEntry.directory;
+    debugPrint('_copyBeforeEdit targetEntry $targetEntry');
+    if (targetAlbum != null) {
+      await doMoveWithoutAsk(
+        context,
+        moveType: MoveType.copy,
+        entriesByDestination: {
+          targetAlbum: {targetEntry}
+        },
+        onSuccess: _editEntry,
+      );
     }
   }
 

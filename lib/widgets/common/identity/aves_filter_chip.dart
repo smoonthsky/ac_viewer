@@ -42,6 +42,12 @@ class AvesFilterDecoration {
   BorderRadius get chipBorderRadius => BorderRadius.all(radius);
 }
 
+// AvesFilterChip is a stateful widget that extends StatefulWidget and defines a custom filter chip that can be used to filter data.
+// The widget takes in a filter object which is used to filter the data, a showText and showGenericIcon boolean properties that determine whether or not to show the text and a generic icon respectively,
+// a useFilterColor boolean property that determines whether or not to use the filter color, a decoration object, a banner string, leadingOverride and details widgets, a padding property, a maxWidth property, a heroType property, and callback functions for onTap, onRemove, and onLongPress events.
+// The widget also defines several static properties such as defaultRadius, outlineWidth, minChipHeight, minChipWidth, iconSize, fontSize, and decoratedContentVerticalPadding.
+// The createState() method of the class creates and returns an instance of the _AvesFilterChipState which is a state object for the AvesFilterChip widget. The state object contains the logic for handling events and updating the state of the widget.
+
 class AvesFilterChip extends StatefulWidget {
   final CollectionFilter filter;
   final bool showText, showGenericIcon, useFilterColor;
@@ -91,6 +97,7 @@ class AvesFilterChip extends StatefulWidget {
     });
   }
 
+  // 在顶部appbar使用，长按对应的filter,或都说标签页，将显示一些选项，主要用于筛选符合要求的媒体文件出来。
   static Future<void> showDefaultLongPressMenu(BuildContext context, CollectionFilter filter, Offset tapPosition) async {
     if (context.read<ValueNotifier<AppMode>>().value.canNavigate) {
       final actions = [

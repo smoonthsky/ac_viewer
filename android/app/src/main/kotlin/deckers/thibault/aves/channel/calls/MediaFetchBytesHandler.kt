@@ -1,14 +1,14 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
 import android.content.Context
 import android.graphics.Rect
 import android.net.Uri
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safeSuspend
-import deckers.thibault.aves.channel.calls.fetchers.RegionFetcher
-import deckers.thibault.aves.channel.calls.fetchers.SvgRegionFetcher
-import deckers.thibault.aves.channel.calls.fetchers.ThumbnailFetcher
-import deckers.thibault.aves.channel.calls.fetchers.TiffRegionFetcher
-import deckers.thibault.aves.utils.MimeTypes
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safeSuspend
+import anonymity.ac.viewer.channel.calls.fetchers.RegionFetcher
+import anonymity.ac.viewer.channel.calls.fetchers.SvgRegionFetcher
+import anonymity.ac.viewer.channel.calls.fetchers.ThumbnailFetcher
+import anonymity.ac.viewer.channel.calls.fetchers.TiffRegionFetcher
+import anonymity.ac.viewer.utils.MimeTypes
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler

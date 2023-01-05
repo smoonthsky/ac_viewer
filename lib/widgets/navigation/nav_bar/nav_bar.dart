@@ -16,6 +16,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'package:aves/model/filters/present.dart';
+
 class AppBottomNavBar extends StatefulWidget {
   final Stream<DraggableScrollBarEvent> events;
 
@@ -68,12 +70,13 @@ class _AppBottomNavBarState extends State<AppBottomNavBar> {
   Widget build(BuildContext context) {
     final showVideo = context.select<Settings, bool>((s) => !s.hiddenFilters.contains(MimeFilter.video));
 
-    final items = [
-      const AvesBottomNavItem(route: CollectionPage.routeName),
-      if (showVideo) AvesBottomNavItem(route: CollectionPage.routeName, filter: MimeFilter.video),
-      const AvesBottomNavItem(route: CollectionPage.routeName, filter: FavouriteFilter.instance),
-      const AvesBottomNavItem(route: AlbumListPage.routeName),
-    ];
+     final items = [
+       // RecentlyAddedFilter.instance is an instance of RecentlyAddedFilter, but RecentlyAddedFilter is not a constant constructor.
+       const AvesBottomNavItem(route: CollectionPage.routeName, filter: PresentFilter.instance),
+       if (showVideo) AvesBottomNavItem(route: CollectionPage.routeName, filter: MimeFilter.video),
+       const AvesBottomNavItem(route: CollectionPage.routeName, filter: FavouriteFilter.instance),
+       const AvesBottomNavItem(route: AlbumListPage.routeName),
+     ];
 
     Widget child = AvesFloatingBar(
       builder: (context, backgroundColor, child) => BottomNavigationBar(

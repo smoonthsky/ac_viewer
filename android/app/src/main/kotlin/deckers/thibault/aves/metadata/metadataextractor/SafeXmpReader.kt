@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata.metadataextractor
+package anonymity.ac.viewer.metadata.metadataextractor
 
 import android.util.Log
 import com.adobe.internal.xmp.XMPException
@@ -16,7 +16,7 @@ import com.drew.metadata.Directory
 import com.drew.metadata.Metadata
 import com.drew.metadata.xmp.XmpDirectory
 import com.drew.metadata.xmp.XmpReader
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.utils.LogUtils
 import java.io.IOException
 
 class SafeXmpReader : XmpReader() {

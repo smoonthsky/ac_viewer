@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata
+package anonymity.ac.viewer.metadata
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -10,15 +10,15 @@ import android.os.ParcelFileDescriptor
 import android.util.Log
 import com.adobe.internal.xmp.XMPMeta
 import com.drew.metadata.xmp.XmpDirectory
-import deckers.thibault.aves.metadata.XMP.countPropArrayItems
-import deckers.thibault.aves.metadata.XMP.doesPropExist
-import deckers.thibault.aves.metadata.XMP.getSafeLong
-import deckers.thibault.aves.metadata.XMP.getSafeStructField
-import deckers.thibault.aves.metadata.metadataextractor.Helper
-import deckers.thibault.aves.model.FieldMap
-import deckers.thibault.aves.utils.LogUtils
-import deckers.thibault.aves.utils.MimeTypes
-import deckers.thibault.aves.utils.indexOfBytes
+import anonymity.ac.viewer.metadata.XMP.countPropArrayItems
+import anonymity.ac.viewer.metadata.XMP.doesPropExist
+import anonymity.ac.viewer.metadata.XMP.getSafeLong
+import anonymity.ac.viewer.metadata.XMP.getSafeStructField
+import anonymity.ac.viewer.metadata.metadataextractor.Helper
+import anonymity.ac.viewer.model.FieldMap
+import anonymity.ac.viewer.utils.LogUtils
+import anonymity.ac.viewer.utils.MimeTypes
+import anonymity.ac.viewer.utils.indexOfBytes
 import org.beyka.tiffbitmapfactory.TiffBitmapFactory
 import java.io.DataInputStream
 

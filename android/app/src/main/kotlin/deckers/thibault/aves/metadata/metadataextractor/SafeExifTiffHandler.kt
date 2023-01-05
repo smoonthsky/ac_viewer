@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata.metadataextractor
+package anonymity.ac.viewer.metadata.metadataextractor
 
 import com.drew.lang.RandomAccessReader
 import com.drew.metadata.Directory

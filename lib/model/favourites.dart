@@ -6,8 +6,14 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
+///singleton, keeps all the favorite entries from the metadata database.
 final Favourites favourites = Favourites._private();
 
+/// The Favourites class is a change notifier that keeps track of the favorite entries in the app.
+///
+/// It has several methods to add and remove entries from the favorites, as well as to check if a given entry is already marked as a favorite.
+///
+/// It also has methods for importing and exporting the favorite entries to and from a JSON object.
 class Favourites with ChangeNotifier {
   Set<FavouriteRow> _rows = {};
 

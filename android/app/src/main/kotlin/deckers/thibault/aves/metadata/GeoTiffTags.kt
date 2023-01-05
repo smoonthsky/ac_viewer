@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata
+package anonymity.ac.viewer.metadata
 
 object GeoTiffKeys {
     // not a standard tag

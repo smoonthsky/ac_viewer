@@ -9,13 +9,18 @@ import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/widgets.dart';
 
+/// Pprovides functionality related to albums, which are essentially directories that contain media files.
+/// The mixin provides functions to manage a list of directories that are considered albums, such as adding or removing directories, and to get information about the albums, such as their display names, entries, and summary statistics (e.g. the number of entries and their total size).
+/// It also provides functions to notify other parts of the app about changes to the albums, such as when an album is added or removed, or when the display names of the albums need to be invalidated.
+/// The mixin is designed to be used in conjunction with a source (a class that represents a collection of media entries), which provides the actual media entries and metadata about them. The mixin uses this data to update and maintain information about the albums.
 mixin AlbumMixin on SourceBase {
   final Set<String> _directories = {};
   final Set<String> _newAlbums = {};
 
   List<String> get rawAlbums => List.unmodifiable(_directories);
 
-  Set<AlbumFilter> getNewAlbumFilters(BuildContext context) => Set.unmodifiable(_newAlbums.map((v) => AlbumFilter(v, getAlbumDisplayName(context, v))));
+  Set<AlbumFilter> getNewAlbumFilters(BuildContext context) => Set.unmodifiable(
+      _newAlbums.map((v) => AlbumFilter(v, getAlbumDisplayName(context, v))));
 
   int compareAlbumsByName(String a, String b) {
     final ua = getAlbumDisplayName(null, a);
@@ -38,9 +43,15 @@ mixin AlbumMixin on SourceBase {
     }
   }
 
+  /// Rreturns a map containing the entries in each album.
+  /// The map keys are the album directories and the values are the entries in those albums.
+  /// The method first sorts the albums by date into three categories: regular albums, app albums, and special albums.
+  /// Special albums include system-defined albums such as "Screenshots" and "Camera".
   Map<String, AvesEntry?> getAlbumEntries() {
     final entries = sortedEntriesByDate;
-    final regularAlbums = <String>[], appAlbums = <String>[], specialAlbums = <String>[];
+    final regularAlbums = <String>[],
+        appAlbums = <String>[],
+        specialAlbums = <String>[];
     for (final album in rawAlbums) {
       switch (androidFileUtils.getAlbumType(album)) {
         case AlbumType.regular:
@@ -54,14 +65,16 @@ mixin AlbumMixin on SourceBase {
           break;
       }
     }
-    return Map.fromEntries([...specialAlbums, ...appAlbums, ...regularAlbums].map((album) => MapEntry(
-          album,
-          entries.firstWhereOrNull((entry) => entry.directory == album),
-        )));
+    return Map.fromEntries([...specialAlbums, ...appAlbums, ...regularAlbums]
+        .map((album) => MapEntry(
+              album,
+              entries.firstWhereOrNull((entry) => entry.directory == album),
+            )));
   }
 
   void updateDirectories() {
-    final visibleDirectories = visibleEntries.map((entry) => entry.directory).toSet();
+    final visibleDirectories =
+        visibleEntries.map((entry) => entry.directory).toSet();
     addDirectories(albums: visibleDirectories);
     cleanEmptyAlbums();
   }
@@ -74,7 +87,9 @@ mixin AlbumMixin on SourceBase {
   }
 
   void cleanEmptyAlbums([Set<String?>? albums]) {
-    final emptyAlbums = (albums ?? _directories).where((v) => _isEmptyAlbum(v) && !_newAlbums.contains(v)).toSet();
+    final emptyAlbums = (albums ?? _directories)
+        .where((v) => _isEmptyAlbum(v) && !_newAlbums.contains(v))
+        .toSet();
     if (emptyAlbums.isNotEmpty) {
       _directories.removeAll(emptyAlbums);
       _onAlbumChanged();
@@ -84,14 +99,16 @@ mixin AlbumMixin on SourceBase {
       final pinnedFilters = settings.pinnedFilters;
       emptyAlbums.forEach((album) {
         bookmarks?.remove(album);
-        pinnedFilters.removeWhere((filter) => filter is AlbumFilter && filter.album == album);
+        pinnedFilters.removeWhere(
+            (filter) => filter is AlbumFilter && filter.album == album);
       });
       settings.drawerAlbumBookmarks = bookmarks;
       settings.pinnedFilters = pinnedFilters;
     }
   }
 
-  bool _isEmptyAlbum(String? album) => !visibleEntries.any((entry) => entry.directory == album);
+  bool _isEmptyAlbum(String? album) =>
+      !visibleEntries.any((entry) => entry.directory == album);
 
   // filter summary
 
@@ -104,7 +121,9 @@ mixin AlbumMixin on SourceBase {
     Set<String?>? directories,
     bool notify = true,
   }) {
-    if (_filterEntryCountMap.isEmpty && _filterSizeMap.isEmpty && _filterRecentEntryMap.isEmpty) return;
+    if (_filterEntryCountMap.isEmpty &&
+        _filterSizeMap.isEmpty &&
+        _filterRecentEntryMap.isEmpty) return;
 
     if (entries == null && directories == null) {
       _filterEntryCountMap.clear();
@@ -113,7 +132,8 @@ mixin AlbumMixin on SourceBase {
     } else {
       directories ??= {};
       if (entries != null) {
-        directories.addAll(entries.map((entry) => entry.directory).whereNotNull());
+        directories
+            .addAll(entries.map((entry) => entry.directory).whereNotNull());
       }
       directories.forEach((directory) {
         _filterEntryCountMap.remove(directory);
@@ -127,15 +147,18 @@ mixin AlbumMixin on SourceBase {
   }
 
   int albumEntryCount(AlbumFilter filter) {
-    return _filterEntryCountMap.putIfAbsent(filter.album, () => visibleEntries.where(filter.test).length);
+    return _filterEntryCountMap.putIfAbsent(
+        filter.album, () => visibleEntries.where(filter.test).length);
   }
 
   int albumSize(AlbumFilter filter) {
-    return _filterSizeMap.putIfAbsent(filter.album, () => visibleEntries.where(filter.test).map((v) => v.sizeBytes).sum);
+    return _filterSizeMap.putIfAbsent(filter.album,
+        () => visibleEntries.where(filter.test).map((v) => v.sizeBytes).sum);
   }
 
   AvesEntry? albumRecentEntry(AlbumFilter filter) {
-    return _filterRecentEntryMap.putIfAbsent(filter.album, () => sortedEntriesByDate.firstWhereOrNull(filter.test));
+    return _filterRecentEntryMap.putIfAbsent(
+        filter.album, () => sortedEntriesByDate.firstWhereOrNull(filter.test));
   }
 
   // new albums
@@ -158,7 +181,8 @@ mixin AlbumMixin on SourceBase {
 
   // display names
 
-  final Map<String, String> _albumDisplayNamesWithContext = {}, _albumDisplayNamesWithoutContext = {};
+  final Map<String, String> _albumDisplayNamesWithContext = {},
+      _albumDisplayNamesWithoutContext = {};
 
   void invalidateAlbumDisplayNames() {
     _albumDisplayNamesWithContext.clear();
@@ -207,16 +231,22 @@ mixin AlbumMixin on SourceBase {
       return dirPath;
     }
 
-    final otherAlbumsOnDevice = _directories.whereNotNull().where((item) => item != dirPath).toSet();
+    final otherAlbumsOnDevice =
+        _directories.whereNotNull().where((item) => item != dirPath).toSet();
     final uniqueNameInDevice = unique(dirPath, otherAlbumsOnDevice);
     if (uniqueNameInDevice.length <= relativeDir.length) {
       return uniqueNameInDevice;
     }
 
     final volumePath = dir.volumePath;
-    String trimVolumePath(String? path) => path!.substring(dir.volumePath.length);
-    final otherAlbumsOnVolume = otherAlbumsOnDevice.where((path) => path.startsWith(volumePath)).map(trimVolumePath).toSet();
-    final uniqueNameInVolume = unique(trimVolumePath(dirPath), otherAlbumsOnVolume);
+    String trimVolumePath(String? path) =>
+        path!.substring(dir.volumePath.length);
+    final otherAlbumsOnVolume = otherAlbumsOnDevice
+        .where((path) => path.startsWith(volumePath))
+        .map(trimVolumePath)
+        .toSet();
+    final uniqueNameInVolume =
+        unique(trimVolumePath(dirPath), otherAlbumsOnVolume);
     final volume = androidFileUtils.getStorageVolume(dirPath)!;
     if (volume.isPrimary) {
       return uniqueNameInVolume;
@@ -226,13 +256,21 @@ mixin AlbumMixin on SourceBase {
   }
 
   String getAlbumDisplayName(BuildContext? context, String dirPath) {
-    final names = (context != null ? _albumDisplayNamesWithContext : _albumDisplayNamesWithoutContext);
-    return names.putIfAbsent(dirPath, () => _computeDisplayName(context, dirPath));
+    final names = (context != null
+        ? _albumDisplayNamesWithContext
+        : _albumDisplayNamesWithoutContext);
+    return names.putIfAbsent(
+        dirPath, () => _computeDisplayName(context, dirPath));
   }
 }
 
+/// Fired when the set of albums changes.
+/// Used in conjunction with the AlbumMixin mixin, which provides methods for adding and removing albums, as well as cleaning empty albums.
+/// When an AlbumsChangedEvent is fired, listeners can use the methods provided by AlbumMixin to update their list of albums and refresh their display of albums.
 class AlbumsChangedEvent {}
 
+/// Used to signal that the summary information for one or more albums has been invalidated and needs to be updated.
+/// The summary information for an album includes the number of entries in the album, the total size of all the entries in the album, and the most recent entry in the album.
 class AlbumSummaryInvalidatedEvent {
   final Set<String?>? directories;
 

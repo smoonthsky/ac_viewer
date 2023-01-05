@@ -4,6 +4,9 @@ import 'package:aves/theme/icons.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/widgets.dart';
 
+/// Filter for the aspect ratio of media in a collection.
+/// predefined filters for landscape and portrait aspect ratios.
+/// The filter can be reversed to include or exclude media that do not match the specified criteria.
 class AspectRatioFilter extends CollectionFilter {
   static const type = 'aspect_ratio';
 

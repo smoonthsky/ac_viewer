@@ -15,7 +15,6 @@ import 'package:aves/utils/file_utils.dart';
 import 'package:aves/widgets/about/about_page.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:aves/widgets/common/extensions/media_query.dart';
-import 'package:aves/widgets/common/identity/aves_logo.dart';
 import 'package:aves/widgets/debug/app_debug_page.dart';
 import 'package:aves/widgets/filter_grids/albums_page.dart';
 import 'package:aves/widgets/filter_grids/countries_page.dart';
@@ -28,6 +27,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+// TODO AC: add present drawer
 
 class AppDrawer extends StatefulWidget {
   // collection loaded in the `CollectionPage`, if any
@@ -66,7 +67,7 @@ class _AppDrawerState extends State<AppDrawer> {
       ..._buildTypeLinks(),
       _buildAlbumLinks(context),
       ..._buildPageLinks(context),
-      if (settings.enableBin) ...[
+      if (settings.enableBin && !settings.presentationVerify) ...[
         const Divider(),
         binTile(context),
       ],
@@ -129,12 +130,12 @@ class _AppDrawerState extends State<AppDrawer> {
                 spacing: 16,
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
-                  const AvesLogo(size: 56),
+                  //const AvesLogo(size: 56),
                   Text(
                     context.l10n.appName,
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 44,
+                      fontSize: 28,
                       fontWeight: FontWeight.w300,
                       letterSpacing: 1.0,
                       fontFeatures: [FontFeature.enable('smcp')],

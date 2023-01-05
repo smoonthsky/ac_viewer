@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata
+package anonymity.ac.viewer.metadata
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -8,9 +8,9 @@ import android.net.Uri
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import deckers.thibault.aves.utils.LogUtils
-import deckers.thibault.aves.utils.MimeTypes
-import deckers.thibault.aves.utils.StorageUtils
+import anonymity.ac.viewer.utils.LogUtils
+import anonymity.ac.viewer.utils.MimeTypes
+import anonymity.ac.viewer.utils.StorageUtils
 
 object MultiTrackMedia {
     private val LOG_TAG = LogUtils.createTag<MultiTrackMedia>()

@@ -1,10 +1,10 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
 import android.content.Context
 import android.media.MediaScannerConnection
 import android.net.Uri
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safe
-import deckers.thibault.aves.model.provider.MediaStoreImageProvider
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safe
+import anonymity.ac.viewer.model.provider.MediaStoreImageProvider
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler

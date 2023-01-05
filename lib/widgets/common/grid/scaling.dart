@@ -19,6 +19,11 @@ class ScalerMetadata<T> {
   const ScalerMetadata(this.item);
 }
 
+// Provide grid scaling functionality.
+// It allows users to use two fingers on the layout interface to change the layout, such as the number of columns in grid mode.
+// It has several properties like scrollableKey, tileLayout, heightForWidth, gridBuilder, scaledItemBuilder, mosaicItemBuilder, highlightItem, and child.
+// The class also contains a nested class called _GridScaleGestureDetectorState which holds the state of the GridScaleGestureDetector and manages the scaling of the grid as the user performs a two-finger gesture on the screen.
+// 可以在布局界面用两指改变布局，比如，网格模式的列数。
 class GridScaleGestureDetector<T> extends StatefulWidget {
   final GlobalKey scrollableKey;
   final TileLayout tileLayout;

@@ -35,6 +35,7 @@ class AvesColorsProvider extends StatelessWidget {
 abstract class AvesColorsData {
   Color get neutral;
 
+//https://en.wikipedia.org/wiki/Hue
   Color fromHue(double hue);
 
   Color? fromBrandColor(Color? color);
@@ -83,6 +84,8 @@ abstract class AvesColorsData {
   Color get favourite => fromHue(0);
 
   Color get animated => fromHue(83);
+
+  Color get present => fromHue(190);
 
   Color get geotiff => fromHue(70);
 

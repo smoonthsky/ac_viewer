@@ -6,6 +6,7 @@ import 'package:latlong2/latlong.dart';
 
 import 'enums.dart';
 
+/// work for settingsLanguageSectionTitle
 extension ExtraCoordinateFormat on CoordinateFormat {
   String getName(BuildContext context) {
     switch (this) {

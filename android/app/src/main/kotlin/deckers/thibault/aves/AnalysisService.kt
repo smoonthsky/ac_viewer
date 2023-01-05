@@ -1,4 +1,4 @@
-package deckers.thibault.aves
+package anonymity.ac.viewer
 
 import android.app.Notification
 import android.app.PendingIntent
@@ -11,12 +11,12 @@ import androidx.core.app.NotificationChannelCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import app.loup.streams_channel.StreamsChannel
-import deckers.thibault.aves.MainActivity.Companion.OPEN_FROM_ANALYSIS_SERVICE
-import deckers.thibault.aves.channel.calls.*
-import deckers.thibault.aves.channel.streams.ImageByteStreamHandler
-import deckers.thibault.aves.channel.streams.MediaStoreStreamHandler
-import deckers.thibault.aves.utils.FlutterUtils
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.MainActivity.Companion.OPEN_FROM_ANALYSIS_SERVICE
+import anonymity.ac.viewer.channel.calls.*
+import anonymity.ac.viewer.channel.streams.ImageByteStreamHandler
+import anonymity.ac.viewer.channel.streams.MediaStoreStreamHandler
+import anonymity.ac.viewer.utils.FlutterUtils
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel

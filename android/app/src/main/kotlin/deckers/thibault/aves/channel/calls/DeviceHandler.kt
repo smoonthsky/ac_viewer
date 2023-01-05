@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
 import android.content.Context
 import android.content.Intent
@@ -9,8 +9,8 @@ import android.os.Build
 import android.provider.MediaStore
 import android.provider.Settings
 import androidx.core.content.pm.ShortcutManagerCompat
-import deckers.thibault.aves.channel.calls.Coresult.Companion.safe
-import deckers.thibault.aves.model.FieldMap
+import anonymity.ac.viewer.channel.calls.Coresult.Companion.safe
+import anonymity.ac.viewer.model.FieldMap
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler

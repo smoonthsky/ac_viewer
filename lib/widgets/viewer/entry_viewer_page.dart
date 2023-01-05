@@ -10,9 +10,11 @@ import 'package:aves/widgets/viewer/visual/conductor.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+///查看单个媒体（图片/视频）状态控制，查看器，EntryViewer
 class EntryViewerPage extends StatefulWidget {
   static const routeName = '/viewer';
 
+  ///所有媒体或标签分类下的合集或目录内全部内容等。
   final CollectionLens? collection;
   final AvesEntry initialEntry;
 

@@ -1,4 +1,4 @@
-package deckers.thibault.aves.decoder
+package anonymity.ac.viewer.decoder
 
 import android.content.Context
 import android.media.MediaMetadataRetriever
@@ -16,8 +16,8 @@ import com.bumptech.glide.load.model.ModelLoaderFactory
 import com.bumptech.glide.load.model.MultiModelLoaderFactory
 import com.bumptech.glide.module.LibraryGlideModule
 import com.bumptech.glide.signature.ObjectKey
-import deckers.thibault.aves.utils.BitmapUtils.getBytes
-import deckers.thibault.aves.utils.StorageUtils.openMetadataRetriever
+import anonymity.ac.viewer.utils.BitmapUtils.getBytes
+import anonymity.ac.viewer.utils.StorageUtils.openMetadataRetriever
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

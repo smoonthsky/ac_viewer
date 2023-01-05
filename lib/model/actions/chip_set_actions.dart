@@ -2,8 +2,12 @@ import 'package:aves/theme/icons.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 
+///APP filters( album)界面可执行的各种操作，
+///TODO AC： add presentation and lock
+/// these action apply to filtered entries.
 enum ChipSetAction {
   // general
+  ///configureView 设置查看排序
   configureView,
   select,
   selectAll,
@@ -24,6 +28,13 @@ enum ChipSetAction {
   // selecting (single filter)
   rename,
   setCover,
+  //present
+  presentTag,
+  presentFilters,
+  unpresentFilters,// add later .
+  togglePresentationVerify,
+  toggleLockPresentation,
+  toggleWidgetFiltersBak,
 }
 
 class ChipSetActions {
@@ -32,6 +43,8 @@ class ChipSetActions {
     ChipSetAction.select,
     ChipSetAction.selectAll,
     ChipSetAction.selectNone,
+    ChipSetAction.toggleLockPresentation,
+
   ];
 
   static const browsing = [
@@ -41,6 +54,9 @@ class ChipSetActions {
     ChipSetAction.map,
     ChipSetAction.slideshow,
     ChipSetAction.stats,
+    ChipSetAction.presentTag,
+    ChipSetAction.togglePresentationVerify,
+    ChipSetAction.toggleWidgetFiltersBak,
   ];
 
   static const selection = [
@@ -53,6 +69,8 @@ class ChipSetActions {
     ChipSetAction.map,
     ChipSetAction.slideshow,
     ChipSetAction.stats,
+    ChipSetAction.presentFilters,
+    ChipSetAction.unpresentFilters,
   ];
 }
 
@@ -97,6 +115,25 @@ extension ExtraChipSetAction on ChipSetAction {
         return context.l10n.chipActionRename;
       case ChipSetAction.setCover:
         return context.l10n.chipActionSetCover;
+
+      case ChipSetAction.presentTag:
+        return context.l10n.menuActionPresentTagSettings;
+      // case ChipSetAction.togglePresent:
+      // // different data depending on toggle state
+      //   return context.l10n.addToPresentation;
+      case ChipSetAction.togglePresentationVerify:
+      // different data depending on toggle state
+        return context.l10n.verifyPresentation;
+      case ChipSetAction.toggleLockPresentation:
+      // different data depending on toggle state
+        return context.l10n.lockPresentation;
+      case ChipSetAction.toggleWidgetFiltersBak:
+        return context.l10n.toggleWidgetFiltersBak;
+      case ChipSetAction.presentFilters:
+      // different data depending on toggle state
+        return context.l10n.addToPresentation;
+      case ChipSetAction.unpresentFilters:
+        return context.l10n.removeFromPresentation;
     }
   }
 
@@ -142,6 +179,21 @@ extension ExtraChipSetAction on ChipSetAction {
         return AIcons.name;
       case ChipSetAction.setCover:
         return AIcons.setCover;
+      case ChipSetAction.presentTag:
+        return AIcons.presentTagsSetting;
+      case ChipSetAction.presentFilters:
+        return AIcons.presentationActive;
+      case ChipSetAction.unpresentFilters:
+        return AIcons.presentationInactive;
+      case ChipSetAction.togglePresentationVerify:
+      // different data depending on toggle state
+        return AIcons.verifyPresentation;
+      case ChipSetAction.toggleLockPresentation:
+      // different data depending on toggle state
+        return AIcons.lockPresentation;
+      case ChipSetAction.toggleWidgetFiltersBak:
+        return AIcons.exchangeWidgetBakFilters;
+
     }
   }
 }

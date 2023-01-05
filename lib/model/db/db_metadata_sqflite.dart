@@ -15,6 +15,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
 
+import 'package:aves/model/present.dart';
+
 class SqfliteMetadataDb implements MetadataDb {
   late Database _db;
 
@@ -28,6 +30,12 @@ class SqfliteMetadataDb implements MetadataDb {
   static const coverTable = 'covers';
   static const trashTable = 'trash';
   static const videoPlaybackTable = 'videoPlayback';
+
+  /* AC Viewer : add for present mode , start */
+  static const presentTagTable = 'presentTags';
+  static const presentEntryTable = 'presentEntries';
+  /* AC Viewer : add for present mode , end */
+
 
   static int _lastId = 0;
 
@@ -98,6 +106,17 @@ class SqfliteMetadataDb implements MetadataDb {
             'id INTEGER PRIMARY KEY'
             ', resumeTimeMillis INTEGER'
             ')');
+        /* AC Viewer : add for present mode , start */
+        await db.execute('CREATE TABLE $presentTagTable('
+            'id INTEGER PRIMARY KEY'
+            ',tag TEXT UNIQUE'
+            ')');
+        await db.execute('CREATE TABLE $presentEntryTable('
+            'entryId INTEGER'
+            ',tagId INTEGER'
+            ',PRIMARY KEY (entryId, tagId)'
+            ')');
+        /* AC Viewer : add for present mode , end */
       },
       onUpgrade: MetadataDbUpgrader.upgradeDb,
       version: 10,
@@ -131,6 +150,7 @@ class SqfliteMetadataDb implements MetadataDb {
     final batch = _db.batch();
     const where = 'id = ?';
     const coverWhere = 'entryId = ?';
+    const presentEntryWhere = 'entryId = ?';
     ids.forEach((id) {
       final whereArgs = [id];
       if (_dataTypes.contains(EntryDataType.basic)) {
@@ -149,6 +169,11 @@ class SqfliteMetadataDb implements MetadataDb {
         batch.delete(trashTable, where: where, whereArgs: whereArgs);
         batch.delete(videoPlaybackTable, where: where, whereArgs: whereArgs);
       }
+
+      if (_dataTypes.contains(EntryDataType.present)) {
+        batch.delete(presentEntryTable, where: presentEntryWhere, whereArgs: whereArgs);
+      }
+
     });
     await batch.commit(noResult: true);
   }
@@ -184,7 +209,9 @@ class SqfliteMetadataDb implements MetadataDb {
           .toSet();
     }
 
+    //TODO: whole entryTable maybe too big.
     final rows = await _db.query(entryTable);
+    //final rows = await _db.query(entryTable, limit: 100);
     return rows.map(AvesEntry.fromMap).toSet();
   }
 
@@ -427,8 +454,119 @@ class SqfliteMetadataDb implements MetadataDb {
     await batch.commit(noResult: true);
   }
 
-  // covers
 
+  // presentTags
+  @override
+  Future<void> clearPresentTags() async {
+    final count = await _db.delete(presentTagTable, where: '1');
+    debugPrint('$runtimeType clearPresentTags deleted $count rows');
+  }
+
+  @override
+  Future<Set<PresentTagRow>> loadAllPresentTags() async {
+    final rows = await _db.query(presentTagTable);
+    return rows.map(PresentTagRow.fromMap).toSet();
+  }
+
+  @override
+  Future<void> addPresentTags(Iterable<PresentTagRow> rows) async {
+    if (rows.isEmpty) return;
+    final batch = _db.batch();
+    rows.forEach((row) => _batchInsertPresentTag(batch, row));
+    await batch.commit(noResult: true);
+  }
+
+  @override
+  Future<void> updatePresentTags(Iterable<PresentTagRow> rows) async {
+    if (rows.isEmpty) return;
+    final ids = rows.map((row) => row.presentTagId);
+    if (ids.isEmpty) return;
+    final batch = _db.batch();
+    ids.forEach((id) => batch.delete(presentTagTable, where: 'id = ?', whereArgs: [id]));
+    rows.forEach((row) => _batchInsertPresentTag(batch, row));
+    await batch.commit(noResult: true);
+  }
+
+  void _batchInsertPresentTag(Batch batch, PresentTagRow row) {
+    batch.insert(
+      presentTagTable,
+      row.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  @override
+  Future<void> removePresentTags(Iterable<PresentTagRow> rows) async {
+    if (rows.isEmpty) return;
+    final ids = rows.map((row) => row.presentTagId);
+    if (ids.isEmpty) return;
+
+    // using array in `whereArgs` and using it with `where id IN ?` is a pain, so we prefer `batch` instead
+    final batch = _db.batch();
+    ids.forEach((id) => batch.delete(presentTagTable, where: 'id = ?', whereArgs: [id]));
+    await batch.commit(noResult: true);
+  }
+
+  // presentEntries
+
+  @override
+  Future<void> clearPresentEntries() async {
+    final count = await _db.delete(presentEntryTable, where: '1');
+    debugPrint('$runtimeType clearPresentEntries deleted $count rows');
+  }
+
+  @override
+  Future<Set<PresentEntryRow>> loadAllPresentEntries() async {
+    final rows = await _db.query(presentEntryTable);
+    return rows.map(PresentEntryRow.fromMap).toSet();
+  }
+
+  @override
+  Future<void> addPresentEntries(Iterable<PresentEntryRow> rows) async {
+    if (rows.isEmpty) return;
+    final batch = _db.batch();
+    rows.forEach((row) => _batchInsertPresent(batch, row));
+    await batch.commit(noResult: true);
+  }
+
+  void _batchInsertPresent(Batch batch, PresentEntryRow row) {
+    batch.insert(
+      presentEntryTable,
+      row.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+  @override
+  Future<void> removePresentEntriesByTagIds(Iterable<int> ids) async {
+    if (ids.isEmpty) return;
+    final batch = _db.batch();
+    ids.forEach((tagId) {
+      batch.delete(presentEntryTable, where: 'tagId = ?', whereArgs: [tagId]);
+    });
+    await batch.commit(noResult: true);
+  }
+
+  @override
+  Future<void> removePresentEntriesByEntryIds(Iterable<int> ids) async {
+    if (ids.isEmpty) return;
+    final batch = _db.batch();
+    ids.forEach((id) {
+      batch.delete(presentEntryTable, where: 'entryId = ?', whereArgs: [id]);
+    });
+    await batch.commit(noResult: true);
+  }
+
+  @override
+  Future<void> removePresentEntries(Iterable<PresentEntryRow> rows) async {
+    if (rows.isEmpty) return;
+    final batch = _db.batch();
+    rows.forEach((row) {
+      batch.delete(presentEntryTable, where: 'entryId = ? and tagId = ?', whereArgs: [row.entryId,row.tagId]);
+    });
+    await batch.commit(noResult: true);
+  }
+
+  // covers
   @override
   Future<void> clearCovers() async {
     final count = await _db.delete(coverTable, where: '1');
@@ -551,4 +689,6 @@ class SqfliteMetadataDb implements MetadataDb {
     );
     return rows.map(mapRow).toSet();
   }
+
+
 }

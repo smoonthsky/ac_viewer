@@ -26,6 +26,7 @@ enum ScaleState {
   zoomedOut,
 }
 
+///查看图片/视频时，对图片/视频的缩放循环控制。
 ScaleState defaultScaleStateCycle(ScaleState actual) {
   switch (actual) {
     case ScaleState.initial:

@@ -2,6 +2,8 @@ import 'package:aves/theme/icons.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/widgets.dart';
 
+/// A chip is a group of entries.
+/// Used in special classification pages: album, country, tag, see in the navigation bar menu."
 enum ChipAction {
   goToAlbumPage,
   goToCountryPage,
@@ -9,7 +11,7 @@ enum ChipAction {
   reverse,
   hide,
 }
-
+/// adds methods to the ChipAction enum to get the text and icon for each action, and the getText method even takes a BuildContext as an argument to allow for localization.
 extension ExtraChipAction on ChipAction {
   String getText(BuildContext context) {
     switch (this) {

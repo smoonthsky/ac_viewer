@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.calls
+package anonymity.ac.viewer.channel.calls
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -9,11 +9,11 @@ import android.content.ServiceConnection
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
-import deckers.thibault.aves.AnalysisService
-import deckers.thibault.aves.AnalysisServiceBinder
-import deckers.thibault.aves.AnalysisServiceListener
-import deckers.thibault.aves.utils.ContextUtils.isMyServiceRunning
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.AnalysisService
+import anonymity.ac.viewer.AnalysisServiceBinder
+import anonymity.ac.viewer.AnalysisServiceListener
+import anonymity.ac.viewer.utils.ContextUtils.isMyServiceRunning
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import kotlinx.coroutines.CoroutineScope

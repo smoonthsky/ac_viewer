@@ -9,6 +9,15 @@ import 'package:aves/widgets/common/grid/header.dart';
 import 'package:aves/widgets/common/identity/aves_icons.dart';
 import 'package:flutter/material.dart';
 
+/// used to create a section header for an album within an app.
+///
+/// The class takes in three arguments in its constructor: directory, albumName, and selectable. directory is the file path of the album, albumName is the name of the album, and selectable is a boolean that indicates if the section header is selectable.
+///
+/// The build method of the class creates an icon representing the album using the IconUtils.getAlbumIcon method.
+///
+/// It then returns a SectionHeader widget with the album icon as the leading element, the album name as the title, and if the directory is on removable storage it will add a removable storage icon to the trailing element.
+///
+/// The class also contains a getPreferredHeight method which is used to calculate the preferred height of the section header based on the provided album name and whether or not the album is on removable storage.
 class AlbumSectionHeader extends StatelessWidget {
   final String? directory, albumName;
   final bool selectable;

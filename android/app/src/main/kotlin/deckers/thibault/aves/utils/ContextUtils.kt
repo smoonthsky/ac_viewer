@@ -1,4 +1,4 @@
-package deckers.thibault.aves.utils
+package anonymity.ac.viewer.utils
 
 import android.app.ActivityManager
 import android.app.Service
@@ -9,7 +9,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
-import deckers.thibault.aves.utils.UriUtils.tryParseId
+import anonymity.ac.viewer.utils.UriUtils.tryParseId
 
 object ContextUtils {
     private val LOG_TAG = LogUtils.createTag<ContextUtils>()

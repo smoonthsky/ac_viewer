@@ -10,6 +10,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:provider/provider.dart';
 
+/// Used for displaying sections in a list-like layout and allows for user interactions such as tap and long press actions.
+///
+/// It takes various arguments such as a "sectionKey" which is used to uniquely identify the section, "leading" and "trailing" widgets to be displayed on the left and right sides of the title, the "title" text to be displayed in the center, and a "selectable" boolean value which determines whether the section can be selected or not.
+///
+/// It creates a container with some padding and constraints and adds a gesture detector to handle tap and long press events.
+///
+/// It contains _onTap method which is used to handle tap events, _getSectionEntries method which is used to get the entries of the section and _toggleSectionSelection method which is used to toggle the selection of the section.
 class SectionHeader<T> extends StatelessWidget {
   final SectionKey sectionKey;
   final Widget? leading, trailing;

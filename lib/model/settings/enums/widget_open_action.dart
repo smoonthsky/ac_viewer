@@ -14,3 +14,17 @@ extension ExtraWidgetOpenPage on WidgetOpenPage {
     }
   }
 }
+extension ExtraWidgetWallpaperLocation on WidgetWallpaperLocation {
+  String getName(BuildContext context) {
+    switch (this) {
+      case WidgetWallpaperLocation.none:
+        return context.l10n.widgetWallpaperLocationNone;
+      case WidgetWallpaperLocation.homeScreen:
+        return context.l10n.widgetWallpaperLocationHomeScreen;
+      case WidgetWallpaperLocation.lockScreen:
+        return context.l10n.widgetWallpaperLocationLockScreen;
+      case WidgetWallpaperLocation.bothScreen:
+        return context.l10n.widgetWallpaperLocationBothScreen;
+    }
+  }
+}

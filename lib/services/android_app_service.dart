@@ -7,6 +7,17 @@ import 'package:collection/collection.dart';
 import 'package:flutter/services.dart';
 import 'package:latlong2/latlong.dart';
 
+/// getting a list of packages installed on the device,
+///
+/// getting an app icon, copying a URI to the clipboard,
+///
+/// opening and editing a file,
+///
+/// opening a map at a given latitude and longitude.
+///
+/// shareEntries and shareSingle are used to share one or multiple files with other apps.
+///
+/// pinToHomeScreen is used to create a shortcut for the app on the home screen with the provided label, cover entry, filters and uri.
 abstract class AndroidAppService {
   Future<Set<Package>> getPackages();
 
@@ -28,7 +39,17 @@ abstract class AndroidAppService {
 
   Future<void> pinToHomeScreen(String label, AvesEntry? coverEntry, {Set<CollectionFilter>? filters, String? uri});
 }
-
+/// getting a list of packages installed on the device,
+///
+/// getting an app icon, copying a URI to the clipboard,
+///
+/// opening and editing a file,
+///
+/// opening a map at a given latitude and longitude.
+///
+/// shareEntries and shareSingle are used to share one or multiple files with other apps.
+///
+/// pinToHomeScreen is used to create a shortcut for the app on the home screen with the provided label, cover entry, filters and uri.
 class PlatformAndroidAppService implements AndroidAppService {
   static const _platform = MethodChannel('deckers.thibault/aves/app');
 
@@ -87,6 +108,7 @@ class PlatformAndroidAppService implements AndroidAppService {
     return false;
   }
 
+  ///调用手机系统本身的图片编辑功能。
   @override
   Future<bool> edit(String uri, String mimeType) async {
     try {

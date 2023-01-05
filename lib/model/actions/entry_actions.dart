@@ -3,6 +3,9 @@ import 'package:aves/theme/icons.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/widgets.dart';
 
+/// represents various actions that can be taken on a particular entry, such as an image or video file.
+/// EntryActions, such as topLevel, export, and trashed, represent different groups of actions.
+/// The EntryAction enum and these lists are used to determine which actions are available for a particular entry in a given context.
 enum EntryAction {
   info,
   addShortcut,
@@ -16,6 +19,8 @@ enum EntryAction {
   move,
   share,
   toggleFavourite,
+  togglePresent,
+  toggleWidgetFiltersBak,
   // raster
   rotateCCW,
   rotateCW,
@@ -56,6 +61,7 @@ enum EntryAction {
   debug,
 }
 
+/// TODO: add guset and lock.
 class EntryActions {
   static const topLevel = [
     EntryAction.info,
@@ -66,6 +72,8 @@ class EntryActions {
     EntryAction.copy,
     EntryAction.move,
     EntryAction.toggleFavourite,
+    EntryAction.togglePresent,
+    EntryAction.toggleWidgetFiltersBak,
     EntryAction.rotateScreen,
     EntryAction.viewSource,
   ];
@@ -165,7 +173,14 @@ extension ExtraEntryAction on EntryAction {
       case EntryAction.toggleFavourite:
         // different data depending on toggle state
         return context.l10n.entryActionAddFavourite;
-      // raster
+      case EntryAction.togglePresent:
+      // different data depending on toggle state
+        return context.l10n.addToPresentation;
+      case EntryAction.toggleWidgetFiltersBak:
+      // different data depending on toggle state
+        return context.l10n.toggleWidgetFiltersBak;
+
+    // raster
       case EntryAction.rotateCCW:
         return context.l10n.entryActionRotateCCW;
       case EntryAction.rotateCW:
@@ -277,6 +292,12 @@ extension ExtraEntryAction on EntryAction {
       case EntryAction.toggleFavourite:
         // different data depending on toggle state
         return AIcons.favourite;
+      case EntryAction.togglePresent:
+      // different data depending on toggle state
+        return AIcons.presentationActive;
+      case EntryAction.toggleWidgetFiltersBak:
+      // different data depending on toggle state
+        return AIcons.exchangeWidgetBakFilters;
       // raster
       case EntryAction.rotateCCW:
         return AIcons.rotateLeft;

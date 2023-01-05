@@ -1,4 +1,4 @@
-package deckers.thibault.aves
+package anonymity.ac.viewer
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -14,12 +14,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.RemoteViews
 import app.loup.streams_channel.StreamsChannel
-import deckers.thibault.aves.channel.AvesByteSendingMethodCodec
-import deckers.thibault.aves.channel.calls.*
-import deckers.thibault.aves.channel.streams.ImageByteStreamHandler
-import deckers.thibault.aves.channel.streams.MediaStoreStreamHandler
-import deckers.thibault.aves.utils.FlutterUtils
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.channel.AvesByteSendingMethodCodec
+import anonymity.ac.viewer.channel.calls.*
+import anonymity.ac.viewer.channel.streams.ImageByteStreamHandler
+import anonymity.ac.viewer.channel.streams.MediaStoreStreamHandler
+import anonymity.ac.viewer.utils.FlutterUtils
+import anonymity.ac.viewer.utils.LogUtils
 import io.flutter.FlutterInjector
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.embedding.engine.dart.DartExecutor
@@ -31,11 +31,92 @@ import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 import kotlin.math.roundToInt
 
+import android.app.AlarmManager
+import android.os.SystemClock
+import android.content.ComponentName
+
 class HomeWidgetProvider : AppWidgetProvider() {
     private val defaultScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
 
+    override fun onReceive(context: Context, intent: Intent) {
+        super.onReceive(context, intent)
+
+        // Check if the intent action is the correct one
+        if (Intent.ACTION_BOOT_COMPLETED == intent?.action) {
+            // Perform the widget update here
+            AppWidgetManager.getInstance(context).getAppWidgetIds(ComponentName(context!!, HomeWidgetProvider::class.java)).also { appWidgetIds ->
+                for (widgetId in appWidgetIds) {
+                    defaultScope.launch {
+                        onUpdate(context, AppWidgetManager.getInstance(context), intArrayOf(widgetId))
+                    }
+                }
+            }
+        }
+    }
+
+
+    private suspend fun scheduleNextUpdate(context: Context, widgetId: Int) {
+        Log.d(LOG_TAG, "Widget scheduleNextUpdate start  widgetId==$widgetId")
+        initFlutterEngine(context)
+        val messenger = flutterEngine!!.dartExecutor
+        val channel = MethodChannel(messenger, WIDGET_DRAW_CHANNEL)
+        //var internalFromWidget = 0
+        var internal = 0
+        try {
+            val internalFromWidget = suspendCoroutine { cont ->
+                defaultScope.launch {
+                    FlutterUtils.runOnUiThread {
+                        channel.invokeMethod("getWidgetUpdateInterval", widgetId, object : MethodChannel.Result {
+                            override fun success(result: Any?) {
+                                cont.resume(result)
+                            }
+
+                            override fun error(errorCode: String, errorMessage: String?, errorDetails: Any?) {
+                                cont.resumeWithException(Exception("$errorCode: $errorMessage\n$errorDetails"))
+                            }
+
+                            override fun notImplemented() {
+                                cont.resumeWithException(Exception("not implemented"))
+                            }
+                        })
+                    }
+                }
+            }
+            if (internalFromWidget is Int) {
+                internal = internalFromWidget * 1000
+                Log.e(LOG_TAG, " scheduleNextUpdate get widget update interval for widgetId=$widgetId , internalFromWidget")
+            }
+        } catch (e: Exception) {
+            Log.e(LOG_TAG, "scheduleNextUpdate failed to get widget update interval for widgetId=$widgetId , $e")
+        }
+        // Log.d(LOG_TAG, "Widget scheduleNextUpdate get result $internal widgetId==$widgetId")
+        if (internal <= 0) internal = 10 * 1000
+        val list = listOf(widgetId)
+        val appWidgetIds = list.toIntArray()
+        val alarmManager: AlarmManager by lazy {
+            context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        }
+        val intent = Intent(context, HomeWidgetProvider::class.java).apply {
+            action = AppWidgetManager.ACTION_APPWIDGET_UPDATE
+            putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds)
+        }
+        val pendingIntent = PendingIntent.getBroadcast(context, widgetId, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+//Even though a new Intent object is created every time scheduleNextUpdate is called,
+//the PendingIntent that is created from it will overwrite the previous one because it has the same widgetId as the request code.
+//This is because the PendingIntent uses the widgetId as the request code to identify it and associate it with a widget.
+//When a new PendingIntent is created with the same widgetId,
+// the system considers it to be a new request to update the same widget and replaces the previous PendingIntent with the new one.
+//This behavior is by design and is used to ensure that the correct widget is updated
+// and that the previous scheduled updates are replaced with the new ones.
+        alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + internal, internal.toLong(), pendingIntent)
+        //alarmManager.setExact(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + internal, pendingIntent)
+        Log.d(LOG_TAG, "Widget scheduleNextUpdate end  widgetId==$widgetId")
+
+    }
+
     override fun onUpdate(context: Context, appWidgetManager: AppWidgetManager, appWidgetIds: IntArray) {
-        Log.d(LOG_TAG, "Widget onUpdate widgetIds=${appWidgetIds.contentToString()}")
+        Log.d(LOG_TAG, "Widget onUpdate test widgetIds=${appWidgetIds.contentToString()}")
+
         for (widgetId in appWidgetIds) {
             val widgetInfo = appWidgetManager.getAppWidgetOptions(widgetId)
 
@@ -45,12 +126,14 @@ class HomeWidgetProvider : AppWidgetProvider() {
 
                 val imageBytes = getBytes(context, widgetId, widgetInfo, drawEntryImage = true, reuseEntry = false)
                 updateWidgetImage(context, appWidgetManager, widgetId, widgetInfo, imageBytes)
+
+                scheduleNextUpdate(context,widgetId)
             }
         }
     }
 
     override fun onAppWidgetOptionsChanged(context: Context, appWidgetManager: AppWidgetManager?, widgetId: Int, widgetInfo: Bundle?) {
-        Log.d(LOG_TAG, "Widget onAppWidgetOptionsChanged widgetId=$widgetId")
+        //Log.d(LOG_TAG, "Widget onAppWidgetOptionsChanged widgetId=$widgetId")
         appWidgetManager ?: return
         widgetInfo ?: return
 
@@ -61,6 +144,8 @@ class HomeWidgetProvider : AppWidgetProvider() {
             delay(500)
             val imageBytes = getBytes(context, widgetId, widgetInfo, drawEntryImage = true, reuseEntry = true)
             updateWidgetImage(context, appWidgetManager, widgetId, widgetInfo, imageBytes)
+            // do put this method after onAppWidgetOptionsChanged, for that ,it can get the setting internal not default internal
+            scheduleNextUpdate(context,widgetId)
         }
     }
 
@@ -131,7 +216,7 @@ class HomeWidgetProvider : AppWidgetProvider() {
         bytes: ByteArray?,
     ) {
         bytes ?: return
-
+        Log.d(LOG_TAG, "Widget updateWidgetImage  widgetId=$widgetId")
         val (widthPx, heightPx) = getWidgetSizePx(context, widgetInfo)
         if (widthPx == 0 || heightPx == 0) return
 

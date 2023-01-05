@@ -2,6 +2,7 @@ import 'package:aves/theme/icons.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 
+/// Enumeration of different actions that can be performed on entries .
 enum EntrySetAction {
   // general
   configureView,
@@ -35,6 +36,12 @@ enum EntrySetAction {
   editRating,
   editTags,
   removeMetadata,
+  //present
+  presentTag,
+  togglePresent,
+  togglePresentationVerify,
+  toggleLockPresentation,
+  toggleWidgetFiltersBak,
 }
 
 class EntrySetActions {
@@ -43,6 +50,7 @@ class EntrySetActions {
     EntrySetAction.select,
     EntrySetAction.selectAll,
     EntrySetAction.selectNone,
+    EntrySetAction.toggleLockPresentation,
   ];
 
   static const pageBrowsing = [
@@ -54,6 +62,9 @@ class EntrySetActions {
     EntrySetAction.stats,
     EntrySetAction.rescan,
     EntrySetAction.emptyBin,
+    EntrySetAction.presentTag,
+    EntrySetAction.togglePresentationVerify,
+    EntrySetAction.toggleWidgetFiltersBak,
   ];
 
   // exclude bin related actions
@@ -65,6 +76,9 @@ class EntrySetActions {
     EntrySetAction.slideshow,
     EntrySetAction.stats,
     EntrySetAction.rescan,
+    EntrySetAction.presentTag,
+    EntrySetAction.togglePresentationVerify,
+    EntrySetAction.toggleWidgetFiltersBak,
   ];
 
   static const pageSelection = [
@@ -79,6 +93,7 @@ class EntrySetActions {
     EntrySetAction.slideshow,
     EntrySetAction.stats,
     EntrySetAction.rescan,
+    EntrySetAction.togglePresent,
     // editing actions are in their subsection
   ];
 
@@ -94,6 +109,7 @@ class EntrySetActions {
     EntrySetAction.slideshow,
     EntrySetAction.stats,
     EntrySetAction.rescan,
+    EntrySetAction.togglePresent,
     // editing actions are in their subsection
   ];
 
@@ -184,6 +200,19 @@ extension ExtraEntrySetAction on EntrySetAction {
         return context.l10n.entryInfoActionEditTags;
       case EntrySetAction.removeMetadata:
         return context.l10n.entryInfoActionRemoveMetadata;
+      case EntrySetAction.presentTag:
+        return context.l10n.menuActionPresentTagSettings;
+      case EntrySetAction.togglePresent:
+      // different data depending on toggle state
+        return context.l10n.addToPresentation;
+      case EntrySetAction.togglePresentationVerify:
+      // different data depending on toggle state
+        return context.l10n.verifyPresentation;
+      case EntrySetAction.toggleLockPresentation:
+      // different data depending on toggle state
+        return context.l10n.lockPresentation;
+      case EntrySetAction.toggleWidgetFiltersBak:
+        return context.l10n.toggleWidgetFiltersBak;
     }
   }
 
@@ -253,6 +282,19 @@ extension ExtraEntrySetAction on EntrySetAction {
         return AIcons.editTags;
       case EntrySetAction.removeMetadata:
         return AIcons.clear;
+      case EntrySetAction.presentTag:
+        return AIcons.presentTagsSetting;
+      case EntrySetAction.togglePresent:
+      // different data depending on toggle state
+        return AIcons.presentationActive;
+      case EntrySetAction.togglePresentationVerify:
+      // different data depending on toggle state
+        return AIcons.verifyPresentation;
+      case EntrySetAction.toggleLockPresentation:
+      // different data depending on toggle state
+        return AIcons.lockPresentation;
+      case EntrySetAction.toggleWidgetFiltersBak:
+        return AIcons.exchangeWidgetBakFilters;
     }
   }
 }

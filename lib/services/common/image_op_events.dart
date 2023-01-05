@@ -1,6 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
+///the base class with the fields success, skipped, and uri.
 @immutable
 class ImageOpEvent extends Equatable {
   final bool success, skipped;
@@ -25,6 +26,7 @@ class ImageOpEvent extends Equatable {
   }
 }
 
+/// base with the fields success, skipped, and uri, additional fields newFields and deleted.
 @immutable
 class MoveOpEvent extends ImageOpEvent {
   final Map newFields;
@@ -55,6 +57,7 @@ class MoveOpEvent extends ImageOpEvent {
   }
 }
 
+/// base with the fields success, skipped, and uri, additional fields pageId
 @immutable
 class ExportOpEvent extends MoveOpEvent {
   final int? pageId;

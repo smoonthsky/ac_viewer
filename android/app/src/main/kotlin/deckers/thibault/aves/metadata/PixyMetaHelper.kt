@@ -1,15 +1,15 @@
-package deckers.thibault.aves.metadata
+package anonymity.ac.viewer.metadata
 
-import deckers.thibault.aves.metadata.Metadata.TYPE_COMMENT
-import deckers.thibault.aves.metadata.Metadata.TYPE_EXIF
-import deckers.thibault.aves.metadata.Metadata.TYPE_ICC_PROFILE
-import deckers.thibault.aves.metadata.Metadata.TYPE_IPTC
-import deckers.thibault.aves.metadata.Metadata.TYPE_JFIF
-import deckers.thibault.aves.metadata.Metadata.TYPE_JPEG_ADOBE
-import deckers.thibault.aves.metadata.Metadata.TYPE_JPEG_DUCKY
-import deckers.thibault.aves.metadata.Metadata.TYPE_PHOTOSHOP_IRB
-import deckers.thibault.aves.metadata.Metadata.TYPE_XMP
-import deckers.thibault.aves.model.FieldMap
+import anonymity.ac.viewer.metadata.Metadata.TYPE_COMMENT
+import anonymity.ac.viewer.metadata.Metadata.TYPE_EXIF
+import anonymity.ac.viewer.metadata.Metadata.TYPE_ICC_PROFILE
+import anonymity.ac.viewer.metadata.Metadata.TYPE_IPTC
+import anonymity.ac.viewer.metadata.Metadata.TYPE_JFIF
+import anonymity.ac.viewer.metadata.Metadata.TYPE_JPEG_ADOBE
+import anonymity.ac.viewer.metadata.Metadata.TYPE_JPEG_DUCKY
+import anonymity.ac.viewer.metadata.Metadata.TYPE_PHOTOSHOP_IRB
+import anonymity.ac.viewer.metadata.Metadata.TYPE_XMP
+import anonymity.ac.viewer.model.FieldMap
 import pixy.meta.meta.Metadata
 import pixy.meta.meta.MetadataEntry
 import pixy.meta.meta.MetadataType

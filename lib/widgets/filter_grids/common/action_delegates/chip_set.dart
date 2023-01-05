@@ -33,6 +33,13 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
+import '../../../../model/present.dart';
+import '../../../../model/settings/home_screen_widget/filter_exchanger.dart';
+
+
+
+
+/// 通用子功能是否可见可执行，等，如只选中一个目标时，可以重命名，多个时不可。
 abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMixin, PermissionAwareMixin, SizeAwareMixin {
   Iterable<FilterGridItem<T>> get allItems;
 
@@ -74,6 +81,7 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
     switch (action) {
       // general
       case ChipSetAction.configureView:
+      case ChipSetAction.toggleLockPresentation:
         return true;
       case ChipSetAction.select:
         return appMode.canSelectFilter && !isSelecting;
@@ -84,8 +92,13 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
       // browsing
       case ChipSetAction.search:
         return !device.isTelevision && appMode.canNavigate && !isSelecting;
+
       case ChipSetAction.toggleTitleSearch:
         return !isSelecting;
+      case ChipSetAction.presentTag:
+      case ChipSetAction.toggleWidgetFiltersBak:
+      case ChipSetAction.togglePresentationVerify:
+        return !(isSelecting || settings.presentationLock);
       case ChipSetAction.createAlbum:
         return false;
       // browsing or selecting
@@ -107,6 +120,11 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
         return false;
       case ChipSetAction.setCover:
         return isMain;
+      //present filters
+      case ChipSetAction.presentFilters:
+        return (!hasSelection || !settings.presentFilters.containsAll(selectedFilters))&& !settings.presentationLock;
+      case ChipSetAction.unpresentFilters:
+        return (hasSelection && settings.presentFilters.containsAll(selectedFilters))&& !settings.presentationLock;
     }
   }
 
@@ -121,6 +139,10 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
     final hasSelection = selectedItemCount > 0;
 
     switch (action) {
+      case ChipSetAction.presentTag:
+      case ChipSetAction.toggleLockPresentation:
+      case ChipSetAction.togglePresentationVerify:
+      case ChipSetAction.toggleWidgetFiltersBak:// be invisible,so can return true.
       // general
       case ChipSetAction.configureView:
       case ChipSetAction.select:
@@ -141,6 +163,8 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
       case ChipSetAction.hide:
       case ChipSetAction.pin:
       case ChipSetAction.unpin:
+      case ChipSetAction.presentFilters:
+      case ChipSetAction.unpresentFilters:
         return hasSelection;
       // selecting (single filter)
       case ChipSetAction.rename:
@@ -202,6 +226,32 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
         break;
       case ChipSetAction.setCover:
         _setCover(context, filters.first);
+        break;
+    //present
+      case ChipSetAction.presentTag:
+        presentFunc.goPresentTag(context);
+        _browse(context);
+        break;
+      case ChipSetAction.togglePresentationVerify:
+        presentFunc.togglePresentationVerify(context);
+        _browse(context);
+        break;
+      case ChipSetAction.presentFilters:
+        settings.presentFilters = settings.presentFilters..addAll(filters);
+        settings.presentVisibleFilters=settings.presentVisibleFilters..addAll(filters);
+        _browse(context);
+        break;
+      case ChipSetAction.unpresentFilters:
+        settings.presentFilters = settings.presentFilters..removeAll(filters);
+        settings.presentVisibleFilters=settings.presentVisibleFilters..removeAll(filters);
+        _browse(context);
+        break;
+      case ChipSetAction.toggleLockPresentation:
+        presentFunc.togglePresentLock(context);
+        _browse(context);
+        break;
+      case ChipSetAction.toggleWidgetFiltersBak:
+        widgetFiltersExchanger.toggleWidgetFiltersBakExchange(context);
         break;
     }
   }
@@ -289,7 +339,6 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
       ),
     );
   }
-
   void _goToSearch(BuildContext context) {
     Navigator.push(
       context,
@@ -301,7 +350,6 @@ abstract class ChipSetActionDelegate<T extends CollectionFilter> with FeedbackMi
       ),
     );
   }
-
   Future<void> _hide(BuildContext context, Set<T> filters) async {
     final confirmed = await showDialog<bool>(
       context: context,

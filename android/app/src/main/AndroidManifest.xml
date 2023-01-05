@@ -8,7 +8,7 @@ This change eventually prevents building the app with Flutter v3.3.3.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="deckers.thibault.aves"
+    package="anonymity.ac.viewer"
     android:installLocation="auto">
 
     <uses-feature
@@ -36,6 +36,11 @@ This change eventually prevents building the app with Flutter v3.3.3.
     <uses-permission
         android:name="android.permission.MANAGE_MEDIA"
         tools:ignore="ProtectedPermissions" />
+
+
+    <!-- for  Alarm Manager Service 20230128-->
+    <uses-permission android:name="com.android.alarm.permission.SET_ALARM"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
@@ -197,6 +202,7 @@ This change eventually prevents building the app with Flutter v3.3.3.
             android:exported="false"
             android:label="@string/app_widget_label">
             <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
 
@@ -247,7 +253,7 @@ This change eventually prevents building the app with Flutter v3.3.3.
             android:name="com.google.android.geo.API_KEY"
             android:value="${googleApiKey}" />
         <meta-data
-            android:name="deckers.thibault.aves.huawei.API_KEY"
+            android:name="anonymity.ac.viewer.huawei.API_KEY"
             android:value="${huaweiApiKey}" />
         <meta-data
             android:name="firebase_crashlytics_collection_enabled"

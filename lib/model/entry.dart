@@ -12,6 +12,7 @@ import 'package:aves/model/metadata/address.dart';
 import 'package:aves/model/metadata/catalog.dart';
 import 'package:aves/model/metadata/trash.dart';
 import 'package:aves/model/multipage.dart';
+import 'package:aves/model/present.dart';
 import 'package:aves/model/source/trash.dart';
 import 'package:aves/model/video/metadata.dart';
 import 'package:aves/ref/mime_types.dart';
@@ -27,7 +28,7 @@ import 'package:country_code/country_code.dart';
 import 'package:flutter/foundation.dart';
 import 'package:latlong2/latlong.dart';
 
-enum EntryDataType { basic, aspectRatio, catalog, address, references }
+enum EntryDataType { basic, aspectRatio, catalog, address, references, present }
 
 class AvesEntry {
   // `sizeBytes`, `dateModifiedSecs` can be missing in viewer mode
@@ -231,6 +232,8 @@ class AvesEntry {
   String get mimeTypeAnySubtype => mimeType.replaceAll(RegExp('/.*'), '/*');
 
   bool get isFavourite => favourites.isFavourite(this);
+
+  bool get isPresent => presentEntries.isPresent(this);
 
   bool get isSvg => mimeType == MimeTypes.svg;
 
@@ -735,6 +738,28 @@ class AvesEntry {
   Future<void> removeFromFavourites() async {
     if (isFavourite) {
       await favourites.removeEntries({this});
+    }
+  }
+
+  // present
+
+  Future<void> togglePresent() async {
+    if (isPresent) {
+      await removeFromPresentation();
+    } else {
+      await addToPresentation();
+    }
+  }
+
+  Future<void> addToPresentation() async {
+    if (!isPresent) {
+      await presentEntries.add({this},);
+    }
+  }
+
+  Future<void> removeFromPresentation() async {
+    if (isPresent) {
+      await presentEntries.removeIds({id});
     }
   }
 

@@ -1,3 +1,3 @@
-package deckers.thibault.aves.model
+package anonymity.ac.viewer.model
 
 typealias FieldMap = MutableMap<String, Any?>

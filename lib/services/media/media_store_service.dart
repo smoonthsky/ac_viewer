@@ -5,6 +5,9 @@ import 'package:aves/services/common/services.dart';
 import 'package:flutter/services.dart';
 import 'package:streams_channel/streams_channel.dart';
 
+/// An abstract class that defines several methods for interacting with the device's media store.
+///
+/// It provides functionalities such as checking for obsolete media, getting a stream of entries from the media store, and scanning a file and returning its media URI.
 abstract class MediaStoreService {
   Future<List<int>> checkObsoleteContentIds(List<int?> knownContentIds);
 
@@ -17,6 +20,13 @@ abstract class MediaStoreService {
   Future<Uri?> scanFile(String path, String mimeType);
 }
 
+/// An implementation of MediaStoreService for the Flutter platform.
+///
+/// It uses the MethodChannel and StreamsChannel classes from the flutter:services package to communicate with the native platform.
+///
+/// The checkObsoleteContentIds, checkObsoletePaths, getEntries, and scanFile methods use the invokeMethod method of the MethodChannel class to call native platform code and
+///
+/// the receiveBroadcastStream method of the StreamsChannel class to receive streams of data from the native platform.
 class PlatformMediaStoreService implements MediaStoreService {
   static const _platform = MethodChannel('deckers.thibault/aves/media_store');
   static final _stream = StreamsChannel('deckers.thibault/aves/media_store_stream');

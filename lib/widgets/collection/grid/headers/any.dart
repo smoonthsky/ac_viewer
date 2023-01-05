@@ -11,6 +11,15 @@ import 'package:aves/widgets/collection/grid/headers/rating.dart';
 import 'package:aves/widgets/common/grid/header.dart';
 import 'package:flutter/material.dart';
 
+/// This class is a widget called CollectionSectionHeader that's used in an album view to show albums (each album a section) and take action to user tap and long press.
+///
+/// The widget takes in a collection object, a section key, a height, and a boolean value indicating whether it is selectable.
+///
+/// The widget's build method returns a SizedBox with a child that is the header built by the _buildHeader method.
+///
+/// The _buildHeader method returns a different type of header widget depending on the sort factor and section factor of the collection.
+///
+/// The getPreferredHeight static method calculates the height of the header based on the text scale factor of the context, the leading size, padding, and margin of the section header.
 class CollectionSectionHeader extends StatelessWidget {
   final CollectionLens collection;
   final SectionKey sectionKey;

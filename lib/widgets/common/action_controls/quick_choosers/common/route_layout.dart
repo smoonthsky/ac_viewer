@@ -1,6 +1,18 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+//QuickChooserRouteLayout is a single child layout delegate that positions a child widget (the QuickChooser) based on the position of the trigger and the position of the menu (over or under the trigger). It has a number of properties:
+//
+// triggerRect: a RelativeRect that defines the position of the trigger that opens the menu
+// menuPosition: a PopupMenuPosition that defines whether the menu should be positioned over or under the trigger.
+// padding: EdgeInsets that defines the amount of padding to be added around the child widget.
+// avoidBounds: A set of Rectangles that defines areas that the QuickChooser should avoid when positioning itself.
+
+// The layout delegate provides a getConstraintsForChild method that returns the size constraints for the child based on the provided constraints and the padding.
+// It also provides a getPositionForChild method that returns the position for the child.
+// This method takes into account the position of the trigger, whether the menu should be positioned over or under the trigger, the size of the overlay, the size of the menu, the padding, and the avoidBounds set of rectangles.
+// It also checks that the position of the child is inside the screen and avoid going outside an area defined as the rectangle 8.0 pixels from the edge of the screen in every direction.
+
 // adapted from Flutter `_PopupMenuRouteLayout` in `/material/popup_menu.dart`
 class QuickChooserRouteLayout extends SingleChildLayoutDelegate {
   final RelativeRect triggerRect;

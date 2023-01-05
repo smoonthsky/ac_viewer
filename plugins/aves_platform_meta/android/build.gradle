@@ -1,4 +1,4 @@
-group 'deckers.thibault.aves.aves_platform_meta'
+group 'anonymity.ac.viewer.aves_platform_meta'
 version '1.0-SNAPSHOT'
 
 buildscript {

@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.streams
+package anonymity.ac.viewer.channel.streams
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -8,13 +8,13 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import deckers.thibault.aves.MainActivity
-import deckers.thibault.aves.PendingStorageAccessResultHandler
-import deckers.thibault.aves.utils.LogUtils
-import deckers.thibault.aves.utils.MimeTypes
-import deckers.thibault.aves.utils.PermissionManager
-import deckers.thibault.aves.utils.StorageUtils
-import deckers.thibault.aves.utils.StorageUtils.ensureTrailingSeparator
+import anonymity.ac.viewer.MainActivity
+import anonymity.ac.viewer.PendingStorageAccessResultHandler
+import anonymity.ac.viewer.utils.LogUtils
+import anonymity.ac.viewer.utils.MimeTypes
+import anonymity.ac.viewer.utils.PermissionManager
+import anonymity.ac.viewer.utils.StorageUtils
+import anonymity.ac.viewer.utils.StorageUtils.ensureTrailingSeparator
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.EventChannel.EventSink
 import kotlinx.coroutines.CoroutineScope

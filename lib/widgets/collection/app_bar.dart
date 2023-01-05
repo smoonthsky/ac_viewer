@@ -22,6 +22,7 @@ import 'package:aves/widgets/collection/entry_set_action_delegate.dart';
 import 'package:aves/widgets/collection/filter_bar.dart';
 import 'package:aves/widgets/collection/query_bar.dart';
 import 'package:aves/widgets/common/action_controls/togglers/favourite.dart';
+import 'package:aves/widgets/common/action_controls/togglers/present.dart';
 import 'package:aves/widgets/common/action_controls/togglers/title_search.dart';
 import 'package:aves/widgets/common/app_bar/app_bar_subtitle.dart';
 import 'package:aves/widgets/common/app_bar/app_bar_title.dart';
@@ -39,6 +40,16 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
+import '../common/action_controls/togglers/presentation_lock.dart';
+import '../common/action_controls/togglers/presentation_verify.dart';
+
+//The CollectionAppBar is a stateful widget that represents the app bar for a collection. The widget takes in two required parameters:
+//
+// appBarHeightNotifier: A ValueNotifier that holds the current height of the app bar. This can be used to track the height of the app bar and make adjustments to the layout of other elements in the UI.
+
+// collection: A CollectionLens object, which represents the collection that the app bar is associated with. This object is used to access the properties and metadata of the collection, such as its title and number of items.
+
+// The createState method returns an instance of the _CollectionAppBarState class, which holds the mutable state of the CollectionAppBar widget.
 class CollectionAppBar extends StatefulWidget {
   final ValueNotifier<double> appBarHeightNotifier;
   final CollectionLens collection;
@@ -53,7 +64,9 @@ class CollectionAppBar extends StatefulWidget {
   State<CollectionAppBar> createState() => _CollectionAppBarState();
 }
 
+/// associated with a CollectionLens object, which represents the current state of the collection being displayed.
 class _CollectionAppBarState extends State<CollectionAppBar> with SingleTickerProviderStateMixin, WidgetsBindingObserver {
+
   final List<StreamSubscription> _subscriptions = [];
   final EntrySetActionDelegate _actionDelegate = EntrySetActionDelegate();
   late AnimationController _browseToSelectAnimation;
@@ -63,13 +76,9 @@ class _CollectionAppBarState extends State<CollectionAppBar> with SingleTickerPr
   double _statusBarHeight = 0;
 
   CollectionLens get collection => widget.collection;
-
   bool get isTrash => collection.filters.contains(TrashFilter.instance);
-
   CollectionSource get source => collection.source;
-
   Set<CollectionFilter> get visibleFilters => collection.filters.where((v) => !(v is QueryFilter && v.live) && v is! TrashFilter).toSet();
-
   bool get showFilterBar => visibleFilters.isNotEmpty;
 
   static const _sortOptions = [
@@ -450,6 +459,19 @@ class _CollectionAppBarState extends State<CollectionAppBar> with SingleTickerPr
           entries: _getExpandedSelectedItems(selection),
           onPressed: onPressed,
         );
+      case EntrySetAction.togglePresent:
+        return PresentToggler(
+          entries: _getExpandedSelectedItems(selection),
+          onPressed: onPressed,
+        );
+      case EntrySetAction.togglePresentationVerify:
+        return PresentationVerifyToggler(
+          onPressed: onPressed,
+        );
+      case EntrySetAction.toggleLockPresentation:
+        return PresentationLockToggler(
+          onPressed: onPressed,
+        );
       default:
         return IconButton(
           key: _getActionKey(action),
@@ -490,6 +512,22 @@ class _CollectionAppBarState extends State<CollectionAppBar> with SingleTickerPr
       case EntrySetAction.toggleFavourite:
         child = FavouriteToggler(
           entries: _getExpandedSelectedItems(selection),
+          isMenuItem: true,
+        );
+        break;
+      case EntrySetAction.togglePresent:
+        child = PresentToggler(
+          entries: _getExpandedSelectedItems(selection),
+          isMenuItem: true,
+        );
+        break;
+      case EntrySetAction.togglePresentationVerify:
+        child = const PresentationVerifyToggler(
+          isMenuItem: true,
+        );
+        break;
+      case EntrySetAction.toggleLockPresentation:
+        child = const PresentationLockToggler(
           isMenuItem: true,
         );
         break;
@@ -628,6 +666,11 @@ class _CollectionAppBarState extends State<CollectionAppBar> with SingleTickerPr
       case EntrySetAction.editRating:
       case EntrySetAction.editTags:
       case EntrySetAction.removeMetadata:
+      case EntrySetAction.toggleLockPresentation:
+      case EntrySetAction.presentTag:
+      case EntrySetAction.togglePresentationVerify:
+      case EntrySetAction.togglePresent:
+      case EntrySetAction.toggleWidgetFiltersBak:
         _actionDelegate.onActionSelected(context, action);
         break;
     }

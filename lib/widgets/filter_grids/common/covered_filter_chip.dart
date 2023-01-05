@@ -58,6 +58,7 @@ class CoveredFilterChip<T extends CollectionFilter> extends StatelessWidget {
 
   static double detailFontSize(double extent) => min<double>(AvesFilterChip.fontSize, extent / 6);
 
+  //TODO AC:add present Filter
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Set<CollectionFilter>?>(

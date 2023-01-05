@@ -3,6 +3,13 @@ import 'dart:ui' as ui;
 import 'package:aves/model/source/enums/enums.dart';
 import 'package:flutter/material.dart';
 
+// This is a custom painter that is designed to paint a grid of tiles with a fixed extent.
+// The tileLayout property can be set to TileLayout.mosaic, TileLayout.grid, or TileLayout.list, which determines the layout of the tiles.
+// The tileCenter and tileSize properties determine the center and size of the tile at the center of the grid.
+// The spacing property determines the distance between tiles, horizontalPadding property to add padding between tile and edge of the screen and the borderWidth property determines the width of the border around each tile.
+// The borderRadius property determines the radius of the border around each tile and the color property determines the color of the border and the fill color.
+// The textDirection property is used to determine the position of the grid if the layout is set to TileLayout.list.
+// This painter is responsible for painting the grid of tiles and the border around each tile.
 class FixedExtentGridPainter extends CustomPainter {
   final TileLayout tileLayout;
   final Offset tileCenter;

@@ -25,12 +25,12 @@ class AlbumListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final source = context.read<CollectionSource>();
-    return Selector<Settings, Tuple4<AlbumChipGroupFactor, ChipSortFactor, bool, Set<CollectionFilter>>>(
-      selector: (context, s) => Tuple4(s.albumGroupFactor, s.albumSortFactor, s.albumSortReverse, s.pinnedFilters),
+    return Selector<Settings, Tuple6<AlbumChipGroupFactor, ChipSortFactor, bool, Set<CollectionFilter>, bool,Set<CollectionFilter>>>(
+      selector: (context, s) => Tuple6(s.albumGroupFactor, s.albumSortFactor, s.albumSortReverse, s.pinnedFilters,s.presentationVerify,s.presentVisibleFilters),
       shouldRebuild: (t1, t2) {
         // `Selector` by default uses `DeepCollectionEquality`, which does not go deep in collections within `TupleN`
         const eq = DeepCollectionEquality();
-        return !(eq.equals(t1.item1, t2.item1) && eq.equals(t1.item2, t2.item2) && eq.equals(t1.item3, t2.item3) && eq.equals(t1.item4, t2.item4));
+        return !(eq.equals(t1.item1, t2.item1) && eq.equals(t1.item2, t2.item2) && eq.equals(t1.item3, t2.item3) && eq.equals(t1.item4, t2.item4)&& eq.equals(t1.item5, t2.item5) && eq.equals(t1.item6, t2.item6)) ;
       },
       builder: (context, s, child) {
         return ValueListenableBuilder<bool>(
@@ -74,7 +74,7 @@ class AlbumListPage extends StatelessWidget {
 
   static List<FilterGridItem<AlbumFilter>> getAlbumGridItems(BuildContext context, CollectionSource source) {
     final filters = source.rawAlbums.map((album) => AlbumFilter(album, source.getAlbumDisplayName(context, album))).toSet();
-
+    // TODO AC : add present filters check here ?
     return FilterNavigationPage.sort(settings.albumSortFactor, settings.albumSortReverse, source, filters);
   }
 

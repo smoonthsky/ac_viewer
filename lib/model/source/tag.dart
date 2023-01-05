@@ -10,7 +10,11 @@ import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 
 mixin TagMixin on SourceBase {
+  /// used to determine how often the catalog metadata should be saved to the metadata database.
+  /// In this case, the catalog metadata is saved every commitCountThreshold entries.
   static const commitCountThreshold = 400;
+  /// _stopCheckCountThreshold is used to determine how often the catalogEntries method should check whether it should stop.
+  /// In this case, the catalogEntries method checks whether it should stop every _stopCheckCountThreshold entries.
   static const _stopCheckCountThreshold = 100;
 
   List<String> sortedTags = List.unmodifiable([]);

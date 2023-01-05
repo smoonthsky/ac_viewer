@@ -12,6 +12,10 @@ import 'package:aves/widgets/viewer/entry_viewer_stack.dart';
 import 'package:aves_magnifier/aves_magnifier.dart';
 import 'package:flutter/material.dart';
 
+/// In general, a screen saver is a feature that displays a moving image or a series of images on a computer screen when the user is inactive for a certain period of time.
+/// Displays a slideshow of images and videos from a CollectionSource, which is a source of media entries that can be filtered and sorted.
+/// The screen saver page is built using a ViewerController that controls the behavior of the slideshow, such as the transition between entries, whether it should repeat, and the interval between entries.
+/// The ViewerController has an autopilot mode that allows it to automatically advance to the next entry.
 class ScreenSaverPage extends StatefulWidget {
   static const routeName = '/screen_saver';
 

@@ -4,6 +4,15 @@ import 'package:aves/widgets/common/identity/aves_app_bar.dart';
 import 'package:aves/widgets/common/identity/aves_filter_chip.dart';
 import 'package:flutter/material.dart';
 
+/// shows a horizontal row of filters, represented as AvesFilterChip widgets.
+///
+/// It listens to the Selection and Query state and update the list of filters accordingly.
+///
+/// It uses AnimatedList to animate the adding, removing and updating of filter chips.
+///
+/// It also listening to ScrollNotification to cancel notification bubbling so that the draggable scroll bar does not misinterpret filter bar scrolling for collection scrolling.
+///
+/// FilterCallback is a callback that is triggered when a filter chip is tapped, and onRemove is a callback that is triggered when a filter chip is removed.
 class FilterBar extends StatefulWidget {
   static const EdgeInsets chipPadding = EdgeInsets.symmetric(horizontal: 4);
   static const EdgeInsets rowPadding = EdgeInsets.symmetric(horizontal: 4);

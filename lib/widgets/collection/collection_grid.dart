@@ -4,6 +4,7 @@ import 'package:aves/app_mode.dart';
 import 'package:aves/model/device.dart';
 import 'package:aves/model/entry.dart';
 import 'package:aves/model/favourites.dart';
+import 'package:aves/model/present.dart';
 import 'package:aves/model/filters/favourite.dart';
 import 'package:aves/model/filters/mime.dart';
 import 'package:aves/model/settings/settings.dart';
@@ -49,6 +50,10 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
+//The code defines a CollectionGrid widget, which is a grid layout that displays a collection of items.
+// It uses a TileExtentController to control the size and spacing of the tiles, and allows the user to adjust the size of the tiles by pinching.
+// The settingsRouteKey attribute is used to determine the layout of the tiles, which can be either TileLayout.fixedExtent or TileLayout.mosaic.
+// The _CollectionGridState class overrides the build method to create and manage the TileExtentController, and passes it to a TileExtentControllerProvider which is then passed to a _CollectionGridContent widget to build the grid layout.
 class CollectionGrid extends StatefulWidget {
   final String settingsRouteKey;
 
@@ -105,6 +110,22 @@ class _CollectionGridContent extends StatefulWidget {
   @override
   State<_CollectionGridContent> createState() => _CollectionGridContentState();
 }
+
+// This code is building a grid layout that displays a collection of items (AvesEntry) using the CollectionLens widget. The grid layout is built using the SectionedEntryListLayoutProvider widget which is a StatefulWidget that listens to various streams and notifiers to update the grid layout dynamically and efficiently.
+//
+// It first define a ValueNotifier<AvesEntry?> _focusedItemNotifier and ValueNotifier<bool> _isScrollingNotifier both these notifiers will be used to notify the InteractiveTile widget of any change in focus and scrolling state.
+//
+// The Consumer<CollectionLens> widget is used to build a grid layout, it listens to changes in the CollectionLens to update the grid layout.
+//
+// The ValueListenableBuilder<double> listens to changes to the thumbnailExtent and the Selector listens to the changes in the TileExtentController to update the grid layout accordingly.
+//
+// The GridTheme widget is used to apply a theme to the grid layout, it takes the thumbnailExtent as a parameter, it then wraps the EntryListDetailsTheme widget and the ValueListenableBuilder<SourceState> which listens to the state of the source to update the grid layout.
+//
+// The StreamBuilder listens to the AspectRatioChangedEvent stream and updates the grid layout accordingly.
+//
+// The SectionedEntryListLayoutProvider takes in the collection, selectable flag, scrollable width, tile layout, column count, spacing, horizontal padding, tile extent, and tile builder function.
+//
+// The AnimatedBuilder is used to animate the InteractiveTile widget while switching between favourite items and the Focus widget is used to handle focus events when running on a television device.
 
 class _CollectionGridContentState extends State<_CollectionGridContent> {
   final ValueNotifier<AvesEntry?> _focusedItemNotifier = ValueNotifier(null);
@@ -166,7 +187,8 @@ class _CollectionGridContentState extends State<_CollectionGridContent> {
                             tileBuilder: (entry, tileSize) {
                               final extent = tileSize.shortestSide;
                               return AnimatedBuilder(
-                                animation: favourites,
+                                //AC Viewer : see https://api.flutter.dev/flutter/foundation/Listenable/Listenable.merge.html
+                                animation: Listenable.merge([favourites,presentTags,presentEntries]),
                                 builder: (context, child) {
                                   Widget tile = InteractiveTile(
                                     key: ValueKey(entry.id),
@@ -444,6 +466,8 @@ class _CollectionScrollViewState extends State<_CollectionScrollView> with Widge
     return _buildDraggableScrollView(scrollView, widget.collection);
   }
 
+// The DraggableScrollbar is a scrollbar that allows the user to drag the thumb to quickly scroll through the contents of the scrollable child.
+// It uses the DraggableThumbLabel and DraggableCrumbLabel widgets to display text labels that indicate the current position within the scrollable content.
   Widget _buildDraggableScrollView(ScrollView scrollView, CollectionLens collection) {
     return ValueListenableBuilder<double>(
       valueListenable: widget.appBarHeightNotifier,
@@ -491,6 +515,14 @@ class _CollectionScrollViewState extends State<_CollectionScrollView> with Widge
     );
   }
 
+  // creates a CustomScrollView.
+  // The CustomScrollView is created with a specified key, primary set to true, and it has some physics that depends on whether the collection passed to the method is empty or not.
+  // If the collection is empty, it sets the physics to NeverScrollableScrollPhysics which means that the user will not be able to scroll the view.
+  // If the collection is not empty, it sets the physics to SloppyScrollPhysics which allows the user to scroll the view with some level of sloppiness.
+  //
+  // The CustomScrollView also has a cacheExtent which is set to context.select<TileExtentController, double>((controller) => controller.effectiveExtentMax), that means the max extent of the scroll cache.
+  //
+  // The CustomScrollView also takes a list of slivers, where the first sliver is the appBar passed to the method, and the rest of the slivers are constants like NavBarPaddingSliver, BottomPaddingSliver, TvTileGridBottomPaddingSliver and if collection is empty it will fill remaining space with _buildEmptyCollectionPlaceholder(collection).
   ScrollView _buildScrollView(Widget appBar, CollectionLens collection) {
     return CustomScrollView(
       key: widget.scrollableKey,
@@ -506,7 +538,7 @@ class _CollectionScrollViewState extends State<_CollectionScrollView> with Widge
       cacheExtent: context.select<TileExtentController, double>((controller) => controller.effectiveExtentMax),
       slivers: [
         appBar,
-        collection.isEmpty
+        ( (!settings.showAllCollectionWhenNoneFilter && collection.filters.isEmpty )|| collection.isEmpty)
             ? SliverFillRemaining(
                 hasScrollBody: false,
                 child: _buildEmptyCollectionPlaceholder(collection),
@@ -544,7 +576,13 @@ class _CollectionScrollViewState extends State<_CollectionScrollView> with Widge
                       },
                     ),
                   );
-
+            if (!collection.isEmpty) {
+              return EmptyContent(
+                icon: AIcons.info,
+                text: context.l10n.collectionFilterEmptyNotShow,
+                bottom: bottom,
+              );
+            }
             if (collection.filters.any((filter) => filter is FavouriteFilter)) {
               return EmptyContent(
                 icon: AIcons.favourite,

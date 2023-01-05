@@ -1,4 +1,4 @@
-package deckers.thibault.aves.channel.calls.fetchers
+package anonymity.ac.viewer.channel.calls.fetchers
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -11,10 +11,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import deckers.thibault.aves.decoder.MultiTrackImage
-import deckers.thibault.aves.utils.BitmapUtils.getBytes
-import deckers.thibault.aves.utils.MimeTypes
-import deckers.thibault.aves.utils.StorageUtils
+import anonymity.ac.viewer.decoder.MultiTrackImage
+import anonymity.ac.viewer.utils.BitmapUtils.getBytes
+import anonymity.ac.viewer.utils.MimeTypes
+import anonymity.ac.viewer.utils.StorageUtils
 import io.flutter.plugin.common.MethodChannel
 import java.io.File
 import kotlin.math.roundToInt

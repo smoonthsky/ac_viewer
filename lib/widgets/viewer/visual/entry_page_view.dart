@@ -71,8 +71,13 @@ class _EntryPageViewState extends State<EntryPageView> with SingleTickerProvider
   ViewerController get viewerController => widget.viewerController;
 
   // use the high res photo as cover for the video part of a motion photo
+  //Motion Photos is a feature which launched with the Google Pixel 2 and
+  // what it does is, along with the photo, it records a video of up to 3 seconds (1.5 seconds before and 1.5 seconds after you took This will copy the video
   ImageProvider get videoCoverUriImage => mainEntry.isMotionPhoto ? mainEntry.uriImage : entry.uriImage;
 
+  //The rasterMaxScale and vectorMaxScale constants are used to define the maximum scaling level for raster images and vector graphics, respectively.
+  // The factor property of the ScaleLevel object determines the scaling factor.
+  // For example, if the factor is set to 5, it means that the image or graphic can be scaled up to 5 times its original size. The ScaleLevel object also has a ref property that determines how the scaling factor is interpreted. For example, if ref is set to ScaleReference.contained, it means that the scaling factor is calculated such that the child size (e.g. an image) fits within the container size (e.g. a view) while maintaining the aspect ratio. This means that the child size will be scaled down if it is larger than the container size, or up if it is smaller.
   static const rasterMaxScale = ScaleLevel(factor: 5);
   static const vectorMaxScale = ScaleLevel(factor: 25);
 

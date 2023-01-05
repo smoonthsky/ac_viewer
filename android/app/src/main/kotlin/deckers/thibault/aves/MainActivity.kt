@@ -1,4 +1,4 @@
-package deckers.thibault.aves
+package anonymity.ac.viewer
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
@@ -16,15 +16,16 @@ import androidx.core.content.pm.ShortcutInfoCompat
 import androidx.core.content.pm.ShortcutManagerCompat
 import androidx.core.graphics.drawable.IconCompat
 import app.loup.streams_channel.StreamsChannel
-import deckers.thibault.aves.channel.AvesByteSendingMethodCodec
-import deckers.thibault.aves.channel.calls.*
-import deckers.thibault.aves.channel.calls.window.ActivityWindowHandler
-import deckers.thibault.aves.channel.calls.window.WindowHandler
-import deckers.thibault.aves.channel.streams.*
-import deckers.thibault.aves.utils.FlutterUtils.enableSoftwareRendering
-import deckers.thibault.aves.utils.FlutterUtils.isSoftwareRenderingRequired
-import deckers.thibault.aves.utils.LogUtils
-import deckers.thibault.aves.utils.getParcelableExtraCompat
+import anonymity.ac.viewer.channel.AvesByteSendingMethodCodec
+import anonymity.ac.viewer.channel.calls.*
+import anonymity.ac.viewer.channel.calls.window.ActivityWindowHandler
+import anonymity.ac.viewer.channel.calls.window.WindowHandler
+import anonymity.ac.viewer.channel.streams.*
+import anonymity.ac.viewer.utils.FlutterUtils.enableSoftwareRendering
+import anonymity.ac.viewer.utils.FlutterUtils.isSoftwareRenderingRequired
+import anonymity.ac.viewer.utils.LogUtils
+import anonymity.ac.viewer.utils.getParcelableExtraCompat
+import anonymity.ac.viewer.HomeScreenWidgetsPlugin
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodCall
@@ -109,6 +110,7 @@ open class MainActivity : FlutterActivity() {
         settingsChangeStreamHandler = SettingsChangeStreamHandler(this).apply {
             EventChannel(messenger, SettingsChangeStreamHandler.CHANNEL).setStreamHandler(this)
         }
+        MethodChannel(messenger, HomeScreenWidgetsPlugin.CHANNEL).setMethodCallHandler(HomeScreenWidgetsPlugin(this))
 
         // intent handling
         // notification: platform -> dart
@@ -137,6 +139,8 @@ open class MainActivity : FlutterActivity() {
         errorStreamHandler = ErrorStreamHandler().apply {
             EventChannel(messenger, ErrorStreamHandler.CHANNEL).setStreamHandler(this)
         }
+
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
             setupShortcuts()

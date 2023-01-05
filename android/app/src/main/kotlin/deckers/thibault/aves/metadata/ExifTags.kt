@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata
+package anonymity.ac.viewer.metadata
 
 /*
 Exif tags missing from `metadata-extractor`

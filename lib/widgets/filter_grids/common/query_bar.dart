@@ -5,6 +5,7 @@ import 'package:aves/widgets/common/extensions/build_context.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// 标题过滤bar，不是搜索bar。
 class FilterQueryBar<T extends CollectionFilter> extends StatelessWidget {
   final ValueNotifier<String> queryNotifier;
   final FocusNode focusNode;

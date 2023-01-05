@@ -12,6 +12,7 @@ import 'package:aves/widgets/common/action_controls/quick_choosers/tag_button.da
 import 'package:aves/widgets/common/action_controls/togglers/favourite.dart';
 import 'package:aves/widgets/common/action_controls/togglers/mute.dart';
 import 'package:aves/widgets/common/action_controls/togglers/play.dart';
+import 'package:aves/widgets/common/action_controls/togglers/present.dart';
 import 'package:aves/widgets/common/basic/menu.dart';
 import 'package:aves/widgets/common/basic/popup_menu_button.dart';
 import 'package:aves/widgets/common/extensions/build_context.dart';
@@ -156,6 +157,8 @@ class ViewerButtonRowContent extends StatelessWidget {
 
   AvesEntry get favouriteTargetEntry => mainEntry.isBurst ? pageEntry : mainEntry;
 
+  AvesEntry get presentTargetEntry => mainEntry.isBurst ? pageEntry : mainEntry;
+
   static const double padding = 8;
 
   ViewerButtonRowContent({
@@ -297,6 +300,12 @@ class ViewerButtonRowContent extends StatelessWidget {
       case EntryAction.toggleFavourite:
         child = FavouriteToggler(
           entries: {favouriteTargetEntry},
+          isMenuItem: true,
+        );
+        break;
+      case EntryAction.togglePresent:
+        child = PresentToggler(
+          entries: {presentTargetEntry},
           isMenuItem: true,
         );
         break;

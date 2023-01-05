@@ -1,4 +1,4 @@
-package deckers.thibault.aves.metadata
+package anonymity.ac.viewer.metadata
 
 import android.util.Log
 import androidx.exifinterface.media.ExifInterface
@@ -8,7 +8,7 @@ import com.drew.metadata.exif.*
 import com.drew.metadata.exif.makernotes.OlympusCameraSettingsMakernoteDirectory
 import com.drew.metadata.exif.makernotes.OlympusImageProcessingMakernoteDirectory
 import com.drew.metadata.exif.makernotes.OlympusMakernoteDirectory
-import deckers.thibault.aves.utils.LogUtils
+import anonymity.ac.viewer.utils.LogUtils
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*

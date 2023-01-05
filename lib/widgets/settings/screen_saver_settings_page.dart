@@ -9,6 +9,7 @@ import 'package:aves/widgets/settings/common/tiles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+///？？？设置界面。
 class ScreenSaverSettingsPage extends StatelessWidget {
   static const routeName = '/settings/screen_saver';
 

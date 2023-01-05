@@ -23,6 +23,7 @@ import 'package:intl/intl.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:provider/provider.dart';
 
+/// 显示向github报告错误
 class BugReport extends StatefulWidget {
   const BugReport({super.key});
 

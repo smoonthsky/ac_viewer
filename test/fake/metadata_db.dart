@@ -6,6 +6,7 @@ import 'package:aves/model/filters/filters.dart';
 import 'package:aves/model/metadata/address.dart';
 import 'package:aves/model/metadata/catalog.dart';
 import 'package:aves/model/metadata/trash.dart';
+import 'package:aves/model/present.dart';
 import 'package:flutter/foundation.dart';
 import 'package:test/fake.dart';
 
@@ -83,6 +84,44 @@ class FakeMetadataDb extends Fake implements MetadataDb {
 
   @override
   Future<void> removeFavourites(Iterable<FavouriteRow> rows) => SynchronousFuture(null);
+
+  /* AC Viewer : add for present mode , start */
+  // present tags
+  @override
+  Future<void> clearPresentTags();
+
+  @override
+  Future<Set<PresentTagRow>> loadAllPresentTags() => SynchronousFuture({});
+
+  @override
+  Future<void> addPresentTags(Iterable<PresentTagRow> rows) => SynchronousFuture(null);
+
+  @override
+  Future<void> updatePresentTags(Iterable<PresentTagRow> rows) => SynchronousFuture(null);
+
+  @override
+  Future<void> removePresentTags(Iterable<PresentTagRow> rows) => SynchronousFuture(null);
+
+  // present entries
+  @override
+  Future<void> clearPresentEntries() => SynchronousFuture(null);
+
+  @override
+  Future<Set<PresentEntryRow>> loadAllPresentEntries() => SynchronousFuture({});
+
+  @override
+  Future<void> addPresentEntries(Iterable<PresentEntryRow> rows) => SynchronousFuture(null);
+
+
+  //Future<void> updatePresentId(int id, PresentEntryRow row);
+  Future<void> removePresentEntriesByTagIds(Iterable<int> ids ) => SynchronousFuture(null);
+
+  Future<void> removePresentEntries(Iterable<PresentEntryRow> rows) => SynchronousFuture(null);
+
+  Future<void> removePresentEntriesByEntryIds(Iterable<int> ids ) => SynchronousFuture(null);
+
+
+  /* AC Viewer : add for present mode , end */
 
   // covers
 

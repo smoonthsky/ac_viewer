@@ -33,6 +33,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
+//The code is defining a class AlbumChipSetActionDelegate that extends ChipSetActionDelegate<AlbumFilter> and mixin with EntryStorageMixin.
+// This class appears to be used to handle actions on a set of filters of type AlbumFilter.
+// It has several methods, including isVisible, canApply, and onActionSelected, that determine the visibility, ability to apply, and actions to take when certain actions are selected.
+// The class also has several private methods like _createAlbum, _delete, _rename, _browse which handle specific actions.
+// The last method configureView showing a dialog to the user to configure the view of the items.
+
 class AlbumChipSetActionDelegate extends ChipSetActionDelegate<AlbumFilter> with EntryStorageMixin {
   final Iterable<FilterGridItem<AlbumFilter>> _items;
 
@@ -79,7 +85,7 @@ class AlbumChipSetActionDelegate extends ChipSetActionDelegate<AlbumFilter> with
         return !device.isReadOnly && appMode == AppMode.main && !isSelecting;
       case ChipSetAction.delete:
       case ChipSetAction.rename:
-        return !device.isReadOnly && appMode == AppMode.main && isSelecting;
+        return !device.isReadOnly && appMode == AppMode.main && isSelecting && !settings.presentationLock;
       default:
         return super.isVisible(
           action,
@@ -136,9 +142,10 @@ class AlbumChipSetActionDelegate extends ChipSetActionDelegate<AlbumFilter> with
     }
     super.onActionSelected(context, filters, action);
   }
-
+//navigates to a new screen
   void _browse(BuildContext context) => context.read<Selection<FilterGridItem<AlbumFilter>>>().browse();
 
+  // 设置查看模式，排序，布局
   @override
   Future<void> configureView(BuildContext context) async {
     final initialValue = Tuple4(
