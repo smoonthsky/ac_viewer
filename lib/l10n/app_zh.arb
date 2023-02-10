@@ -1290,7 +1290,7 @@
   "@settingsWidgetUpdateIntervalTile": {},
   "settingsCollectionBakTile": "备用媒体集",
   "@settingsCollectionBakTile": {},
-  "settingsWidgetBakUpdateIntervalTile": "壁纸切换时间间隔",
+  "settingsWidgetBakUpdateIntervalTile": "备用壁纸切换时间间隔",
   "@settingsWidgetBakUpdateIntervalTile": {},
   "homeScreenWidgetSettingTile": "桌面微件设置",
   "@homeScreenWidgetSettingTile": {},
