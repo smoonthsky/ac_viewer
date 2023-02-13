@@ -18,12 +18,15 @@
 ![20230210-02.png](./_resources/20230210-02.png)
 
 2. 点击右上角红框加入展示
+ 
 ![20230210-03加入展示.png](./_resources/20230210-03加入展示.png)
 
 3. 锁定展示
+ 
 ![2023021004锁定展示.png](./_resources/2023021004锁定展示.png)
 
 4. 这样，除了已加入展示的内容，相册将不会显示任何其它内容。
+ 
 ![2023021005-锁定展示效果.png](./_resources/2023021005-锁定展示效果.png)
 
 5. 解锁密码默认为1234，可在设置中修改
@@ -35,47 +38,59 @@
 ![1aefc57f21bdd867fb6f3d48e45df4ad.png](./_resources/1aefc57f21bdd867fb6f3d48e45df4ad.png)
 
 6. 忘记密码，清空软件数据或卸载APP重装：
+ 
 ![5b3423ebef7b1e4b49a53964e395a9d5.png](./_resources/5b3423ebef7b1e4b49a53964e395a9d5.png)
 
 7.“验证展示”“取消展示”，与锁定解锁效果一样，但不需要输入密码。
+ 
 ![40fe1246e386415526c1324f0a04a024.png](./_resources/40fe1246e386415526c1324f0a04a024.png)
 
 1.2  图片展示标签设置
 
 1.2.1 默认每次加入展示标签会清空之前标签的的可见性，并生成一个新的时间标签。
+ 
 ![396cf31c6abab2aad5a1ef98e0ebdec4.png](./_resources/396cf31c6abab2aad5a1ef98e0ebdec4.png)
 
 1.2.2 选择不同的标签可以显示不同的媒体文件。同一个媒体文件可以同时加入多个标签。
 
 1.2.3 取消所有显示无效，必须选择至少一个标签。
+ 
 ![2023021022.png](./_resources/2023021022.png)
 展示标签长按与移动重新排序也是无效的。
 
 1.2.4 在“管理”中，可以重命名展示标签（左侧红框）或删除展示标签（右侧红框）。
 删除标签后，除非被其他标签包含，该标签代表的媒体文件将不会在展示模式中显示。
 Tag 2-6 是程序自动生成的样例标签，您可以随意删除，但是不提供删除default标签。
+ 
 ![2023021023.png](./_resources/2023021023.png)
 
 
 1.2.5 可以在设置中选择将新增媒体文件自动添加到当前可见标签中。
+ 
 ![2023021026.png](./_resources/2023021026.png)
 
 
 1.2.6 展示标签与媒体标签不同，展示标签仅保存在此APP内，删除APP会永久删除。媒体标签保存在文件中，不会因删除APP而丢失。
 点开任意一个图片/视频上滑）
+ 
 ![2023021024.png](./_resources/2023021024.png)
 
 1.2.7 Bug：如果媒体文件有标签但标签页没有显示，请在相应目录中重新扫描编目。注意：文件数量较多的目录可能重新扫描仍然无效。如果要正常使用标签页和国家页，请下载APP：Aves。
+ 
 ![2023021025.png](./_resources/2023021025.png)
 
 
 ###  2、对相册使用展示模式
 2.1. 在相册界面将整个目录加入展示
+ 
 ![2023021029.png](./_resources/2023021029.png)
+ 
 2.2. 重命名该目录
+ 
 ![9406b1b9e24fba1fbaa653d0b7a464e1.png](./_resources/9406b1b9e24fba1fbaa653d0b7a464e1.png)
 
 2.3. 验证展示，确保不会显示重命名的文件夹
+ 
 ![2023021032.png](./_resources/2023021032.png)
 
 2.4. 切出APP，拍摄新照片并确认自动在展示模式下显示
@@ -84,6 +99,7 @@ Tag 2-6 是程序自动生成的样例标签，您可以随意删除，但是不
 ![2023021033.png](./_resources/2023021033.png)
 
 2.5. 在展示标签设置中管理展示的标签
+ 
 ![3af5b5993e11e1987f329ea83d42b34e.png](./_resources/3af5b5993e11e1987f329ea83d42b34e.png)
 
 *****
@@ -102,17 +118,21 @@ Tag 2-6 是程序自动生成的样例标签，您可以随意删除，但是不
 3.1 设置桌面壁纸
 
 3.1.1 在桌面空白处长按，选择“添加工具”，找到软件工具，拖放到桌面：
+ 
 ![52034e40e5b26189f9a7cbdbd2c708cf.png](./_resources/52034e40e5b26189f9a7cbdbd2c708cf.png)
 
 3.1.2 弹出设置窗口，设置成“仅桌面”（bug:MIUI设置锁屏无效）：
+ 
 ![60e758612377beffe5e51d7e17b724ed.png](./_resources/60e758612377beffe5e51d7e17b724ed.png)
 
 3.1.4 点击编辑图标（上图最小红框）进入相册，选择图片集：
+ 
 ![54e0c08f08b02722edf331a517d0a909.png](./_resources/54e0c08f08b02722edf331a517d0a909.png)
 
 3.1.5 可以按关键字搜索并设置设置图片集。
 以手机pixiv 为例，其保存文件名一般以“illust_”开头，输入“ill” 回车确认；
 长按视频标签，点击滤除，点击纵向，最终显示出所有包含ill字段，纵向的图片：
+ 
 ![3df2060c2fb69e9eeaecf8ef2d9a85fe.png](./_resources/3df2060c2fb69e9eeaecf8ef2d9a85fe.png)
 
 3.1.6 点击保存，桌面生成图片微件。长按可以调整微件位置和大小。点击将进入查看器，且强制更新壁纸。
@@ -120,6 +140,7 @@ Tag 2-6 是程序自动生成的样例标签，您可以随意删除，但是不
 ![bf50b37a66e4d8e751e0edfd482a3221.png](./_resources/bf50b37a66e4d8e751e0edfd482a3221.png)
 
 3.1.7 在原生Android中，可以直接更新微件设置，MIUI需要在设置界面重新设置
+ 
 ![fb40db9febcda924d2bdf5ea7c67dab1.png](./_resources/fb40db9febcda924d2bdf5ea7c67dab1.png)
 
 
@@ -127,6 +148,7 @@ Tag 2-6 是程序自动生成的样例标签，您可以随意删除，但是不
 > alarmManager.setInexactRepeating(AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + internal, internal.toLong(), pendingIntent)
 setInexactRepeating 更新时间不会精确，设置成3秒实际等待可能3~15s，取决于手机的运行状态。
 见：
+ 
 [https://developer.android.com/reference/android/app/AlarmManager](https://developer.android.com/reference/android/app/AlarmManager)
 
 
@@ -134,9 +156,11 @@ setInexactRepeating 更新时间不会精确，设置成3秒实际等待可能3~
 3.2 缓解壁纸社会性死亡问题
 
 3.2.1 在相册、缩略图或查看器中找到"微件备用切换"按钮。
+ 
 ![c7d1fdda39166a266c684ba6453fd08c.png](./_resources/c7d1fdda39166a266c684ba6453fd08c.png)
 
 3.2.2 点击按钮切换所有微件的媒体集和备用媒体集，以及更新间隔和备用更新间隔的设置。立即更新每个微件一次。
+ 
 ![599416c45285b1c9dc59fd9ea3f403f9.png](./_resources/599416c45285b1c9dc59fd9ea3f403f9.png)
 
 3.2.3 设计目的是独处时使用一种壁纸设置，外出公开场合使用另一种，以缓解壁纸社会性死亡。
@@ -148,8 +172,11 @@ setInexactRepeating 更新时间不会精确，设置成3秒实际等待可能3~
 
 bug1: 在系统出现问题（如微件添加失败）时，桌面微件可能会显示已经不存在的微件的设置。重新安装APP可以解决此问题。不重装不影响设置正常微件。
 正常：
+ 
 ![428bed683cdb8f5e7b7a87571c606cd7.png](./_resources/428bed683cdb8f5e7b7a87571c606cd7.png)
+ 
 bug：
+ 
 ![dc38b9fc2c847b90dd6e43029d368dad.png](./_resources/dc38b9fc2c847b90dd6e43029d368dad.png)
 
 bug2: 偶尔会出现桌面微件无法显示图像，点击进入微件让它强制更新即可，或等待下一次自动更新。
@@ -176,6 +203,7 @@ bug3: 偶尔微件会停止更新，点击进入让它强制更新即可。
 
 原Aves中，取消标签显示功能会显示所有媒体文件。由于我有大量图片，因此不喜欢这个功能。
 因此，我对该功能进行了修改，可以在设置界面开启此功能。
+ 
 ![68aed204090d9753fcc615c018d99b34.png](./_resources/68aed204090d9753fcc615c018d99b34.png)
 
 4.3 其他小修小改，不再详细阐述。
@@ -234,6 +262,7 @@ APP应该能自动标注新添加的图片所属场景，例如在生活场景�
  >  static const opGreater = '>';
 
 如下图，大于２ＭＢ，小于４ＭＢ，晚于2012年的图片。
+ 
 ![6f848144d74840726d2d304ab19fbcda.png](./_resources/6f848144d74840726d2d304ab19fbcda.png)
 
 2、
