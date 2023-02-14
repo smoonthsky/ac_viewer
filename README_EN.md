@@ -104,6 +104,8 @@ You can add an app lock to other picture viewing software and only use this soft
 
 ###  3.1 Setting Desktop Wallpaper
 
+The app can be set to prevent it from accessing the internet, but the wallpaper update must have the storage permission set to "always."
+
 3.1.1 Long press on the desktop blank to select "Add Tool", find the software tool and drag it to the desktop:
 
 ![52034e40e5b26189f9a7cbdbd2c708cf.png](./_resources/52034e40e5b26189f9a7cbdbd2c708cf.png)
