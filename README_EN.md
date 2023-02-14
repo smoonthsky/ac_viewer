@@ -7,16 +7,20 @@ AC Viewer
 Steps:
 
 1.1.1 Select the picture
+
 ![20230210-02.png](./_resources/20230210-02.png)
 
 1.1.2 Click on the red box in the top right corner to add to presentation
+
 ![20230210-03加入展示.png](./_resources/20230210-03加入展示.png)
 
 
 1.1.3 Lock the presentation
+
 ![2023021004锁定展示.png](./_resources/2023021004锁定展示.png)
 
 1.1.4 This way, except for the content that has been added to the presentation, the album will not display any other content.
+
 ![2023021005-锁定展示效果.png](./_resources/2023021005-锁定展示效果.png)
 
 1.1.5 The unlock password is 1234 by default, and can be changed in settings.
@@ -28,9 +32,11 @@ Steps:
 ![1aefc57f21bdd867fb6f3d48e45df4ad.png](./_resources/1aefc57f21bdd867fb6f3d48e45df4ad.png)
 
 1.1.6 If you forget the password, clear the software data or uninstall the APP and reinstall it:
+
 ![5b3423ebef7b1e4b49a53964e395a9d5.png](./_resources/5b3423ebef7b1e4b49a53964e395a9d5.png)
 
 1.1.7 "Verify presentation" and "Cancel presentation" have the same effect as locking and unlocking, but without entering a password.
+
 ![40fe1246e386415526c1324f0a04a024.png](./_resources/40fe1246e386415526c1324f0a04a024.png)
 
 
@@ -43,39 +49,52 @@ Steps:
 1.2.2 Selecting different tags can display different media files. The same media file can be added to multiple tags at the same time.
 
 1.2.3 Cancelling all displays is invalid, and at least one tag must be selected.
+
 ![2023021022.png](./_resources/2023021022.png)
+
 Long pressing and moving to reorder display tags  also have no effect.
 
 1.2.4 In "Management", you can rename the display tag (left red box) or delete the display tag (right red box).
+
 ![2023021023.png](./_resources/2023021023.png)
+
 After a tag is deleted, the media file represented by the tag will not be displayed in the display mode unless contained by other tags. Tag 2-6 is an automatically generated sample tag, you can delete it at will, but deletion of the default tag is not provided.
 
 
 1.2.5 You can select to automatically add newly added media files to the current visible tags in the settings.
+
 ![2023021026.png](./_resources/2023021026.png)
 
 1.2.6 The display tag is different from the media tag, the display tag is only saved within this APP, and deletion of the APP will permanently delete it. The media tag is saved in the file and will not be lost due to deletion of the APP.
 (Slide down on any image/video)
+
 ![2023021024.png](./_resources/2023021024.png)
 
 1.2.7 Bug: If the media file has a tag but the tag page is not displayed, please rescan the catalog in the corresponding directory. Note: Directories with a large number of files may still be ineffective after rescanning. If you want to use the tag page and country page normally, please download the APP: Aves.
+
 ![2023021025.png](./_resources/2023021025.png)
 
 
 ###  2. Using Display Mode In Album Page
 2.1. Add the entire directory to the display in the album interface
+
 ![2023021029.png](./_resources/2023021029.png)
+
 2.2. Rename the directory
+
 ![9406b1b9e24fba1fbaa653d0b7a464e1.png](./_resources/9406b1b9e24fba1fbaa653d0b7a464e1.png)
 
 2.3. Verify the display to make sure the renamed folder is not displayed
+
 ![2023021032.png](./_resources/2023021032.png)
 
 2.4. Exit the app, take a new photo, and confirm it is automatically displayed in display mode
 It may not be refreshed immediately and may take a little time.
+
 ![2023021033.png](./_resources/2023021033.png)
 
 2.5. Manage the display tags in the display tag settings
+
 ![3af5b5993e11e1987f329ea83d42b34e.png](./_resources/3af5b5993e11e1987f329ea83d42b34e.png)
 
 *****
@@ -86,17 +105,21 @@ You can add an app lock to other picture viewing software and only use this soft
 ###  3.1 Setting Desktop Wallpaper
 
 3.1.1 Long press on the desktop blank to select "Add Tool", find the software tool and drag it to the desktop:
+
 ![52034e40e5b26189f9a7cbdbd2c708cf.png](./_resources/52034e40e5b26189f9a7cbdbd2c708cf.png)
 
 3.1.2 Pop up the setting window, set it to "Only Desktop" (bug: MIUI set lock screen is invalid):
+
 ![60e758612377beffe5e51d7e17b724ed.png](./_resources/60e758612377beffe5e51d7e17b724ed.png)
 
 3.1.4 Click the edit icon (the smallest red box in the above figure) to enter the album, select the image set:
+
 ![54e0c08f08b02722edf331a517d0a909.png](./_resources/54e0c08f08b02722edf331a517d0a909.png)
 
 3.1.5 You can search by keyword and set the image set.
 Taking the mobile pixiv as an example, its saved file name generally starts with "illust_", enter "ill" and press Enter to confirm;
 Long press the video tag, click filter, click vertical, finally display all images that contain the ill field, vertical:
+
 ![3df2060c2fb69e9eeaecf8ef2d9a85fe.png](./_resources/3df2060c2fb69e9eeaecf8ef2d9a85fe.png)
 
 3.1.6 Click Save, the desktop generates an image widget. Long press to adjust the widget position and size. Clicking will enter the viewer and force an update to the widget.
@@ -104,6 +127,7 @@ Long press the video tag, click filter, click vertical, finally display all imag
 ![bf50b37a66e4d8e751e0edfd482a3221.png](./_resources/bf50b37a66e4d8e751e0edfd482a3221.png)
 
 3.1.7 In native Android, you can directly update the widget settings, MIUI needs to reset the settings in the setting interface.
+
 ![fb40db9febcda924d2bdf5ea7c67dab1.png](./_resources/fb40db9febcda924d2bdf5ea7c67dab1.png)
 
 3.1.8 The backup media set will be discussed later. The default update interval is 3 minutes, and the effective setting range is 1 second to 47 hours 59 minutes 59 seconds.
@@ -112,15 +136,18 @@ Long press the video tag, click filter, click vertical, finally display all imag
 
 `setInexactRepeating` update time is not accurate, setting to 3 seconds, the actual wait may be 3~15s, depending on the running state of the phone.
 See:
+
 [https://developer.android.com/reference/android/app/AlarmManager](https://developer.android.com/reference/android/app/AlarmManager)
 
 
 3.2 Relieve Wallpaper Social Death Problem
 
 3.2.1 Find the "Widget Backup Switch" button in the album, thumbnail or viewer.
+
 ![c7d1fdda39166a266c684ba6453fd08c.png](./_resources/c7d1fdda39166a266c684ba6453fd08c.png)
 
 3.2.2 Click the button to switch the media set and backup media set for all widgets, as well as the update interval and backup update interval settings. Update each widget immediately once.
+
 ![599416c45285b1c9dc59fd9ea3f403f9.png](./_resources/599416c45285b1c9dc59fd9ea3f403f9.png)
 
 3.2.3 The design goal is to use one wallpaper setting when alone and another for public occasions outside to relieve wallpaper social death.
@@ -131,8 +158,11 @@ See:
 
 bug1: The desktop widget may display the settings of a widget that no longer exists when the system has issues (such as widget addition failure). Reinstalling the app can resolve this issue. Not reinstalling will not affect the normal widget settings.
 Normal:
+
 ![428bed683cdb8f5e7b7a87571c606cd7.png](./_resources/428bed683cdb8f5e7b7a87571c606cd7.png)
+
 bug：
+
 ![dc38b9fc2c847b90dd6e43029d368dad.png](./_resources/dc38b9fc2c847b90dd6e43029d368dad.png)
 
 bug2: Occasionally, the desktop widget may not display images. You can force the widget to update by clicking into the widget or wait for the next automatic update.
@@ -160,24 +190,32 @@ To avoid this, I modified the editing function to automatically copy the file an
 
 In the original Aves, cancelling label display would display all media files. I don't like this feature because I have a large number of pictures.
 Therefore, I modified this feature and it can be turned on in the settings interface.
+
 ![68aed204090d9753fcc615c018d99b34.png](./_resources/68aed204090d9753fcc615c018d99b34.png)
 
 4.3 There are some other small modifications, but they will not be discussed in detail.
 
 ## How to Obtain the AC Viewer App
 github:
+
 [https://github.com/t4y-123/ac_viewer/releases/tag/publish-play](https://github.com/t4y-123/ac_viewer/releases/tag/publish-play)
+
 OneDriver：
+
 [https://1drv.ms/u/s!Akj4Qncyo3Oxcq1skIIq4uDa620?e=sd2mc1](https://1drv.ms/u/s!Akj4Qncyo3Oxcq1skIIq4uDa620?e=sd2mc1)
 
+
 Using a computer, type in powershell in the address bar of the apk folder,enter.:
+
 ![16a925031a8e8898491ae250eae73321.png](./_resources/16a925031a8e8898491ae250eae73321.png)
 
 
 Enter the command:
+
 >  Get-FileHash  ./*  -Algorithm MD5
 
 Obtain the MD5 value
+
 ![574d85cf4db58786a62039a9e369aa55.png](./_resources/574d85cf4db58786a62039a9e369aa55.png)
 
 ***
@@ -200,7 +238,7 @@ I should read the official development documentation and other open source proje
 1.Media content can be searched based on conditions such as year, month, day, picture width and height, file size in KB, MB, GB, etc.
 The code is as follows: \lib\model\filters\query.dart
 
->   static final _fieldPattern = RegExp(r'(.+)([=<>])(.+)');
+ >  static final _fieldPattern = RegExp(r'(.+)([=<>])(.+)');
  >  static final _fileSizePattern = RegExp(r'(\d+)([KMG])?');
  >  static const keyContentId = 'ID'; // 精确匹配ID，一般用不上。
  >  static const keyContentYear = 'YEAR';
@@ -214,6 +252,7 @@ The code is as follows: \lib\model\filters\query.dart
  >  static const opGreater = '>';
 
 As shown in the following figure, pictures that are greater than 2 MB and less than 4 MB, and later than 2012.
+
 ![6f848144d74840726d2d304ab19fbcda.png](./_resources/6f848144d74840726d2d304ab19fbcda.png)
 
 
@@ -223,6 +262,7 @@ As shown in the following figure, pictures that are greater than 2 MB and less t
 
 4.Map function, the Chinese version has three fewer maps than the foreign version.
 This is the Aves I downloaded from the Huawei App Store in China from Github:
+
 [https://1drv.ms/u/s!Akj4Qncyo3Oxd8rhWFRdzwXZ20I?e=3IR3bL](https://1drv.ms/u/s!Akj4Qncyo3Oxd8rhWFRdzwXZ20I?e=3IR3bL)
 
 > C6DC9DD85D41532611D416C4B089721C
